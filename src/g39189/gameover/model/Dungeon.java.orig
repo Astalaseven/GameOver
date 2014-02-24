@@ -1,0 +1,105 @@
+package g39189.gameover.model;
+
+import java.util.Collections;
+import java.util.LinkedList;
+
+public class Dungeon {
+	
+	public final static int N = 5;
+	private Room[][] roomss = new Room[N][N];
+	private static Dungeon instance;
+	private LinkedList<Room> donjon = new LinkedList<>();
+	
+	/** Constructeur de Dungeon
+	 * @param roomss
+	 */
+	private Dungeon() {
+
+		populateDungeon();
+		Collections.shuffle(donjon);
+
+		for(int row = 0; row < N; row++) {
+			for(int column = 0; column < N; column++) {
+//				System.out.println(row + " " + column);
+//				roomss[row][column] = donjon.get(row + column);
+				roomss[row][column] = donjon.pop();
+			}
+		}
+
+	}
+	
+	public static void main(String[] args) {
+
+		Dungeon d = getInstance();
+		System.out.println(d);
+
+	}
+	
+	Dungeon(Room[][] configuration) {
+		
+	}
+
+	public static Dungeon getInstance() {
+
+		if(instance==null) {
+			instance = new Dungeon();
+		}
+
+		return instance;
+
+	}
+	
+	public Room getRoom(DungeonPosition pos) {
+		return roomss[pos.getRow()][pos.getColumn()];	
+	}
+	
+	public void show(DungeonPosition pos) {
+		roomss[pos.getRow()][pos.getColumn()].setHidden(false);
+	}
+	
+	public void hideAll() {
+
+		for(int row = 0; row < N; row++) {
+			for(int column = 0; column < N; column++) {
+
+				roomss[row][column].setHidden(true);
+
+			}
+		}
+
+	}
+	
+	private void populateDungeon() {
+
+		addRoom(RoomType.BLORK, 16, false, true);
+		addRoom(RoomType.PRINCESS, 4, true, false);
+		addRoom(RoomType.KEY, 2, false, false);
+		addRoom(RoomType.BLORK, 2, false, false);
+		addRoom(RoomType.GATE, 1, false, false);
+
+	}
+
+	private void addRoom(RoomType type, int nb, boolean color, boolean weapon) {
+
+		int i = 0;
+		int j = 0;
+
+		while(i < nb) {
+
+			if(j > 3) {
+				j = 0;
+			}
+
+			WeaponType weaponType = weapon ? WeaponType.values()[j] : null;
+			BarbarianColor colorType = color ? BarbarianColor.values()[j] : null;
+			Room room = new Room(type, true, weaponType, colorType);
+			donjon.add(room);
+
+			i++;
+			j++;
+			
+			System.out.println(room);
+
+		}
+	}
+}

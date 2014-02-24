@@ -1,0 +1,438 @@
+*******************************
+* CLASSE GAME, méthode play() *
+*******************************
+
+/* Cas normal : le joueur tombe sur un blork avec la bonne arme */
+playTest0() {
+
+Le joueur descend et tombe sur un blork qui a la même arme que lui.
+Le joueur peut rejouer.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | Y |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Mauvaise arme */
+playTest1() {
+
+Le joueur descend et tombe sur un blork qui a une arme différente de la sienne.
+Les cartes sont retournées et c’est au tour du joueur suivant de jouer.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | F |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Tombe sur un blork invincible */
+playTest2() {
+
+Le joueur descend et tombe sur un blork invincible.
+Les cartes sont retournées et c’est au tour du joueur suivant de jouer.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | I |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Trouve une princesse qui est de sa couleur puis une clé */
+playTest3() {
+
+Le joueur descend et découvre sa princesse.
+Le joueur descend et découvre une clé.
+La partie est finie, le joueur actuel a gagné.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | P |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    | K |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Trouve une princesse qui n’est pas de sa couleur puis une clé */
+playTest4() {
+
+Le joueur descend et découvre une princesse qui n’est pas de sa couleur.
+Le joueur descend et découvre une clé.
+Le joueur peut rejouer.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | P |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    | K |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Trouve une clé puis sa princesse */
+playTest5() {
+
+Le joueur descend et découvre une clé.
+Le joueur descend et découvre sa princesse.
+La partie est finie, le joueur actuel a gagné.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | P |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    | K |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Tombe sur une porte */
+playTest6() {
+
+Le joueur descend et découvre une porte.
+Le joueur peut rejouer.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | G |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+**********************************************************************
+**********************************************************************
+
+*******************************
+*CLASSE PLAYER, méthode move()*
+*******************************
+
+== Test Joueur 1 en position initiale / en dehors du donjon ==
+
+/* Essaie de descendre */
+moveTest0() {
+
+Le joueur descend.
+Nouvelle position en Y(0,0).
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    | Y |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Essaie de monter */
+moveTest1() {
+
+Le joueur monte.
+Erreur lancée.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Essaie d’aller à gauche */
+moveTest2() {
+
+Le joueur va à gauche.
+Erreur lancée.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Essaie d’aller à droite */
+moveTest3() {
+
+Le joueur va à droite.
+Erreur lancée.
+
+      X
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+== Test Joueur en position (0,0) ==
+
+/* Essaie d’aller à droite */
+moveTest0() {
+
+Le joueur va à droite.
+Nouvelle position en Y(0,1).
+
+    −−−−−−−−−−−−−−−−−−−−−
+    | X | Y |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Essaie d’aller à gauche */
+moveTest1() {
+
+Le joueur va à gauche.
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    | X |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Essaie de monter */
+moveTest2() {
+
+Le joueur monte.
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    | X |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+/* Essaie de descendre */
+moveTest3() {
+
+Le joueur descend.
+Nouvelle position en Y(1,0).
+
+    −−−−−−−−−−−−−−−−−−−−−
+    | X |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    | Y |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+
+}
+
+
+@Test(expected=GameOverException)
+moveTest5() {
+
+// joueur en position (0,0)
+// part à gauche
+// expected : lance une exception (mauvaise colonne)
+
+}
+
+moveTest6() {
+
+// joueur en position (0,0)
+// descend
+// expected : nouvelle position (1,0)
+
+}
+
+moveTest7() {
+
+// joueur en position (0,0)
+// part à droite
+// expected : nouvelle position (0,1)
+
+}
+
+== Test Joueur en position (4,4) ==
+
+moveTest8() {
+
+// joueur en position (4,4)
+// monte
+// expected : nouvelle position (3,4)
+
+}
+
+moveTest9() {
+
+// joueur en position (4,4)
+// part à gauche
+// expected : nouvelle position (4,3)
+
+}
+
+@Test(expected=GameOverException)
+moveTest10() {
+
+// joueur en position (4,4)
+// descend
+// expected : lance une exception (mauvaise ligne)
+
+}
+
+@Test(expected=GameOverException)
+moveTest11() {
+
+// joueur en position (4,4)
+// part à droite
+// expected : lance une exception (mauvaise colonne)
+
+}
+
+== Test Joueur 4 en position initiale ==
+
+moveTest0() {
+
+// joueur 4 en position initiale (4,-1)
+// descend
+// expected : lance une exception (mauvaise colonne)
+
+}
+
+@Test(expected=GameOverException)
+moveTest1() {
+
+// joueur 4 en position initiale (4,-1)
+// monte
+// expected : lance une exception (mauvaise colonne et mauvaise ligne)
+
+}
+
+@Test(expected=GameOverException)
+moveTest2() {
+
+// joueur 4 en position initiale (4,-1)
+// part à gauche
+// expected : lance une exception (mauvaise colonne)
+
+}
+
+@Test(expected=GameOverException)
+moveTest3() {
+
+// joueur 4 en position initiale (4,-1)
+// part à droite
+// expected : nouvelle position (4,0)
+
+}
+
+
+
+
+
+
+
+
+
+
+
