@@ -329,77 +329,172 @@ Nouvelle position en Y(1,0).
 
 == Test Joueur en position (4,4) ==
 
-moveTest8() {
-
-// joueur en position (4,4)
-// monte
-// expected : nouvelle position (3,4)
-
-}
-
-moveTest9() {
-
-// joueur en position (4,4)
-// part à gauche
-// expected : nouvelle position (4,3)
-
-}
-
-@Test(expected=GameOverException)
-moveTest10() {
-
-// joueur en position (4,4)
-// descend
-// expected : lance une exception (mauvaise ligne)
-
-}
-
-@Test(expected=GameOverException)
-moveTest11() {
-
-// joueur en position (4,4)
-// part à droite
-// expected : lance une exception (mauvaise colonne)
-
-}
-
-== Test Joueur 4 en position initiale ==
-
+/* Essaie d’aller à droite */
 moveTest0() {
 
-// joueur 4 en position initiale (4,-1)
-// descend
-// expected : lance une exception (mauvaise colonne)
+Le joueur va à droite.
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   | X |
+    −−−−−−−−−−−−−−−−−−−−−
 
 }
 
-@Test(expected=GameOverException)
+/* Essaie d’aller à gauche */
 moveTest1() {
 
-// joueur 4 en position initiale (4,-1)
-// monte
-// expected : lance une exception (mauvaise colonne et mauvaise ligne)
+Le joueur va à gauche.
+Nouvelle position en Y(4,3).
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   | Y | X |
+    −−−−−−−−−−−−−−−−−−−−−
 
 }
 
-@Test(expected=GameOverException)
+/* Essaie de monter */
 moveTest2() {
 
-// joueur 4 en position initiale (4,-1)
-// part à gauche
-// expected : lance une exception (mauvaise colonne)
+Le joueur monte.
+Nouvelle position en Y(3,4).
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   | Y |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   | X |
+    −−−−−−−−−−−−−−−−−−−−−
 
 }
 
-@Test(expected=GameOverException)
+/* Essaie de descendre */
 moveTest3() {
 
-// joueur 4 en position initiale (4,-1)
-// part à droite
-// expected : nouvelle position (4,0)
+Le joueur descend.
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   | X |
+    −−−−−−−−−−−−−−−−−−−−−
 
 }
 
+== Test Joueur 4 en position initiale / en dehors du donjon ==
+
+/* Essaie de descendre */
+moveTest0() {
+
+Le joueur descend.
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+                      X
+
+}
+
+/* Essaie de monter */
+moveTest1() {
+
+Le joueur monte.
+Nouvelle position en Y(4,4).
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   | Y |
+    −−−−−−−−−−−−−−−−−−−−−
+                      X
+
+}
+
+/* Essaie d’aller à gauche */
+moveTest2() {
+
+Le joueur va à gauche.
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+                      X
+
+}
+
+/* Essaie d’aller à droite */
+moveTest3() {
+
+Le joueur va à droite.
+Erreur lancée.
+
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+    |   |   |   |   |   |
+    −−−−−−−−−−−−−−−−−−−−−
+                      X
+
+}
 
 
 

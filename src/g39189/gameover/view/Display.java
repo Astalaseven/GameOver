@@ -24,7 +24,7 @@ public class Display {
 	public static void printRoomInDungeon(Room room) {
 		
 		String template = String.format("| %1$8s ", room.getType());
-		boolean isHidden = false;//room.isHidden();
+		boolean isHidden = room.isHidden();
 		
 		System.out.print(isHidden ? String.format("| %1$8s ", " ") : template);
 	}
@@ -46,7 +46,7 @@ public class Display {
 			details = formatRoom(color);
 		}
 
-		boolean isHidden = false;//room.isHidden();
+		boolean isHidden = room.isHidden();
 		if(isHidden || details == null) {
 			details = formatRoom(" ");
 		}
@@ -107,24 +107,40 @@ public class Display {
 		return names;
 	}
 	
-	public static String askMov() {
+	public static int askMov() {
 		
 		Console console = System.console();
-		console.printf("Quel mouvement souhaitez-vous faire ?\n");
-		String dir = console.readLine("UP (0), DOWN (1), " 
-				+ "RIGHT (2), LEFT (3)\n");
+		int answer = -1;
+		while(answer < 0 || answer > 3) {
+			console.printf("Quel mouvement souhaitez-vous faire ?\n");
+			// char - 48 pour convertir l’ascii en int
+			try {
+				answer = console.readLine("UP (0), DOWN (1), " 
+						+ "RIGHT (2), LEFT (3)\n").charAt(0) - 48;
+			} catch (StringIndexOutOfBoundsException err) {
+				continue;
+			}
+		}
 
-		return dir;
+		return answer;
 	}
 	
-	public static String askWeapon() {
+	public static int askWeapon() {
 		
 		Console console = System.console();
-		console.printf("Équipez-vous d’une arme !\n");
-		String weapon = console.readLine("POTION (0), ARROWS (1), "
-				+ "BLUDGEON (2), GUN (3)\n");
+		int answer = -1;
+		while(answer < 0 || answer > 3) {
+			console.printf("Équipez-vous d’une arme !\n");
+			try {
+				// char - 48 pour convertir l’ascii en int
+				answer = console.readLine("POTION (0), ARROWS (1), "
+						+ "BLUDGEON (2), GUN (3)\n").charAt(0) - 48;
+			} catch (StringIndexOutOfBoundsException err) {
+				continue;
+			}
+		}
 	
-		return weapon;
+		return answer;
 	}
 	
 	public static void printPlayer(Player player) {
@@ -136,10 +152,9 @@ public class Display {
               + "| %5$10s : %6$10s",
               bold("Nom du joueur"), player.getName(),
               bold("Couleur"),       player.getColor(),
-              bold("Position actu"), player.getInitPosition());
+              bold("Position init"), InitPosition.values()[player.getId()]);
 	
 		System.out.println(template);
-		System.out.println(player);
 		printLine();
 
 	}

@@ -23,7 +23,7 @@ public class DungeonPosition {
 	 * @throws GameOverException si la colonne ou la ligne est en dehors
 	 * du plateau
 	 */
-	public DungeonPosition(int column, int row) throws GameOverException {
+	public DungeonPosition(int row, int column) throws GameOverException {
 
 		if(column < 0 || column > Dungeon.N-1) {
 			throw new GameOverException("Cette colonne n’existe pas");
@@ -55,7 +55,7 @@ public class DungeonPosition {
 	 */
 	@Override
 	public String toString() {
-		return "[" + column + "," + row + "]";
+		return "[" + row + "," + column + "]";
 	}
 
 	/** Retourne la valeur de column
@@ -85,7 +85,7 @@ public class DungeonPosition {
 		}
 		
 		pos.column = column;
-		pos.row = --row;
+		pos.row = row - 1;
 
 		return pos;
 
@@ -102,7 +102,7 @@ public class DungeonPosition {
 			throw new GameOverException("Impossible de descendre");
 		}
 		pos.column = column;
-		pos.row = ++row;
+		pos.row = row + 1;
 
 		return pos;
 	}
@@ -117,7 +117,7 @@ public class DungeonPosition {
 		if(column + 1 > Dungeon.N - 1 || row < 0 || row > Dungeon.N - 1) {
 			throw new GameOverException("Impossible d’aller à droite");
 		}
-		pos.column = ++column;
+		pos.column = column + 1;
 		pos.row = row;
 
 		return pos;
@@ -133,7 +133,7 @@ public class DungeonPosition {
 		if(column - 1 < 0 || row < 0 || row > Dungeon.N - 1) {
 			throw new GameOverException("Impossible d’aller à gauche");
 		}
-		pos.column = --column;
+		pos.column = column - 1;
 		pos.row = row;
 
 		return pos;
