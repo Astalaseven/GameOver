@@ -30,12 +30,13 @@ public class GameView {
 							game.getCurrentPlayer().getName());
 					
 					Display.printPlayer(game.getCurrentPlayer());
+					Display.printDungeon(Dungeon.getInstance());
 					
-					String dir = Display.askMov();
-					String wea = Display.askWeapon();
+					int dir = Display.askMov();
+					int wea = Display.askWeapon();
 					
-					Direction direction = Direction.values()[Integer.parseInt(dir)];
-					WeaponType weapon = WeaponType.values()[Integer.parseInt(wea)];
+					Direction direction = Direction.values()[dir];
+					WeaponType weapon = WeaponType.values()[wea];
 					
 					game.play(direction, weapon);
 					

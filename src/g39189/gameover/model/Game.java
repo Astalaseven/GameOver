@@ -104,15 +104,15 @@ public class Game {
 			throw new GameOverException("La partie est finie");
 		}
 		// Si la partie n’est pas finie, fait le mouvement
-		DungeonPosition pos = lastPosition.move(dir);
+		DungeonPosition newPos = lastPosition.move(dir);
 
-		Room room = dungeon.getRoom(lastPosition);
+		Room room = dungeon.getRoom(newPos);
 		
 		if(!room.isHidden()) {
 			throw new GameOverException("Carte déjà retournée");
 		}
 		// Si la carte n’était pas encore retournée, la retourne
-		dungeon.show(lastPosition);
+		dungeon.show(newPos);
 
 		// Si le joueur n’a pas la bonne arme, lance une exception
 		WeaponType weaponRoom = room.getWeapon();
@@ -137,6 +137,8 @@ public class Game {
 		if(isOver()) {
 			idWinner = idCurrent;
 		}
+		
+		lastPosition = newPos;
 
 		return keyFound; // TODO
 	}
