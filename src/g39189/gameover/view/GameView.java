@@ -26,10 +26,12 @@ public class GameView {
 				Display.printGameOver(false);
 				
 				try {
-					console.printf("%s, à vous de jouer !\n",
-							game.getCurrentPlayer().getName());
+
+					Player player = game.getCurrentPlayer();
+
+					console.printf("%s, à vous de jouer !\n", player.getName());
 					
-					Display.printPlayer(game.getCurrentPlayer());
+					Display.printPlayer(player);
 					Display.printDungeon(Dungeon.getInstance());
 					
 					int dir = Display.askMov();
@@ -50,7 +52,9 @@ public class GameView {
 				
 			}
 		} catch (GameOverException e) {
+
 			e.printStackTrace();
+
 		}
 
 	}
