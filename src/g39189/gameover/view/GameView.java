@@ -7,7 +7,7 @@ import g39189.gameover.model.*;
 
 public class GameView {
 
-	public static String[] names = new String[Game.maxPlayer];
+	private static String[] names = new String[Game.maxPlayer];
 	
 	public static void main(String[] args) {
 		

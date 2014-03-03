@@ -37,11 +37,11 @@ public class Display {
 		
 		String details = null;
 		
-		if(room.getWeapon() instanceof WeaponType) {
+		if(room.getWeapon() != null) {
 
 			details = formatRoom(room.getWeapon());
 
-		} else if(room.getColor() instanceof BarbarianColor) {
+		} else if(room.getColor() != null) {
 
 			details = formatRoom(room.getColor());
 
@@ -173,8 +173,8 @@ public class Display {
 		
 		printLine();
 
-		final String template = String.format(
-				"| %1$10s : %2$10s \t %3$10s : %4$10s \n"
+		String template = String.format(
+				"| %1$10s : %2$10s \t %3$10s : %4$10s %n"
               + "| %5$10s : %6$10s",
               bold("Nom du joueur"), player.getName(),
               bold("Couleur"),       player.getColor(),
@@ -263,12 +263,12 @@ public class Display {
 		// TODO fix princess display
 		if(room.getColor() != null) {
 
-			template += String.format("\n| %1$10s : %2$10s", 
+			template += String.format("%n| %1$10s : %2$10s", 
 					bold("Couleur"), room.getColor());
 
 		} else if(room.getWeapon() != null) {
 
-			template += String.format("\n| %1$10s : %2$10s", 
+			template += String.format("%n| %1$10s : %2$10s", 
 					bold("Arme"), room.getWeapon());
 
 		} else if((room.getType() == RoomType.BLORK) && (room.getWeapon() == null)) {

@@ -4,7 +4,7 @@ public class Player {
 	
 	//private DungeonPosition[] POSITIONS;
 	private int n;
-	private static int nextN;
+	private int nextN;
 	private String name;
 	private BarbarianColor color;
 	private final DungeonPosition initPosition;
