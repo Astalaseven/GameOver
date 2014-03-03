@@ -20,6 +20,7 @@ public class Player {
 		this.color = BarbarianColor.values()[n];
 
 		switch(n) {
+
 		case 0:
 			this.initPosition = DungeonPosition.P_BARBARIAN_1;
 			break;
@@ -32,6 +33,7 @@ public class Player {
 		case 3:
 			this.initPosition = DungeonPosition.P_BARBARIAN_4;
 			break;
+
 		default:
 			this.initPosition = null;
 		}
@@ -41,6 +43,7 @@ public class Player {
 	 * @return le nom du joueur
 	 */
 	public String getName() {
+
 		return name;
 	}
 
@@ -48,6 +51,7 @@ public class Player {
 	 * @return la couleur du joueur
 	 */
 	public BarbarianColor getColor() {
+
 		return color;
 	}
 
@@ -55,6 +59,7 @@ public class Player {
 	 * @return la position initiale du joueur
 	 */
 	public DungeonPosition getInitPosition() {
+
 		return initPosition;
 	}
 	
@@ -62,11 +67,13 @@ public class Player {
 	 * @return l’id du joueur
 	 */
 	public int getId() {
+
 		return n;
 	}
 	
 	@Override
 	public String toString() {
+
 		return "Player [n=" + n + ", name=" + name + ", color=" + color + 
 				", initPosition=" + initPosition + "]";
 	}

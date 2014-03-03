@@ -22,13 +22,16 @@ public class Game {
 	 */
 	public Game(String... names) throws GameOverException {
 		
-		if(names.length < minPlayer || names.length > maxPlayer) {
+		if((names.length < minPlayer) || (names.length > maxPlayer)) {
+
 			throw new GameOverException("Nombre de concurrents invalide");
 		}
 
 		players = new ArrayList<Player>();
 		for(String name : names) {
+
 			if(name != null) {
+
 				Player player = new Player(name);
 				players.add(player);
 			}
@@ -46,6 +49,7 @@ public class Game {
 	 * @return le plateau de jeu
 	 */
 	public Dungeon getDungeon() {
+
 		return dungeon;
 	}
 
@@ -53,6 +57,7 @@ public class Game {
 	 * @return l’id du joueur actuel
 	 */
 	public Player getCurrentPlayer() {
+
 		return players.get(idCurrent);
 	}
 
@@ -60,6 +65,7 @@ public class Game {
 	 * @return booléen indiquant le statut de la partie
 	 */
 	public boolean isOver() {
+
 		return keyFound && princessFound;
 	}
 	
@@ -71,6 +77,7 @@ public class Game {
 		Player player = null;
 
 		if(isOver()) {
+
 			player = players.get(idWinner);
 		}
 
@@ -81,6 +88,7 @@ public class Game {
 	 * @param dungeon
 	 */
 	void setDungeon(Dungeon dungeon) {
+
 		this.dungeon = dungeon;
 	}
 	
@@ -88,6 +96,7 @@ public class Game {
 	 * @return le nombre mininum de joueurs
 	 */
 	public static int getMinPlayer() {
+
 		return minPlayer;
 	}
 
@@ -95,12 +104,14 @@ public class Game {
 	 * @return le nombre maximum de joueurs
 	 */
 	public static int getMaxPlayer() {
+
 		return maxPlayer;
 	}
 	
 	public boolean play(Direction dir, WeaponType weapon) throws GameOverException {
 
 		if(isOver()) {
+
 			throw new GameOverException("La partie est finie");
 		}
 		// Si la partie n’est pas finie, fait le mouvement
@@ -109,6 +120,7 @@ public class Game {
 		Room room = dungeon.getRoom(newPos);
 		
 		if(!room.isHidden()) {
+
 			throw new GameOverException("Carte déjà retournée");
 		}
 		// Si la carte n’était pas encore retournée, la retourne
@@ -116,7 +128,8 @@ public class Game {
 
 		// Si le joueur n’a pas la bonne arme, lance une exception
 		WeaponType weaponRoom = room.getWeapon();
-		if(room.getType() == RoomType.BLORK && weaponRoom != weapon) {
+		if((room.getType() == RoomType.BLORK) && (weaponRoom != weapon)) {
+
 			Display.printGameOver(true);
 			Display.printRoom(room);
 			throw new GameOverException("Mauvaise arme !");
@@ -126,15 +139,18 @@ public class Game {
 		BarbarianColor colorRoom = room.getColor();
 		BarbarianColor colorPlayer = players.get(idCurrent).getColor();
 		if(colorRoom == colorPlayer) {
+
 			princessFound = true;
 		}
 		
 		// Si la carte est une clé
 		if(room.getType() == RoomType.KEY) {
+
 			keyFound = true;
 		}
 
 		if(isOver()) {
+
 			idWinner = idCurrent;
 		}
 		
@@ -148,6 +164,7 @@ public class Game {
 		++idCurrent;
 		
 		if(idCurrent >= players.size()) {
+
 			idCurrent = 0;
 		}
 
@@ -155,7 +172,6 @@ public class Game {
 		keyFound = false;
 		princessFound = false;
 		lastPosition = players.get(idCurrent).getInitPosition();
-
 	}
 
 	public static void main(String[] args) throws GameOverException {

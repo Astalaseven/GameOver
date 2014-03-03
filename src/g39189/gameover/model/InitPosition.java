@@ -11,13 +11,13 @@ public enum InitPosition {
 
 		this.column = column;
 		this.row = row;
-
 	}
 
 	/** Retourne la valeur de column
 	 * @return column colonne dans le tableau
 	 */
 	public int getColumn() {
+
 		return column;
 	}
 
@@ -25,6 +25,7 @@ public enum InitPosition {
 	 * @return row ligne dans le tableau
 	 */
 	public int getRow() {
+
 		return row;
 	}
 	
@@ -32,9 +33,11 @@ public enum InitPosition {
 	 * @param column colonne utilisée pour retrouver le nom de l’enum
 	 */
 	public String getName(int column) {
+
 		String name = null;
 
 		for(InitPosition pos : InitPosition.values()) {
+
 			name = (pos.column == column) ? pos.name() : null;
 		}
 

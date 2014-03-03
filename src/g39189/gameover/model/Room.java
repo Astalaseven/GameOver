@@ -13,8 +13,9 @@ public class Room {
 	 * @param weapon type d’arme de l’élément du donjon
 	 * @param color couleur de la carte
 	 */
-	public Room(RoomType type, boolean hidden, WeaponType weapon,
+	public Room(RoomType type, boolean hidden, WeaponType weapon, 
 			BarbarianColor color) {
+
 		this.type = type;
 		this.hidden = hidden;
 		this.weapon = weapon;
@@ -25,6 +26,7 @@ public class Room {
 	 * @param hidden the hidden to set
 	 */
 	public void setHidden(boolean hidden) {
+
 		this.hidden = hidden;
 	}
 	
@@ -32,6 +34,7 @@ public class Room {
 	 * @return hidden
 	 */
 	public boolean isHidden() {
+
 		return hidden;
 	}
 
@@ -39,6 +42,7 @@ public class Room {
 	 * @return type
 	 */
 	public RoomType getType() {
+
 		return type;
 	}
 
@@ -46,6 +50,7 @@ public class Room {
 	 * @return weapon
 	 */
 	public WeaponType getWeapon() {
+
 		return weapon;
 	}
 
@@ -53,6 +58,7 @@ public class Room {
 	 * @return color
 	 */
 	public BarbarianColor getColor() {
+
 		return color;
 	}
 
@@ -61,6 +67,7 @@ public class Room {
 	 */
 	@Override
 	public int hashCode() {
+
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
@@ -75,12 +82,14 @@ public class Room {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+
 		Room other = (Room) obj;
 		if (color != other.color)
 			return false;
@@ -99,6 +108,7 @@ public class Room {
 	 */
 	@Override
 	public String toString() {
+
 		return "Room [type=" + type + ", hidden=" + hidden + ", weapon="
 				+ weapon + ", color=" + color + "]";
 	}

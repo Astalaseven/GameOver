@@ -47,14 +47,12 @@ public class GameView {
 					game.getCurrentPlayer();
 					game.nextPlayer();
 					continue;
-
 				}
 				
 			}
 		} catch (GameOverException e) {
 
 			e.printStackTrace();
-
 		}
 
 	}

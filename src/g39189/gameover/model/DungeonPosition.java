@@ -26,10 +26,12 @@ public class DungeonPosition {
 	public DungeonPosition(int row, int column) throws GameOverException {
 
 		if((column < 0) || (column > (Dungeon.N - 1))) {
+
 			throw new GameOverException("Cette colonne n’existe pas");
 		}
 		
 		if((row < 0) || (row > (Dungeon.N - 1))) {
+
 			throw new GameOverException("Cette ligne n’existe pas");
 		}
 		
@@ -78,10 +80,11 @@ public class DungeonPosition {
 	 * @throws GameOverException si la ligne du dessus n’existe pas
 	 */
 	public DungeonPosition up() throws GameOverException {
-		
+
 		DungeonPosition pos = new DungeonPosition(0, 0);
 
-		if(row - 1 < 0 || column < 0 || column > Dungeon.N - 1) {
+		if((row - 1 < 0) || (column < 0) || (column > (Dungeon.N - 1))) {
+
 			throw new GameOverException("Impossible de monter");
 		}
 		
@@ -96,11 +99,14 @@ public class DungeonPosition {
 	 * @throws GameOverException si la ligne du dessous n’existe pas
 	 */
 	public DungeonPosition down() throws GameOverException {
+
 		DungeonPosition pos = new DungeonPosition(0, 0);
 
-		if(row + 1 > Dungeon.N - 1 || column < 0 || column > Dungeon.N - 1) {
+		if(((row + 1) > (Dungeon.N - 1)) || (column < 0) || (column > (Dungeon.N - 1))) {
+
 			throw new GameOverException("Impossible de descendre");
 		}
+
 		pos.column = column;
 		pos.row = row + 1;
 
@@ -112,11 +118,14 @@ public class DungeonPosition {
 	 * @throws GameOverException si la colonne à droite n’existe pas
 	 */
 	public DungeonPosition right() throws GameOverException {
+
 		DungeonPosition pos = new DungeonPosition(0, 0);
 
-		if(column + 1 > Dungeon.N - 1 || row < 0 || row > Dungeon.N - 1) {
+		if(((column + 1) >( Dungeon.N - 1)) || (row < 0) || (row > (Dungeon.N - 1))) {
+
 			throw new GameOverException("Impossible d’aller à droite");
 		}
+
 		pos.column = column + 1;
 		pos.row = row;
 
@@ -128,11 +137,14 @@ public class DungeonPosition {
 	 * @throws GameOverException si la colonne à gauche n’existe pas
 	 */
 	public DungeonPosition left() throws GameOverException {
+
 		DungeonPosition pos = new DungeonPosition(0, 0);
 
-		if(column - 1 < 0 || row < 0 || row > Dungeon.N - 1) {
+		if(((column - 1) < 0) || (row < 0) || (row > (Dungeon.N - 1))) {
+
 			throw new GameOverException("Impossible d’aller à gauche");
 		}
+
 		pos.column = column - 1;
 		pos.row = row;
 
@@ -145,13 +157,16 @@ public class DungeonPosition {
 	 * @throws GameOverException si le mouvement n’est pas possible
 	 */
 	public DungeonPosition move(Direction dir) throws GameOverException {
+
 		DungeonPosition movDir = null;
 
 		switch(dir) {
+
 		case UP:	movDir = up();		break;
 		case DOWN:  movDir = down(); 	break;
 		case RIGHT: movDir = right(); 	break;
 		case LEFT:  movDir = left(); 	break;
+
 		default:	throw new GameOverException("Direction inconnue");
 		}
 
