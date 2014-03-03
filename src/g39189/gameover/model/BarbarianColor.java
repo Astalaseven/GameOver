@@ -1,6 +1,6 @@
 package g39189.gameover.model;
 
-public enum BarbarianColor {
-
+public enum BarbarianColor
+{
 	RED, GREEN, BLUE, YELLOW;
 }

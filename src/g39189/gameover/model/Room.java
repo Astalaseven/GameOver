@@ -14,8 +14,8 @@ public class Room {
 	 * @param color couleur de la carte
 	 */
 	public Room(RoomType type, boolean hidden, WeaponType weapon, 
-			BarbarianColor color) {
-
+			BarbarianColor color)
+	{
 		this.type = type;
 		this.hidden = hidden;
 		this.weapon = weapon;
@@ -25,40 +25,40 @@ public class Room {
 	/** Modifie la valeur de hidden
 	 * @param hidden the hidden to set
 	 */
-	public void setHidden(boolean hidden) {
-
+	public void setHidden(boolean hidden)
+	{
 		this.hidden = hidden;
 	}
 	
 	/** Retourne la valeur de hidden
 	 * @return hidden
 	 */
-	public boolean isHidden() {
-
+	public boolean isHidden()
+	{
 		return hidden;
 	}
 
 	/** Retourne la valeur de type
 	 * @return type
 	 */
-	public RoomType getType() {
-
+	public RoomType getType()
+	{
 		return type;
 	}
 
 	/** Retourne la valeur de weapon
 	 * @return weapon
 	 */
-	public WeaponType getWeapon() {
-
+	public WeaponType getWeapon()
+	{
 		return weapon;
 	}
 
 	/** Retourne la valeur de color
 	 * @return color
 	 */
-	public BarbarianColor getColor() {
-
+	public BarbarianColor getColor()
+	{
 		return color;
 	}
 
@@ -66,8 +66,8 @@ public class Room {
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode() {
-
+	public int hashCode()
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
@@ -81,8 +81,8 @@ public class Room {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
-
+	public boolean equals(Object obj)
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -107,10 +107,9 @@ public class Room {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-
+	public String toString()
+	{
 		return "Room [type=" + type + ", hidden=" + hidden + ", weapon="
 				+ weapon + ", color=" + color + "]";
 	}
-
 }

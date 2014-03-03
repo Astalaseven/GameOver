@@ -5,14 +5,14 @@ import java.io.Console;
 import g39189.gameover.model.*;
 
 
-public class GameView {
-
+public class GameView
+{
 	private static String[] names = new String[Game.maxPlayer];
 	
-	public static void main(String[] args) {
-		
-		try {
-			
+	public static void main(String[] args)
+	{
+		try 
+		{
 			Display.printGameOver(false);
 			
 			Console console = System.console();
@@ -21,12 +21,12 @@ public class GameView {
 
 			Game game = new Game(names);
 			
-			while(!game.isOver()) {
-				
+			while(!game.isOver())
+			{
 				Display.printGameOver(false);
 				
-				try {
-
+				try
+				{
 					Player player = game.getCurrentPlayer();
 
 					console.printf("%s, à vous de jouer !\n", player.getName());
@@ -40,18 +40,23 @@ public class GameView {
 					Direction direction = Direction.values()[dir];
 					WeaponType weapon = WeaponType.values()[wea];
 					
-					game.play(direction, weapon);
+					if(!game.play(direction, weapon))
+					{
+						game.getCurrentPlayer();
+						game.nextPlayer();
+						throw new GameOverException("Mauvaise arme !");
+					}
 					
-				} catch (GameOverException e) {
-
-					game.getCurrentPlayer();
-					game.nextPlayer();
+				}
+				catch (GameOverException e)
+				{
 					continue;
 				}
 				
 			}
-		} catch (GameOverException e) {
-
+		}
+		catch (GameOverException e)
+		{
 			e.printStackTrace();
 		}
 

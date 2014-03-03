@@ -1,6 +1,6 @@
 package g39189.gameover.model;
 
-public enum WeaponType {
-
+public enum WeaponType
+{
 	POTION, ARROWS, BLUDGEON, GUN;
 }

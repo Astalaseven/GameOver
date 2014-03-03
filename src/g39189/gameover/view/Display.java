@@ -4,15 +4,15 @@ import java.io.Console;
 
 import g39189.gameover.model.*;
 
-public class Display {
-	
+public class Display
+{	
 	/** Affiche une ligne de séparation
 	 * 
 	 */
-	public static void printLine() {
-		
-		for(int i = 0; i < 56; i++) {
-
+	public static void printLine()
+	{
+		for(int i = 0; i < 56; i++)
+		{
 			System.out.print("=");
 		}
 		
@@ -22,8 +22,8 @@ public class Display {
 	/** Affiche le type de la carte retournée
 	 * @param room la carte à afficher
 	 */
-	public static void printRoomInDungeon(Room room) {
-		
+	public static void printRoomInDungeon(Room room)
+	{
 		String template = String.format("| %1$8s ", room.getType());
 		boolean isHidden = room.isHidden();
 		
@@ -33,20 +33,20 @@ public class Display {
 	/** Affiche des détails sur la carte retournée (arme, couleur…)
 	 * @param room la carte à détailler
 	 */
-	public static void printRoomInDungeonDetails(Room room) {
-		
+	public static void printRoomInDungeonDetails(Room room)
+	{
 		String details = null;
 		
-		if(room.getWeapon() != null) {
-
+		if(room.getWeapon() != null)
+		{
 			details = formatRoom(room.getWeapon());
-
-		} else if(room.getColor() != null) {
-
+		} 
+		else if(room.getColor() != null)
+		{
 			details = formatRoom(room.getColor());
-
-		} else if(room.isHidden() || (details == null)) {
-
+		} 
+		else if(room.isHidden() || (details == null))
+		{
 			details = formatRoom(" ");
 		}
 
@@ -57,8 +57,8 @@ public class Display {
 	 * @param o une carte
 	 * @return la valeur de la carte formatée
 	 */
-	private static String formatRoom(Object o) {
-		
+	private static String formatRoom(Object o)
+	{
 		return String.format("| %1$8s ", o);
 	}
 	
@@ -66,27 +66,29 @@ public class Display {
 	 * (minimum 2, maximum 4)
 	 * @return un tableau contenant les noms des joueurs
 	 */
-	public static String[] createPlayers() {
-
+	public static String[] createPlayers()
+	{
 		int nbPlayers = 0;
 		final String[] names = new String[Game.maxPlayer];
 		boolean newPlayer = true;
 		Console console = System.console();
 
-		while(newPlayer && (nbPlayers < Game.maxPlayer)) {
-			
+		while(newPlayer && (nbPlayers < Game.maxPlayer))
+		{
 			String name = "";
-			try {
 
+			try
+			{
 				name = console.readLine("Veuillez entrer votre nom : ");
 
-				if(name.length() < 1) {
-
+				if(name.length() < 1)
+				{
 					throw new GameOverException("Nom trop court");
 				}
 
-			} catch (GameOverException e) {
-				
+			} 
+			catch (GameOverException e)
+			{
 				printGameOver(false);
 				continue;
 			}
@@ -95,14 +97,14 @@ public class Display {
 			console.printf("Joueur %s créé avec succès !\n", name);
 			++nbPlayers;
 			
-			if((nbPlayers >= Game.minPlayer) 
-					&& (nbPlayers <= (Game.maxPlayer - 1))) {
-
+			if((nbPlayers >= Game.minPlayer) && 
+					(nbPlayers <= (Game.maxPlayer - 1)))
+			{
 				String str = " ";
 				char answer;
 				
-				do {
-					
+				do
+				{
 					str = console.readLine("Créer un autre joueur ? (O/n) ");
 					str = str.toUpperCase();
 					
@@ -120,22 +122,23 @@ public class Display {
 	/** Demande à l’utilisateur quel mouvement il souhaite faire
 	 * @return le mouvement sous forme d’entier
 	 */
-	public static int askMov() {
-		
+	public static int askMov()
+	{
 		Console console = System.console();
 		int answer = -1;
 
-		while((answer < 0) || (answer > 3)) {
-
+		while((answer < 0) || (answer > 3))
+		{
 			console.printf("Quel mouvement souhaitez-vous faire ?\n");
 
-			try {
+			try
+			{
 				// char - 48 pour convertir l’ascii en int
 				answer = console.readLine("UP (0), DOWN (1), " 
 						+ "RIGHT (2), LEFT (3)\n").charAt(0) - 48;
-
-			} catch (StringIndexOutOfBoundsException err) {
-
+			} 
+			catch (StringIndexOutOfBoundsException err)
+			{
 				continue;
 			}
 		}
@@ -143,22 +146,24 @@ public class Display {
 		return answer;
 	}
 	
-	public static int askWeapon() {
-		
+	public static int askWeapon()
+	{
 		Console console = System.console();
 		int answer = -1;
 
-		while((answer < 0) || (answer > 3)) {
-
+		while((answer < 0) || (answer > 3))
+		{
 			console.printf("Équipez-vous d’une arme !\n");
 
-			try {
+			try
+			{
 				// char - 48 pour convertir l’ascii en int
 				answer = console.readLine("POTION (0), ARROWS (1), "
 						+ "BLUDGEON (2), GUN (3)\n").charAt(0) - 48;
 
-			} catch (StringIndexOutOfBoundsException err) {
-
+			} 
+			catch (StringIndexOutOfBoundsException err)
+			{
 				continue;
 			}
 		}
@@ -169,8 +174,8 @@ public class Display {
 	/** Affiche la fiche signalétique d’un joueur
 	 * @param player le joueur à afficher
 	 */
-	public static void printPlayer(Player player) {
-		
+	public static void printPlayer(Player player)
+	{
 		printLine();
 
 		String template = String.format(
@@ -187,28 +192,28 @@ public class Display {
 	/** Affiche le donjon
 	 * @param dungeon le donjon à afficher
 	 */
-	public static void printDungeon(Dungeon dungeon) {
-		
+	public static void printDungeon(Dungeon dungeon)
+	{
 		printLine();
 		
-		for(int row = 0; row < Dungeon.N; row++) {
-			
-			if(row != 0) {
-
+		for(int row = 0; row < Dungeon.N; row++)
+		{
+			if(row != 0)
+			{
 				System.out.print("|\n");
 				printLine();
 			}
 			
 			DungeonPosition pos = null;
 			
-			for(int column = 0; column < Dungeon.N; column++) {				
-				
-				try {
-
+			for(int column = 0; column < Dungeon.N; column++)
+			{				
+				try
+				{
 					pos = new DungeonPosition(column, row);
-
-				} catch (GameOverException e) {
-
+				} 
+				catch (GameOverException e)
+				{
 					e.printStackTrace();
 				}
 				
@@ -218,21 +223,20 @@ public class Display {
 			
 			System.out.print("|\n");
 			
-			for(int column = 0; column < Dungeon.N; column++) {				
-
-				try {
-
+			for(int column = 0; column < Dungeon.N; column++) 
+			{				
+				try
+				{
 					pos = new DungeonPosition(column, row);
-
-				} catch (GameOverException e) {
-
+				} 
+				catch (GameOverException e)
+				{
 					e.printStackTrace();
 				}
 				
 				Room room = dungeon.getRoom(pos);
 				printRoomInDungeonDetails(room);
 			}
-
 		}
 		
 		System.out.println("|");
@@ -243,16 +247,16 @@ public class Display {
 	 * @param str le texte à mettre en gras
 	 * @return le texte mis en gras
 	 */
-	public static String bold(String str) {
-
+	public static String bold(String str)
+	{
 		return "\033[1m" + str + "\033[0m";
 	}
 	
 	/** Affiche la carte retournée
 	 * @param room la carte passée en paramètre
 	 */
-	public static void printRoom(Room room) {
-		
+	public static void printRoom(Room room)
+	{
 		printLine();
 		System.out.println("| Carte retournée :");
 		printLine();
@@ -261,18 +265,18 @@ public class Display {
 				bold("Type"), room.getType());
 		
 		// TODO fix princess display
-		if(room.getColor() != null) {
-
+		if(room.getColor() != null)
+		{
 			template += String.format("%n| %1$10s : %2$10s", 
 					bold("Couleur"), room.getColor());
-
-		} else if(room.getWeapon() != null) {
-
+		}
+		else if(room.getWeapon() != null)
+		{
 			template += String.format("%n| %1$10s : %2$10s", 
 					bold("Arme"), room.getWeapon());
-
-		} else if((room.getType() == RoomType.BLORK) && (room.getWeapon() == null)) {
-
+		}
+		else if((room.getType() == RoomType.BLORK) && (room.getWeapon() == null))
+		{
 			template += String.format(" invincible");
 		}
 	
@@ -280,8 +284,8 @@ public class Display {
 		printLine();
 	}
 	
-	public static void printSkull() {
-		
+	public static void printSkull()
+	{
 		System.out.println();
 		
 		System.out.println("\t\t             uu$$$$$$$$$$$uu             ");
@@ -313,14 +317,14 @@ public class Display {
 		System.out.println();
 	}
 	
-	public static void clearScreen() {
-
+	public static void clearScreen()
+	{
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
 	
-	public static void printGameOver(boolean skull) {
-		
+	public static void printGameOver(boolean skull)
+	{
 		clearScreen();
 		
 		System.out.println("**************************************************************************");
@@ -337,7 +341,8 @@ public class Display {
 		System.out.println("**************************************************************************");
 		System.out.println("**************************************************************************");
 
-		if(skull) {
+		if(skull)
+		{
 			printSkull();
 		}
 	}

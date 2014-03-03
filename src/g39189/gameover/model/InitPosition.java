@@ -7,8 +7,8 @@ public enum InitPosition {
 	private final int column; // TODO final ?
 	private final int row;
 	
-	private InitPosition(int row, int column) {
-
+	private InitPosition(int row, int column)
+	{
 		this.column = column;
 		this.row = row;
 	}
@@ -16,28 +16,28 @@ public enum InitPosition {
 	/** Retourne la valeur de column
 	 * @return column colonne dans le tableau
 	 */
-	public int getColumn() {
-
+	public int getColumn()
+	{
 		return column;
 	}
 
 	/** Retourne la valeur de row
 	 * @return row ligne dans le tableau
 	 */
-	public int getRow() {
-
+	public int getRow()
+	{
 		return row;
 	}
 	
 	/** Retourne le nom de la position en fonction de sa colonne
 	 * @param column colonne utilisée pour retrouver le nom de l’enum
 	 */
-	public String getName(int column) {
-
+	public String getName(int column)
+	{
 		String name = null;
 
-		for(InitPosition pos : InitPosition.values()) {
-
+		for(InitPosition pos : InitPosition.values())
+		{
 			name = (pos.column == column) ? pos.name() : null;
 		}
 
