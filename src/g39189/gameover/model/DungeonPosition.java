@@ -35,7 +35,6 @@ public class DungeonPosition {
 		
 		this.column = column;
 		this.row = row;
-
 	}
 
 	/** Constructeur de DungeonPosition
