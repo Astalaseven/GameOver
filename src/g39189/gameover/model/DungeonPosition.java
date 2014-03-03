@@ -1,7 +1,7 @@
 package g39189.gameover.model;
 
-public class DungeonPosition {
-
+public class DungeonPosition
+{
     public final static DungeonPosition P_BARBARIAN_1;
     public final static DungeonPosition P_BARBARIAN_2;
     public final static DungeonPosition P_BARBARIAN_3;
@@ -119,8 +119,8 @@ public class DungeonPosition {
      * @return nouvelle position située à droite de l’actuelle
      * @throws GameOverException si la colonne à droite n’existe pas
      */
-    public DungeonPosition right() throws GameOverException {
-
+    public DungeonPosition right() throws GameOverException
+    {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
         if(((column + 1) > (Dungeon.N - 1)) || (row < 0) || (row > (Dungeon.N - 1)))
@@ -164,12 +164,12 @@ public class DungeonPosition {
 
         switch(dir)
         {
-        case UP:    movDir = up();      break;
-        case DOWN:  movDir = down();    break;
-        case RIGHT: movDir = right();   break;
-        case LEFT:  movDir = left();    break;
-
-        default:    throw new GameOverException("Direction inconnue");
+            case UP:    movDir = up();      break;
+            case DOWN:  movDir = down();    break;
+            case RIGHT: movDir = right();   break;
+            case LEFT:  movDir = left();    break;
+    
+            default:    throw new GameOverException("Direction inconnue");
         }
 
         return movDir;

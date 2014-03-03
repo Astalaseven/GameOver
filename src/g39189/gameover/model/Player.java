@@ -1,7 +1,7 @@
 package g39189.gameover.model;
 
-public class Player {
-
+public class Player
+{
     //private DungeonPosition[] POSITIONS;
     private int n;
     private int nextN;
@@ -21,20 +21,12 @@ public class Player {
 
         switch(n)
         {
-        case 0:
-            this.initPosition = DungeonPosition.P_BARBARIAN_1;
-            break;
-        case 1:
-            this.initPosition = DungeonPosition.P_BARBARIAN_2;
-            break;
-        case 2:
-            this.initPosition = DungeonPosition.P_BARBARIAN_3;
-            break;
-        case 3:
-            this.initPosition = DungeonPosition.P_BARBARIAN_4;
-            break;
-
-        default: this.initPosition = null;
+            case 0:  this.initPosition = DungeonPosition.P_BARBARIAN_1;  break;
+            case 1:  this.initPosition = DungeonPosition.P_BARBARIAN_2;  break;
+            case 2:  this.initPosition = DungeonPosition.P_BARBARIAN_3;  break;
+            case 3:  this.initPosition = DungeonPosition.P_BARBARIAN_4;  break;
+    
+            default: this.initPosition = null;
         }
     }
 
