@@ -199,7 +199,6 @@ public class Display {
 				
 				Room room = dungeon.getRoom(pos);
 				printRoomInDungeon(room);
-				
 			}
 			
 			System.out.print("|\n");
@@ -207,24 +206,26 @@ public class Display {
 			for(int column = 0; column < Dungeon.N; column++) {				
 
 				try {
+
 					pos = new DungeonPosition(column, row);
+
 				} catch (GameOverException e) {
+
 					e.printStackTrace();
 				}
 				
 				Room room = dungeon.getRoom(pos);
 				printRoomInDungeonDetails(room);
-				
 			}
 
 		}
 		
 		System.out.println("|");
 		printLine();
-		
 	}
 	
 	public static String bold(String str) {
+
 		return "\033[1m" + str + "\033[0m";
 	}
 	
@@ -238,14 +239,20 @@ public class Display {
 				bold("Type"), room.getType());
 		
 		// TODO fix princess display
-		if(room.getColor() != null)
+		if(room.getColor() != null) {
+
 			template += String.format("\n| %1$10s : %2$10s", 
 					bold("Couleur"), room.getColor());
-		else if(room.getWeapon() != null)
+
+		} else if(room.getWeapon() != null) {
+
 			template += String.format("\n| %1$10s : %2$10s", 
 					bold("Arme"), room.getWeapon());
-		else if(room.getType() == RoomType.BLORK && room.getWeapon() == null)
+
+		} else if((room.getType() == RoomType.BLORK) && (room.getWeapon() == null)) {
+
 			template += String.format(" invincible");
+		}
 	
 		System.out.println(template);
 		printLine();
@@ -272,11 +279,11 @@ public class Display {
 		System.out.println("\t\t  uuu        $$u$ $ $ $ $u$$       uuu   ");
 		System.out.println("\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  ");
 		System.out.println("\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  ");
-		System.out.println("\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$u");
+		System.out.println("\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ ");
 		System.out.println("\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       ");
 		System.out.println("\t\t           $$$$$$$$$$$$$$$$$$$           ");
 		System.out.println("\t\t          uuuu$$$$$   $$$$$$uuuu         ");
-		System.out.println("\t\t  u$$$uuu$$$$$$$$       $$$$$$$$$$uuu$$$ ");
+		System.out.println("\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ ");
 		System.out.println("\t\t  $$$$$$$$$$                $$$$$$$$$$$  ");
 		System.out.println("\t\t    $$$$$                      $$$$$     ");
 		System.out.println("\t\t     $$$                        $$$      ");
@@ -285,6 +292,7 @@ public class Display {
 	}
 	
 	public static void clearScreen() {
+
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
@@ -307,18 +315,23 @@ public class Display {
 		System.out.println("**************************************************************************");
 		System.out.println("**************************************************************************");
 
-		if(skull)
+		if(skull) {
 			printSkull();
+		}
 	}
 	
 	public static void main(String[] args) {
+
 		Dungeon dungeon = Dungeon.getInstance();
 		printDungeon(dungeon);
 		DungeonPosition pos = null;
+
 		try {
+
 			pos = new DungeonPosition(0, 0);
+
 		} catch (GameOverException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		
