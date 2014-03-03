@@ -19,11 +19,12 @@ public class Dungeon {
         Collections.shuffle(donjon);
 
         for(int row = 0; row < N; row++) {
+
             for(int column = 0; column < N; column++) {
+
                 roomss[row][column] = donjon.pop();
             }
         }
-
     }
 
     /** Constructeur utilisé pour les tests
@@ -32,7 +33,6 @@ public class Dungeon {
     Dungeon(Room[][] configuration) {
     	
     	this.roomss = configuration;
-
     }
 
     /** Retourne l’instance, la crée si elle n’existe pas encore
@@ -41,7 +41,6 @@ public class Dungeon {
     public static Dungeon getInstance() {
 
         return (instance != null) ? instance : new Dungeon();
-
     }
 
     /** Retourne la valeur d’une room
@@ -51,7 +50,6 @@ public class Dungeon {
     public Room getRoom(DungeonPosition pos) {
 
         return roomss[pos.getRow()][pos.getColumn()];
-
     }
 
     /** Retourne une carte pour l’afficher
@@ -60,7 +58,6 @@ public class Dungeon {
     public void show(DungeonPosition pos) {
 
         roomss[pos.getRow()][pos.getColumn()].setHidden(false);
-
     }
 
     /** Retourne toutes les cartes pour les cacher
@@ -69,13 +66,12 @@ public class Dungeon {
     public void hideAll() {
 
         for(int row = 0; row < N; row++) {
+
             for(int column = 0; column < N; column++) {
 
                 roomss[row][column].setHidden(true);
-
             }
         }
-
     }
 
     /** Crée et ajoute les rooms dans la liste dungeon
@@ -88,7 +84,6 @@ public class Dungeon {
         addRoom(RoomType.KEY, 2, false, false);
         addRoom(RoomType.BLORK, 2, false, false);
         addRoom(RoomType.GATE, 1, false, false);
-
     }
 
     /** Crée et ajoute un room à la liste dungeon
@@ -105,6 +100,7 @@ public class Dungeon {
         while(i < nb) {
 
             if(j > 3) {
+
                 j = 0;
             }
 
@@ -115,9 +111,6 @@ public class Dungeon {
 
             i++;
             j++;
-
-//            System.out.println(room);
-
         }
     }
 }
