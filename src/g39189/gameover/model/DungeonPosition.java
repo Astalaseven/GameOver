@@ -47,7 +47,6 @@ public class DungeonPosition {
 		column = init.getColumn();
 		row = init.getRow();
 		++dungeonCpt;
-
 	}
 
 	/** Affiche une position selon sa colonne et sa ligne
@@ -55,6 +54,7 @@ public class DungeonPosition {
 	 */
 	@Override
 	public String toString() {
+
 		return "[" + row + "," + column + "]";
 	}
 
@@ -62,6 +62,7 @@ public class DungeonPosition {
 	 * @return la colonne de la position
 	 */
 	public int getColumn() {
+
 		return column;
 	}
 
@@ -69,6 +70,7 @@ public class DungeonPosition {
 	 * @return la ligne de la position
 	 */
 	public int getRow() {
+
 		return row;
 	}
 	
@@ -88,7 +90,6 @@ public class DungeonPosition {
 		pos.row = row - 1;
 
 		return pos;
-
 	}
 	
 	/** Retourne la position en dessous de la position actuelle
