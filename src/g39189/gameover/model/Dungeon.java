@@ -32,7 +32,7 @@ public class Dungeon
      */
     Dungeon(Room[][] configuration) 
     {
-    	this.roomss = configuration;
+        this.roomss = configuration;
     }
 
     /** Retourne l’instance, la crée si elle n’existe pas encore
