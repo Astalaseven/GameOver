@@ -48,13 +48,16 @@ public class Display {
 		} else if(room.isHidden() || (details == null)) {
 
 			details = formatRoom(" ");
-
 		}
 
 		System.out.print(details);
 	}
 	
-	public static String formatRoom(Object o) {
+	/** Format d’affichage d’une carte
+	 * @param o une carte
+	 * @return la valeur de la carte formatée
+	 */
+	private static String formatRoom(Object o) {
 		
 		return String.format("| %1$8s ", o);
 	}
@@ -66,7 +69,7 @@ public class Display {
 	public static String[] createPlayers() {
 
 		int nbPlayers = 0;
-		String[] names = new String[Game.maxPlayer];
+		final String[] names = new String[Game.maxPlayer];
 		boolean newPlayer = true;
 		Console console = System.console();
 
@@ -92,7 +95,7 @@ public class Display {
 			console.printf("Joueur %s créé avec succès !\n", name);
 			++nbPlayers;
 			
-			if((nbPlayers >= Game.minPlayer)
+			if((nbPlayers >= Game.minPlayer) 
 					&& (nbPlayers <= (Game.maxPlayer - 1))) {
 
 				String str = " ";
@@ -114,6 +117,9 @@ public class Display {
 		return names;
 	}
 	
+	/** Demande à l’utilisateur quel mouvement il souhaite faire
+	 * @return le mouvement sous forme d’entier
+	 */
 	public static int askMov() {
 		
 		Console console = System.console();
@@ -145,6 +151,7 @@ public class Display {
 		while((answer < 0) || (answer > 3)) {
 
 			console.printf("Équipez-vous d’une arme !\n");
+
 			try {
 				// char - 48 pour convertir l’ascii en int
 				answer = console.readLine("POTION (0), ARROWS (1), "
@@ -159,11 +166,14 @@ public class Display {
 		return answer;
 	}
 	
+	/** Affiche la fiche signalétique d’un joueur
+	 * @param player le joueur à afficher
+	 */
 	public static void printPlayer(Player player) {
 		
 		printLine();
 
-		String template = String.format(
+		final String template = String.format(
 				"| %1$10s : %2$10s \t %3$10s : %4$10s \n"
               + "| %5$10s : %6$10s",
               bold("Nom du joueur"), player.getName(),
@@ -174,6 +184,9 @@ public class Display {
 		printLine();
 	}
 	
+	/** Affiche le donjon
+	 * @param dungeon le donjon à afficher
+	 */
 	public static void printDungeon(Dungeon dungeon) {
 		
 		printLine();
@@ -226,11 +239,18 @@ public class Display {
 		printLine();
 	}
 	
+	/** Met le texte passé en paramètre en gras
+	 * @param str le texte à mettre en gras
+	 * @return le texte mis en gras
+	 */
 	public static String bold(String str) {
 
 		return "\033[1m" + str + "\033[0m";
 	}
 	
+	/** Affiche la carte retournée
+	 * @param room la carte passée en paramètre
+	 */
 	public static void printRoom(Room room) {
 		
 		printLine();
@@ -324,7 +344,7 @@ public class Display {
 	
 	public static void main(String[] args) {
 
-		Dungeon dungeon = Dungeon.getInstance();
+		final Dungeon dungeon = Dungeon.getInstance();
 		printDungeon(dungeon);
 		DungeonPosition pos = null;
 
