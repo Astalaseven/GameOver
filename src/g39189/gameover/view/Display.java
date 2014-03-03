@@ -66,17 +66,19 @@ public class Display {
 	public static String[] createPlayers() {
 
 		int nbPlayers = 0;
-		String[] names = new String[4];
+		String[] names = new String[Game.maxPlayer];
 		boolean newPlayer = true;
 		Console console = System.console();
 
-		while(newPlayer && (nbPlayers < Game.getMaxPlayer())) {
+		while(newPlayer && (nbPlayers < Game.maxPlayer)) {
 			
 			String name = "";
 			try {
 
 				name = console.readLine("Veuillez entrer votre nom : ");
+
 				if(name.length() < 1) {
+
 					throw new GameOverException("Nom trop court");
 				}
 
@@ -90,8 +92,8 @@ public class Display {
 			console.printf("Joueur %s créé avec succès !\n", name);
 			++nbPlayers;
 			
-			if((nbPlayers >= Game.getMinPlayer())
-					&& (nbPlayers <= (Game.getMaxPlayer() - 1))) {
+			if((nbPlayers >= Game.minPlayer)
+					&& (nbPlayers <= (Game.maxPlayer - 1))) {
 
 				String str = " ";
 				char answer;

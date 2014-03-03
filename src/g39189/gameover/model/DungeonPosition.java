@@ -2,12 +2,13 @@ package g39189.gameover.model;
 
 public class DungeonPosition {
 	
-	private int column;
-	private int row;
 	public final static DungeonPosition P_BARBARIAN_1;
 	public final static DungeonPosition P_BARBARIAN_2;
 	public final static DungeonPosition P_BARBARIAN_3;
 	public final static DungeonPosition P_BARBARIAN_4;
+
+	private int column;
+	private int row;
 	private static int dungeonCpt = 0;
 	
 	static {

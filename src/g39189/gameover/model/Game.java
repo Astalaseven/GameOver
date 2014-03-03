@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 public class Game {
 	
-	private final static int minPlayer = 2;
-	private final static int maxPlayer = 4;
+	public final static int minPlayer = 2;
+	public final static int maxPlayer = 4;
+
 	private Dungeon dungeon;
 	private ArrayList<Player> players;
 	private int idCurrent;
@@ -90,22 +91,6 @@ public class Game {
 	void setDungeon(Dungeon dungeon) {
 
 		this.dungeon = dungeon;
-	}
-	
-	/** Retourne le nombre minimum de joueurs
-	 * @return le nombre mininum de joueurs
-	 */
-	public static int getMinPlayer() {
-
-		return minPlayer;
-	}
-
-	/** Retourne le nombre maximum de joueurs
-	 * @return le nombre maximum de joueurs
-	 */
-	public static int getMaxPlayer() {
-
-		return maxPlayer;
 	}
 	
 	public boolean play(Direction dir, WeaponType weapon) throws GameOverException {
