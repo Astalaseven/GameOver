@@ -123,7 +123,7 @@ public class DungeonPosition {
 
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if(((column + 1) >( Dungeon.N - 1)) || (row < 0) || (row > (Dungeon.N - 1)))
+        if(((column + 1) > (Dungeon.N - 1)) || (row < 0) || (row > (Dungeon.N - 1)))
         {
             throw new GameOverException("Impossible d’aller à droite");
         }

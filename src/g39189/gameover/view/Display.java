@@ -41,11 +41,11 @@ public class Display
         {
             details = formatRoom(room.getWeapon());
         } 
-        else if(room.getColor() != null)
+        if(room.getColor() != null)
         {
             details = formatRoom(room.getColor());
         } 
-        else if(room.isHidden() || (details == null))
+        if(room.isHidden() || (details == null))
         {
             details = formatRoom(" ");
         }
@@ -288,32 +288,34 @@ public class Display
     {
         System.out.println();
 
-        System.out.println("\t\t             uu$$$$$$$$$$$uu             ");
-        System.out.println("\t\t          uu$$$$$$$$$$$$$$$$$uu          ");
-        System.out.println("\t\t         u$$$$$$$$$$$$$$$$$$$$$u         ");
-        System.out.println("\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        ");
-        System.out.println("\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       ");
-        System.out.println("\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       ");
-        System.out.println("\t\t       u$$$$$$     $$$     $$$$$$u       ");
-        System.out.println("\t\t        $$$$       u$u       $$$$        ");
-        System.out.println("\t\t        $$$u       u$u       u$$$        ");
-        System.out.println("\t\t        $$$u      u$$$u      u$$$        ");
-        System.out.println("\t\t         $$$$$uu$$$   $$$uu$$$$$         ");
-        System.out.println("\t\t           $$$$$$$     $$$$$$$           ");
-        System.out.println("\t\t            u$$$$$$$u$$$$$$$u            ");
-        System.out.println("\t\t             u$ $ $ $ $ $ $u             ");
-        System.out.println("\t\t  uuu        $$u$ $ $ $ $u$$       uuu   ");
-        System.out.println("\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  ");
-        System.out.println("\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  ");
-        System.out.println("\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ ");
-        System.out.println("\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       ");
-        System.out.println("\t\t           $$$$$$$$$$$$$$$$$$$           ");
-        System.out.println("\t\t          uuuu$$$$$   $$$$$$uuuu         ");
-        System.out.println("\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ ");
-        System.out.println("\t\t  $$$$$$$$$$                $$$$$$$$$$$  ");
-        System.out.println("\t\t    $$$$$                      $$$$$     ");
-        System.out.println("\t\t     $$$                        $$$      ");
-
+        String skull =
+          "\t\t             uu$$$$$$$$$$$uu             \n"
+        + "\t\t          uu$$$$$$$$$$$$$$$$$uu          \n"
+        + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         \n"
+        + "\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        \n"
+        + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
+        + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
+        + "\t\t       u$$$$$$     $$$     $$$$$$u       \n"
+        + "\t\t        $$$$       u$u       $$$$        \n"
+        + "\t\t        $$$u       u$u       u$$$        \n"
+        + "\t\t        $$$u      u$$$u      u$$$        \n"
+        + "\t\t         $$$$$uu$$$   $$$uu$$$$$         \n"
+        + "\t\t           $$$$$$$     $$$$$$$           \n"
+        + "\t\t            u$$$$$$$u$$$$$$$u            \n"
+        + "\t\t             u$ $ $ $ $ $ $u             \n"
+        + "\t\t  uuu        $$u$ $ $ $ $u$$       uuu   \n"
+        + "\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  \n"
+        + "\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  \n"
+        + "\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ \n"
+        + "\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       \n"
+        + "\t\t           $$$$$$$$$$$$$$$$$$$           \n"
+        + "\t\t          uuuu$$$$$   $$$$$$uuuu         \n"
+        + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ \n"
+        + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
+        + "\t\t    $$$$$                      $$$$$     \n"
+        + "\t\t     $$$                        $$$      \n";
+        
+        System.out.println(skull);
         System.out.println();
     }
 
@@ -365,6 +367,7 @@ public class Display
         printRoom(dungeon.getRoom(pos));
         System.out.println();
         printLine();
+//        printSkull();
         //		printGameOver();
         //		Player player = new Player("Jean");
         //		printPlayer(player);
