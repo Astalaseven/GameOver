@@ -12,6 +12,7 @@ public class Display {
 	public static void printLine() {
 		
 		for(int i = 0; i < 56; i++) {
+
 			System.out.print("=");
 		}
 		
@@ -36,29 +37,26 @@ public class Display {
 		
 		String details = null;
 		
-		WeaponType weapon = room.getWeapon();
-		if(weapon instanceof WeaponType) {
-			details = formatRoom(weapon);
-		}
+		if(room.getWeapon() instanceof WeaponType) {
 
-		BarbarianColor color = room.getColor();
-		if(color instanceof BarbarianColor) {
-			details = formatRoom(color);
-		}
+			details = formatRoom(room.getWeapon());
 
-		boolean isHidden = room.isHidden();
-		if(isHidden || details == null) {
+		} else if(room.getColor() instanceof BarbarianColor) {
+
+			details = formatRoom(room.getColor());
+
+		} else if(room.isHidden() || (details == null)) {
+
 			details = formatRoom(" ");
+
 		}
 
 		System.out.print(details);
-
 	}
 	
 	public static String formatRoom(Object o) {
 		
 		return String.format("| %1$8s ", o);
-
 	}
 	
 	/** Demande à l’utilisateur d’entrer les noms des joueurs 
@@ -71,27 +69,29 @@ public class Display {
 		String[] names = new String[4];
 		boolean newPlayer = true;
 		Console console = System.console();
-		
 
 		while(newPlayer && (nbPlayers < Game.getMaxPlayer())) {
 			
 			String name = "";
 			try {
+
 				name = console.readLine("Veuillez entrer votre nom : ");
 				if(name.length() < 1) {
 					throw new GameOverException("Nom trop court");
 				}
+
 			} catch (GameOverException e) {
 				
 				printGameOver(false);
 				continue;
 			}
+
 			names[nbPlayers] = name;
 			console.printf("Joueur %s créé avec succès !\n", name);
 			++nbPlayers;
 			
-			if(nbPlayers >= Game.getMinPlayer() 
-					&& nbPlayers <= Game.getMaxPlayer() - 1) {
+			if((nbPlayers >= Game.getMinPlayer())
+					&& (nbPlayers <= (Game.getMaxPlayer() - 1))) {
 
 				String str = " ";
 				char answer;
@@ -108,6 +108,7 @@ public class Display {
 				newPlayer = (answer == 'O');
 			}
 		}
+
 		return names;
 	}
 	
@@ -115,13 +116,18 @@ public class Display {
 		
 		Console console = System.console();
 		int answer = -1;
-		while(answer < 0 || answer > 3) {
+
+		while((answer < 0) || (answer > 3)) {
+
 			console.printf("Quel mouvement souhaitez-vous faire ?\n");
-			// char - 48 pour convertir l’ascii en int
+
 			try {
+				// char - 48 pour convertir l’ascii en int
 				answer = console.readLine("UP (0), DOWN (1), " 
 						+ "RIGHT (2), LEFT (3)\n").charAt(0) - 48;
+
 			} catch (StringIndexOutOfBoundsException err) {
+
 				continue;
 			}
 		}
@@ -133,13 +139,17 @@ public class Display {
 		
 		Console console = System.console();
 		int answer = -1;
-		while(answer < 0 || answer > 3) {
+
+		while((answer < 0) || (answer > 3)) {
+
 			console.printf("Équipez-vous d’une arme !\n");
 			try {
 				// char - 48 pour convertir l’ascii en int
 				answer = console.readLine("POTION (0), ARROWS (1), "
 						+ "BLUDGEON (2), GUN (3)\n").charAt(0) - 48;
+
 			} catch (StringIndexOutOfBoundsException err) {
+
 				continue;
 			}
 		}
@@ -160,7 +170,6 @@ public class Display {
 	
 		System.out.println(template);
 		printLine();
-
 	}
 	
 	public static void printDungeon(Dungeon dungeon) {
@@ -170,6 +179,7 @@ public class Display {
 		for(int row = 0; row < Dungeon.N; row++) {
 			
 			if(row != 0) {
+
 				System.out.print("|\n");
 				printLine();
 			}
@@ -179,8 +189,11 @@ public class Display {
 			for(int column = 0; column < Dungeon.N; column++) {				
 				
 				try {
+
 					pos = new DungeonPosition(column, row);
+
 				} catch (GameOverException e) {
+
 					e.printStackTrace();
 				}
 				

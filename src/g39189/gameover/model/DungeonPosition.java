@@ -25,11 +25,11 @@ public class DungeonPosition {
 	 */
 	public DungeonPosition(int row, int column) throws GameOverException {
 
-		if(column < 0 || column > Dungeon.N-1) {
+		if((column < 0) || (column > (Dungeon.N - 1))) {
 			throw new GameOverException("Cette colonne n’existe pas");
 		}
 		
-		if(row < 0 || row > Dungeon.N-1) {
+		if((row < 0) || (row > (Dungeon.N - 1))) {
 			throw new GameOverException("Cette ligne n’existe pas");
 		}
 		
