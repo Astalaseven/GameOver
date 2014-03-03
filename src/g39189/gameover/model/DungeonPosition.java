@@ -4,10 +4,10 @@ public class DungeonPosition {
 	
 	private int column;
 	private int row;
-	final static DungeonPosition P_BARBARIAN_1;
-	final static DungeonPosition P_BARBARIAN_2;
-	final static DungeonPosition P_BARBARIAN_3;
-	final static DungeonPosition P_BARBARIAN_4;
+	public final static DungeonPosition P_BARBARIAN_1;
+	public final static DungeonPosition P_BARBARIAN_2;
+	public final static DungeonPosition P_BARBARIAN_3;
+	public final static DungeonPosition P_BARBARIAN_4;
 	private static int dungeonCpt = 0;
 	
 	static {
@@ -107,7 +107,7 @@ public class DungeonPosition {
 		return pos;
 	}
 	
-	/** Retourne la position à droite de de la position actuelle
+	/** Retourne la position à droite de la position actuelle
 	 * @return nouvelle position située à droite de l’actuelle
 	 * @throws GameOverException si la colonne à droite n’existe pas
 	 */
@@ -139,7 +139,7 @@ public class DungeonPosition {
 		return pos;
 	}
 	
-	/** Avance le jouer d’une case
+	/** Avance le joueur d’une case
 	 * @param dir la direction dans laquelle avancer
 	 * @return la nouvelle position du joueur
 	 * @throws GameOverException si le mouvement n’est pas possible

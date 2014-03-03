@@ -61,6 +61,10 @@ public class Display {
 
 	}
 	
+	/** Demande à l’utilisateur d’entrer les noms des joueurs 
+	 * (minimum 2, maximum 4)
+	 * @return un tableau contenant les noms des joueurs
+	 */
 	public static String[] createPlayers() {
 
 		int nbPlayers = 0;
@@ -69,7 +73,7 @@ public class Display {
 		Console console = System.console();
 		
 
-		while((newPlayer) && (nbPlayers <= Game.getMaxPlayer() - 1)) {
+		while(newPlayer && (nbPlayers < Game.getMaxPlayer())) {
 			
 			String name = "";
 			try {
