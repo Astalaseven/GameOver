@@ -164,12 +164,12 @@ public class DungeonPosition {
 
 		switch(dir)
 		{
-			case UP:	movDir = up();		break;
-			case DOWN:  movDir = down(); 	break;
-			case RIGHT: movDir = right(); 	break;
-			case LEFT:  movDir = left(); 	break;
+			case UP:    movDir = up();      break;
+			case DOWN:  movDir = down();    break;
+			case RIGHT: movDir = right();   break;
+			case LEFT:  movDir = left();    break;
 
-			default:	throw new GameOverException("Direction inconnue");
+			default:    throw new GameOverException("Direction inconnue");
 		}
 
 		return movDir;
