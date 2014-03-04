@@ -29,7 +29,7 @@ public class GameView
                 {
                     Player player = game.getCurrentPlayer();
 
-                    console.printf("%s, à vous de jouer !\n", player.getName());
+                    console.printf("%s, à vous de jouer !%n", player.getName());
 
                     Display.printPlayer(player);
                     Display.printDungeon(Dungeon.getInstance());
