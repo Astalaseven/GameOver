@@ -9,9 +9,8 @@ public class Player
     private BarbarianColor color;
     private final DungeonPosition initPosition;
 
-    /** Constructeur de Player
-     * @param name nom du joueur
-     * @throws GameOverException 
+    /** Crée un joueur
+     * @param name nom du joueur 
      */
     public Player(String name)
     {
