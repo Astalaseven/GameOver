@@ -44,9 +44,9 @@ public class Dungeon
         return (instance != null) ? instance : new Dungeon();
     }
 
-    /** Retourne la valeur d’une room
-     * @param pos la position de la room dans le dungeon
-     * @return la valeur d’une room
+    /** Retourne la valeur d’une carte
+     * @param pos la position de la carte dans le dungeon
+     * @return la valeur d’une carte
      */
     public Room getRoom(DungeonPosition pos) 
     {
@@ -75,7 +75,7 @@ public class Dungeon
         }
     }
 
-    /** Crée et ajoute les rooms dans la liste dungeon
+    /** Crée et ajoute les cartes dans la liste dungeon
      * 
      */
     private void populateDungeon() 
@@ -87,11 +87,11 @@ public class Dungeon
         addRoom(RoomType.GATE, 1, false, false);
     }
 
-    /** Crée et ajoute un room à la liste dungeon
-     * @param type le type de room à créer
-     * @param nb le nombre de rooms à créer
-     * @param colored indique si le room à une couleur
-     * @param armed indique si le room à une arme
+    /** Crée et ajoute une carte à la liste dungeon
+     * @param type le type de carte à créer
+     * @param nb le nombre de cartes à créer
+     * @param colored indique si la carte à une couleur
+     * @param armed indique si la carte à une arme
      */
     private void addRoom(RoomType type, int nb, boolean colored, boolean armed) 
     {

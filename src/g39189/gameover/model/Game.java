@@ -93,6 +93,14 @@ public class Game
         this.dungeon = dungeon;
     }
 
+    /** Exécute un coup d’un joueur
+     * @param dir la direction vers laquelle le joueur souhaite se déplacer
+     * @param weapon l’arme choisie par le joueur
+     * @return faux si le joueur ne peut pas vaincre la carte dévoilée, 
+     * vrai sinon
+     * @throws GameOverException si la partie est finie,
+     * si la carte sur laquelle le joueur se déplacer a déjà été retournée,
+     */
     public boolean play(Direction dir, WeaponType weapon) throws GameOverException
     {
         if(isOver())
@@ -111,7 +119,7 @@ public class Game
         // Si la carte n’était pas encore retournée, la retourne
         dungeon.show(newPos);
 
-        // Si le joueur n’a pas la bonne arme, lance une exception
+        // Si le joueur n’a pas la bonne arme, il a perdu
         WeaponType weaponRoom = room.getWeapon();
         if((room.getType() == RoomType.BLORK) && (weaponRoom != weapon))
         {
@@ -144,6 +152,9 @@ public class Game
         return perdu;
     }
 
+    /** Passe au joueur suivant
+     *
+     */
     public void nextPlayer()
     {
         ++idCurrent;
