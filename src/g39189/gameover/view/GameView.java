@@ -29,7 +29,7 @@ public class GameView
                 {
                     Player player = game.getCurrentPlayer();
 
-                    console.printf("%s, à vous de jouer !%n", player.getName());
+                    console.printf("%s, à vous de jouer !\n", player.getName());
 
                     Display.printPlayer(player);
                     Display.printDungeon(Dungeon.getInstance());
@@ -46,13 +46,11 @@ public class GameView
                         game.nextPlayer();
                         throw new GameOverException("Mauvaise arme !");
                     }
-
                 }
                 catch (GameOverException e)
                 {
                     continue;
                 }
-
             }
         }
         catch (GameOverException e)

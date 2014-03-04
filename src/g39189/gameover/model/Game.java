@@ -111,7 +111,7 @@ public class Game
         DungeonPosition newPos = lastPosition.move(dir);
         Player player = players.get(idCurrent);
         Room room = dungeon.getRoom(newPos);
-        boolean perdu = false;
+        boolean rejoue = true;
 
         if(!room.isHidden())
         {
@@ -119,13 +119,14 @@ public class Game
         }
         // Si la carte n’était pas encore retournée, la retourne
         dungeon.show(newPos);
+        Display.printRoom(room);
 
         // Si le joueur n’a pas la bonne arme, il a perdu
         if((room.getType() == RoomType.BLORK) && (room.getWeapon() != weapon))
         {
             Display.printGameOver(true);
             Display.printRoom(room);
-            perdu = true;
+            rejoue = false;
         }
 
         // Si la carte est la princesse de la couleur du joueur
@@ -147,7 +148,7 @@ public class Game
 
         lastPosition = newPos;
 
-        return perdu;
+        return rejoue;
     }
 
     /** Passe au joueur suivant
@@ -172,5 +173,4 @@ public class Game
         //Game game = new Game("Paul", "Jean");
         //System.out.println(game.players.get(0).getId());
     }
-
 }

@@ -41,7 +41,7 @@ public class Dungeon
      */
     public static Dungeon getInstance() 
     {
-        return (instance != null) ? instance : new Dungeon();
+        return (instance != null) ? instance : (instance = new Dungeon());
     }
 
     /** Retourne la valeur d’une carte

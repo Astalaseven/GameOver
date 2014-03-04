@@ -4,7 +4,7 @@ public class Player
 {
     //private DungeonPosition[] POSITIONS;
     private int n;
-    private int nextN;
+    private static int nextN;
     private String name;
     private BarbarianColor color;
     private final DungeonPosition initPosition;
@@ -18,7 +18,7 @@ public class Player
         this.name = name;
         this.n = nextN++;
         this.color = BarbarianColor.values()[n];
-
+        System.out.println(n);
         switch(n)
         {
             case 0:  this.initPosition = DungeonPosition.P_BARBARIAN_1;  break;

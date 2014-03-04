@@ -25,9 +25,9 @@ public class Display
     public static void printRoomInDungeon(Room room)
     {
         String template = String.format("| %1$8s ", room.getType());
-        boolean isHidden = room.isHidden();
+        boolean hidden = room.isHidden();
 
-        System.out.print(isHidden ? String.format("| %1$8s ", " ") : template);
+        System.out.print(hidden ? String.format("| %1$8s ", " ") : template);
     }
 
     /** Affiche des détails sur la carte retournée (arme, couleur…)
@@ -40,11 +40,11 @@ public class Display
         if(room.getWeapon() != null)
         {
             details = formatRoom(room.getWeapon());
-        } 
+        }
         if(room.getColor() != null)
         {
             details = formatRoom(room.getColor());
-        } 
+        }
         if(room.isHidden() || (details == null))
         {
             details = formatRoom(" ");
@@ -94,7 +94,7 @@ public class Display
             }
 
             names[nbPlayers] = name;
-            console.printf("Joueur %s créé avec succès !%n", name);
+            console.printf("Joueur %s créé avec succès !\n", name);
             ++nbPlayers;
 
             if((nbPlayers >= Game.minPlayer) && 
@@ -129,13 +129,13 @@ public class Display
 
         while((answer < 0) || (answer > 3))
         {
-            console.printf("Quel mouvement souhaitez-vous faire ?%n");
+            console.printf("Quel mouvement souhaitez-vous faire ?\n");
 
             try
             {
                 // char - 48 pour convertir l’ascii en int
                 answer = console.readLine("UP (0), DOWN (1), " 
-                        + "RIGHT (2), LEFT (3)%n").charAt(0) - 48;
+                        + "RIGHT (2), LEFT (3)\n").charAt(0) - 48;
             } 
             catch (StringIndexOutOfBoundsException err)
             {
@@ -156,13 +156,13 @@ public class Display
 
         while((answer < 0) || (answer > 3))
         {
-            console.printf("Équipez-vous d’une arme !%n");
+            console.printf("Équipez-vous d’une arme !\n");
 
             try
             {
                 // char - 48 pour convertir l’ascii en int
                 answer = console.readLine("POTION (0), ARROWS (1), "
-                        + "BLUDGEON (2), GUN (3)%n").charAt(0) - 48;
+                        + "BLUDGEON (2), GUN (3)\n").charAt(0) - 48;
 
             } 
             catch (StringIndexOutOfBoundsException err)
@@ -295,31 +295,31 @@ public class Display
         System.out.println();
 
         String skull =
-          "\t\t             uu$$$$$$$$$$$uu             %n"
-        + "\t\t          uu$$$$$$$$$$$$$$$$$uu          %n"
-        + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         %n"
-        + "\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        %n"
-        + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       %n"
-        + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       %n"
-        + "\t\t       u$$$$$$     $$$     $$$$$$u       %n"
-        + "\t\t        $$$$       u$u       $$$$        %n"
-        + "\t\t        $$$u       u$u       u$$$        %n"
-        + "\t\t        $$$u      u$$$u      u$$$        %n"
-        + "\t\t         $$$$$uu$$$   $$$uu$$$$$         %n"
-        + "\t\t           $$$$$$$     $$$$$$$           %n"
-        + "\t\t            u$$$$$$$u$$$$$$$u            %n"
-        + "\t\t             u$ $ $ $ $ $ $u             %n"
-        + "\t\t  uuu        $$u$ $ $ $ $u$$       uuu   %n"
-        + "\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  %n"
-        + "\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  %n"
-        + "\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ %n"
-        + "\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       %n"
-        + "\t\t           $$$$$$$$$$$$$$$$$$$           %n"
-        + "\t\t          uuuu$$$$$   $$$$$$uuuu         %n"
-        + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ %n"
-        + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  %n"
-        + "\t\t    $$$$$                      $$$$$     %n"
-        + "\t\t     $$$                        $$$      %n";
+          "\t\t             uu$$$$$$$$$$$uu             \n"
+        + "\t\t          uu$$$$$$$$$$$$$$$$$uu          \n"
+        + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         \n"
+        + "\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        \n"
+        + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
+        + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
+        + "\t\t       u$$$$$$     $$$     $$$$$$u       \n"
+        + "\t\t        $$$$       u$u       $$$$        \n"
+        + "\t\t        $$$u       u$u       u$$$        \n"
+        + "\t\t        $$$u      u$$$u      u$$$        \n"
+        + "\t\t         $$$$$uu$$$   $$$uu$$$$$         \n"
+        + "\t\t           $$$$$$$     $$$$$$$           \n"
+        + "\t\t            u$$$$$$$u$$$$$$$u            \n"
+        + "\t\t             u$ $ $ $ $ $ $u             \n"
+        + "\t\t  uuu        $$u$ $ $ $ $u$$       uuu   \n"
+        + "\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  \n"
+        + "\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  \n"
+        + "\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ \n"
+        + "\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       \n"
+        + "\t\t           $$$$$$$$$$$$$$$$$$$           \n"
+        + "\t\t          uuuu$$$$$   $$$$$$uuuu         \n"
+        + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ \n"
+        + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
+        + "\t\t    $$$$$                      $$$$$     \n"
+        + "\t\t     $$$                        $$$      \n";
         
         System.out.println(skull);
         System.out.println();
@@ -336,19 +336,19 @@ public class Display
         clearScreen();
 
         String gameover = 
-                "**************************************************************************%n"
-              + "**************************************************************************%n"
-              + "**                                                                      **%n"
-              + "**   #####     #    #     # #######    ####### #     # ####### ######   **%n"
-              + "**  #     #   # #   ##   ## #          #     # #     # #       #     #  **%n"
-              + "**  #        #   #  # # # # #          #     # #     # #       #     #  **%n"
-              + "**  #  #### #     # #  #  # #####      #     # #     # #####   ######   **%n"
-              + "**  #     # ####### #     # #          #     #  #   #  #       #   #    **%n"
-              + "**  #     # #     # #     # #          #     #   # #   #       #    #   **%n"
-              + "**   #####  #     # #     # #######    #######    #    ####### #     #  **%n"
-              + "**                                                                      **%n"
-              + "**************************************************************************%n"
-              + "**************************************************************************%n";
+                "**************************************************************************\n"
+              + "**************************************************************************\n"
+              + "**                                                                      **\n"
+              + "**   #####     #    #     # #######    ####### #     # ####### ######   **\n"
+              + "**  #     #   # #   ##   ## #          #     # #     # #       #     #  **\n"
+              + "**  #        #   #  # # # # #          #     # #     # #       #     #  **\n"
+              + "**  #  #### #     # #  #  # #####      #     # #     # #####   ######   **\n"
+              + "**  #     # ####### #     # #          #     #  #   #  #       #   #    **\n"
+              + "**  #     # #     # #     # #          #     #   # #   #       #    #   **\n"
+              + "**   #####  #     # #     # #######    #######    #    ####### #     #  **\n"
+              + "**                                                                      **\n"
+              + "**************************************************************************\n"
+              + "**************************************************************************\n";
         
         System.out.println(gameover);
 
