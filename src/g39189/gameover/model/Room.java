@@ -1,7 +1,7 @@
 package g39189.gameover.model;
 
-public class Room {
-
+public class Room
+{
     private RoomType type;
     private boolean hidden;
     private WeaponType weapon;

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 public class Dungeon 
 {
     public final static int N = 5;
+
     private Room[][] roomss = new Room[N][N];
     private static Dungeon instance;
     private LinkedList<Room> donjon = new LinkedList<>();
