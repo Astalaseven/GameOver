@@ -23,7 +23,7 @@ public class Room
     }
 
     /** Modifie la valeur de hidden
-     * @param hidden the hidden to set
+     * @param hidden la nouvelle valeur de hidden
      */
     public void setHidden(boolean hidden)
     {
@@ -31,7 +31,7 @@ public class Room
     }
 
     /** Retourne la valeur de hidden
-     * @return hidden
+     * @return vrai si la carte est cachée, faux si elle est dévoilée
      */
     public boolean isHidden()
     {
@@ -39,7 +39,7 @@ public class Room
     }
 
     /** Retourne la valeur de type
-     * @return type
+     * @return le type de la carte
      */
     public RoomType getType()
     {
@@ -47,7 +47,7 @@ public class Room
     }
 
     /** Retourne la valeur de weapon
-     * @return weapon
+     * @return l’arme de la carte
      */
     public WeaponType getWeapon()
     {
@@ -55,7 +55,7 @@ public class Room
     }
 
     /** Retourne la valeur de color
-     * @return color
+     * @return la couleur de la carte
      */
     public BarbarianColor getColor()
     {
@@ -77,8 +77,8 @@ public class Room
         return result;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
+    /** Compare si 2 cartes sont égales
+     * 
      */
     @Override
     public boolean equals(Object obj)

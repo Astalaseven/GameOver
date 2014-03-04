@@ -98,8 +98,8 @@ public class Game
      * @param weapon l’arme choisie par le joueur
      * @return faux si le joueur ne peut pas vaincre la carte dévoilée, 
      * vrai sinon
-     * @throws GameOverException si la partie est finie,
-     * si la carte sur laquelle le joueur se déplacer a déjà été retournée,
+     * @throws GameOverException si la partie est finie ou
+     * si la carte sur laquelle le joueur se déplace a déjà été retournée
      */
     public boolean play(Direction dir, WeaponType weapon) throws GameOverException
     {
@@ -109,6 +109,7 @@ public class Game
         }
         // Si la partie n’est pas finie, fait le mouvement
         DungeonPosition newPos = lastPosition.move(dir);
+        Player player = players.get(idCurrent);
         Room room = dungeon.getRoom(newPos);
         boolean perdu = false;
 
@@ -120,18 +121,15 @@ public class Game
         dungeon.show(newPos);
 
         // Si le joueur n’a pas la bonne arme, il a perdu
-        WeaponType weaponRoom = room.getWeapon();
-        if((room.getType() == RoomType.BLORK) && (weaponRoom != weapon))
+        if((room.getType() == RoomType.BLORK) && (room.getWeapon() != weapon))
         {
             Display.printGameOver(true);
             Display.printRoom(room);
             perdu = true;
         }
 
-        // Si la carte est une princesse
-        BarbarianColor colorRoom = room.getColor();
-        BarbarianColor colorPlayer = players.get(idCurrent).getColor();
-        if(colorRoom == colorPlayer)
+        // Si la carte est la princesse de la couleur du joueur
+        if(room.getColor() == player.getColor())
         {
             princessFound = true;
         }

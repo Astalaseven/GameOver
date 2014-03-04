@@ -146,6 +146,9 @@ public class Display
         return answer;
     }
 
+    /** Demande à l’utilisateur quel arme il souhaite prendre
+     * @return l’arme sous forme d’entier
+     */
     public static int askWeapon()
     {
         Console console = System.console();
@@ -284,6 +287,9 @@ public class Display
         printLine();
     }
 
+    /** Affiche un crâne en ASCII
+     * 
+     */
     public static void printSkull()
     {
         System.out.println();
