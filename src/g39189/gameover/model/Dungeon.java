@@ -14,14 +14,14 @@ public class Dungeon
     /** Constructeur de Dungeon
      *
      */
-    private Dungeon() 
+    private Dungeon()
     {
         populateDungeon();
         Collections.shuffle(donjon);
 
-        for(int row = 0; row < N; row++) 
+        for(int row = 0; row < N; row++)
         {
-            for(int column = 0; column < N; column++) 
+            for(int column = 0; column < N; column++)
             {
                 roomss[row][column] = donjon.pop();
             }
@@ -31,7 +31,7 @@ public class Dungeon
     /** Constructeur utilisé pour les tests
      * @param configuration un donjon personnalisé
      */
-    Dungeon(Room[][] configuration) 
+    Dungeon(Room[][] configuration)
     {
         this.roomss = configuration;
     }
@@ -39,7 +39,7 @@ public class Dungeon
     /** Retourne l’instance, la crée si elle n’existe pas encore
      * @return une instance unique de dungeon
      */
-    public static Dungeon getInstance() 
+    public static Dungeon getInstance()
     {
         return (instance != null) ? instance : (instance = new Dungeon());
     }
@@ -48,7 +48,7 @@ public class Dungeon
      * @param pos la position de la carte dans le dungeon
      * @return la valeur d’une carte
      */
-    public Room getRoom(DungeonPosition pos) 
+    public Room getRoom(DungeonPosition pos)
     {
         return roomss[pos.getRow()][pos.getColumn()];
     }
@@ -56,7 +56,7 @@ public class Dungeon
     /** Retourne une carte pour l’afficher
      * @param pos la position de la carte à retourner
      */
-    public void show(DungeonPosition pos) 
+    public void show(DungeonPosition pos)
     {
         roomss[pos.getRow()][pos.getColumn()].setHidden(false);
     }
@@ -64,11 +64,11 @@ public class Dungeon
     /** Retourne toutes les cartes pour les cacher
      * 
      */
-    public void hideAll() 
+    public void hideAll()
     {
-        for(int row = 0; row < N; row++) 
+        for(int row = 0; row < N; row++)
         {
-            for(int column = 0; column < N; column++) 
+            for(int column = 0; column < N; column++)
             {
                 roomss[row][column].setHidden(true);
             }
@@ -78,7 +78,7 @@ public class Dungeon
     /** Crée et ajoute les cartes dans la liste dungeon
      * 
      */
-    private void populateDungeon() 
+    private void populateDungeon()
     {
         addRoom(RoomType.BLORK, 16, false, true);
         addRoom(RoomType.PRINCESS, 4, true, false);
@@ -93,14 +93,14 @@ public class Dungeon
      * @param colored indique si la carte à une couleur
      * @param armed indique si la carte à une arme
      */
-    private void addRoom(RoomType type, int nb, boolean colored, boolean armed) 
+    private void addRoom(RoomType type, int nb, boolean colored, boolean armed)
     {
         int i = 0;
         int j = 0;
 
-        while(i < nb) 
+        while(i < nb)
         {
-            if(j > 3) 
+            if(j > 3)
             {
                 j = 0;
             }

@@ -62,7 +62,7 @@ public class Display
         return String.format("| %1$8s ", o);
     }
 
-    /** Demande à l’utilisateur d’entrer les noms des joueurs 
+    /** Demande à l’utilisateur d’entrer les noms des joueurs
      * (minimum 2, maximum 4)
      * @return un tableau contenant les noms des joueurs
      */
@@ -86,7 +86,7 @@ public class Display
                     throw new GameOverException("Nom trop court");
                 }
 
-            } 
+            }
             catch (GameOverException e)
             {
                 printGameOver(false);
