@@ -1,6 +1,7 @@
 package g39189.gameover.model;
 
 import g39189.gameover.view.Display;
+
 import java.util.ArrayList;
 
 public class Game
@@ -16,22 +17,25 @@ public class Game
     private boolean princessFound;
     private int idWinner;
 
-    /** Constructeur de Game
-     * @param names noms des joueurs
-     * @throws GameOverException si le nb de joueurs n’est pas compris
-     * entre 2 et 4 inclus.
+    /**
+     * Constructeur de Game
+     * 
+     * @param names
+     *            noms des joueurs
+     * @throws GameOverException
+     *             si le nb de joueurs n’est pas compris entre 2 et 4 inclus.
      */
     public Game(String... names) throws GameOverException
     {
-        if((names.length < minPlayer) || (names.length > maxPlayer))
+        if ((names.length < minPlayer) || (names.length > maxPlayer))
         {
             throw new GameOverException("Nombre de concurrents invalide");
         }
 
         players = new ArrayList<Player>();
-        for(String name : names)
+        for (String name : names)
         {
-            if(name != null)
+            if (name != null)
             {
                 Player player = new Player(name);
                 players.add(player);
@@ -46,7 +50,9 @@ public class Game
         idWinner = -1;
     }
 
-    /** Retourne la valeur de dungeon
+    /**
+     * Retourne la valeur de dungeon
+     * 
      * @return le plateau de jeu
      */
     public Dungeon getDungeon()
@@ -54,7 +60,9 @@ public class Game
         return dungeon;
     }
 
-    /** Retourne la valeur de idCurrent
+    /**
+     * Retourne la valeur de idCurrent
+     * 
      * @return l’id du joueur actuel
      */
     public Player getCurrentPlayer()
@@ -62,22 +70,26 @@ public class Game
         return players.get(idCurrent);
     }
 
-    /** Indique si la partie est finie
-     * @return booléen indiquant le statut de la partie
+    /**
+     * Indique si la partie est finie
+     * 
+     * @return vrai si le joueur a trouvé une clé et sa princesse, faux sinon
      */
     public boolean isOver()
     {
         return keyFound && princessFound;
     }
 
-    /** Retourne le joueur gagnant
+    /**
+     * Retourne le joueur gagnant
+     * 
      * @return le joueur gagnant si la partie est finie, sinon null
      */
     public Player getWinner()
     {
         Player player = null;
 
-        if(isOver())
+        if (isOver())
         {
             player = players.get(idWinner);
         }
@@ -85,7 +97,9 @@ public class Game
         return player;
     }
 
-    /** Mutateur prévu pour les tests
+    /**
+     * Mutateur prévu pour les tests
+     * 
      * @param dungeon
      */
     void setDungeon(Dungeon dungeon)
@@ -93,17 +107,22 @@ public class Game
         this.dungeon = dungeon;
     }
 
-    /** Exécute un coup d’un joueur
-     * @param dir la direction vers laquelle le joueur souhaite se déplacer
-     * @param weapon l’arme choisie par le joueur
-     * @return faux si le joueur ne peut pas vaincre la carte dévoilée, 
-     * vrai sinon
-     * @throws GameOverException si la partie est finie ou
-     * si la carte sur laquelle le joueur se déplace a déjà été retournée
+    /**
+     * Exécute un coup d’un joueur
+     * 
+     * @param dir
+     *            la direction vers laquelle le joueur souhaite se déplacer
+     * @param wea
+     *            l’arme choisie par le joueur
+     * @return faux si le joueur ne peut pas vaincre la carte dévoilée,
+     *         vrai sinon
+     * @throws GameOverException
+     *             si la partie est finie ou si la carte sur laquelle le joueur
+     *             se déplace a déjà été retournée
      */
-    public boolean play(Direction dir, WeaponType weapon) throws GameOverException
+    public boolean play(Direction dir, WeaponType wea) throws GameOverException
     {
-        if(isOver())
+        if (isOver())
         {
             throw new GameOverException("La partie est finie");
         }
@@ -113,7 +132,7 @@ public class Game
         Room room = dungeon.getRoom(newPos);
         boolean rejoue = true;
 
-        if(!room.isHidden())
+        if (!room.isHidden())
         {
             throw new GameOverException("Carte déjà retournée");
         }
@@ -122,7 +141,7 @@ public class Game
         Display.printRoom(room);
 
         // Si le joueur n’a pas la bonne arme, il a perdu
-        if((room.getType() == RoomType.BLORK) && (room.getWeapon() != weapon))
+        if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != wea))
         {
             Display.printGameOver(true);
             Display.printRoom(room);
@@ -130,18 +149,18 @@ public class Game
         }
 
         // Si la carte est la princesse de la couleur du joueur
-        if(room.getColor() == player.getColor())
+        if (room.getColor() == player.getColor())
         {
             princessFound = true;
         }
 
         // Si la carte est une clé
-        if(room.getType() == RoomType.KEY)
+        if (room.getType() == RoomType.KEY)
         {
             keyFound = true;
         }
 
-        if(isOver())
+        if (isOver())
         {
             idWinner = idCurrent;
         }
@@ -151,14 +170,14 @@ public class Game
         return rejoue;
     }
 
-    /** Passe au joueur suivant
-     *
+    /**
+     * Passe au joueur suivant
      */
     public void nextPlayer()
     {
         ++idCurrent;
 
-        if(idCurrent >= players.size())
+        if (idCurrent >= players.size())
         {
             idCurrent = 0;
         }
@@ -169,8 +188,9 @@ public class Game
         lastPosition = players.get(idCurrent).getInitPosition();
     }
 
-    public static void main(String[] args) throws GameOverException {
-        //Game game = new Game("Paul", "Jean");
-        //System.out.println(game.players.get(0).getId());
+    public static void main(String[] args) throws GameOverException
+    {
+        // Game game = new Game("Paul", "Jean");
+        // System.out.println(game.players.get(0).getId());
     }
 }

@@ -1,9 +1,13 @@
 package g39189.gameover.view;
 
+import g39189.gameover.model.Direction;
+import g39189.gameover.model.Dungeon;
+import g39189.gameover.model.Game;
+import g39189.gameover.model.GameOverException;
+import g39189.gameover.model.Player;
+import g39189.gameover.model.WeaponType;
+
 import java.io.Console;
-
-import g39189.gameover.model.*;
-
 
 public class GameView
 {
@@ -11,7 +15,7 @@ public class GameView
 
     public static void main(String[] args)
     {
-        try 
+        try
         {
             Display.printGameOver(false);
 
@@ -21,7 +25,7 @@ public class GameView
 
             Game game = new Game(names);
 
-            while(!game.isOver())
+            while (!game.isOver())
             {
                 Display.printGameOver(false);
 
@@ -40,7 +44,7 @@ public class GameView
                     Direction direction = Direction.values()[dir];
                     WeaponType weapon = WeaponType.values()[wea];
 
-                    if(!game.play(direction, weapon))
+                    if (!game.play(direction, weapon))
                     {
                         game.getCurrentPlayer();
                         game.nextPlayer();

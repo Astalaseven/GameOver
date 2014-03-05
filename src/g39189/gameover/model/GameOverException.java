@@ -2,8 +2,11 @@ package g39189.gameover.model;
 
 public class GameOverException extends Exception
 {
-    /** Constructeur de l’exception GameOverException
-     * @param err le message d’erreur à afficher
+    /**
+     * Constructeur de l’exception GameOverException
+     * 
+     * @param err
+     *            le message d’erreur à afficher
      */
     public GameOverException(String err)
     {

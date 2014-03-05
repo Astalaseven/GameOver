@@ -2,15 +2,18 @@ package g39189.gameover.model;
 
 public class Player
 {
-    //private DungeonPosition[] POSITIONS;
+    // private DungeonPosition[] POSITIONS;
     private int n;
     private static int nextN;
     private String name;
     private BarbarianColor color;
     private final DungeonPosition initPosition;
 
-    /** Crée un joueur
-     * @param name nom du joueur 
+    /**
+     * Crée un joueur
+     * 
+     * @param name
+     *            nom du joueur
      */
     public Player(String name)
     {
@@ -29,7 +32,9 @@ public class Player
         }
     }
 
-    /** Retourne la valeur de name
+    /**
+     * Retourne la valeur de name
+     * 
      * @return le nom du joueur
      */
     public String getName()
@@ -37,7 +42,9 @@ public class Player
         return name;
     }
 
-    /** Retourne la valeur de color
+    /**
+     * Retourne la valeur de color
+     * 
      * @return la couleur du joueur
      */
     public BarbarianColor getColor()
@@ -45,7 +52,9 @@ public class Player
         return color;
     }
 
-    /** Retourne la valeur de initPosition
+    /**
+     * Retourne la valeur de initPosition
+     * 
      * @return la position initiale du joueur
      */
     public DungeonPosition getInitPosition()
@@ -53,7 +62,9 @@ public class Player
         return initPosition;
     }
 
-    /** Retourne l’id du joueur
+    /**
+     * Retourne l’id du joueur
+     * 
      * @return l’id du joueur
      */
     public int getId()
@@ -64,11 +75,12 @@ public class Player
     @Override
     public String toString()
     {
-        return "Player [n=" + n + ", name=" + name + ", color=" + color + 
-                ", initPosition=" + initPosition + "]";
+        return "Player [n=" + n + ", name=" + name + ", color=" + color
+                + ", initPosition=" + initPosition + "]";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Player player = new Player("Paul");
         System.out.println(player);
         Player player0 = new Player("Jean");
