@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Game
 {
-    public final static int minPlayer = 2;
-    public final static int maxPlayer = 4;
+    public final static int MIN_PLAYER = 2;
+    public final static int MAX_PLAYER = 4;
 
     private Dungeon dungeon;
     private ArrayList<Player> players;
@@ -27,7 +27,7 @@ public class Game
      */
     public Game(String... names) throws GameOverException
     {
-        if ((names.length < minPlayer) || (names.length > maxPlayer))
+        if ((names.length < MIN_PLAYER) || (names.length > MAX_PLAYER))
         {
             throw new GameOverException("Nombre de concurrents invalide");
         }

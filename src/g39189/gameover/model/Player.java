@@ -2,12 +2,17 @@ package g39189.gameover.model;
 
 public class Player
 {
-    // private DungeonPosition[] POSITIONS;
     private int n;
     private static int nextN;
     private String name;
     private BarbarianColor color;
     private final DungeonPosition initPosition;
+    private final static DungeonPosition[] POSITIONS =
+        {
+            DungeonPosition.P_BARBARIAN_1, DungeonPosition.P_BARBARIAN_2,
+            DungeonPosition.P_BARBARIAN_3, DungeonPosition.P_BARBARIAN_4
+        };
+
 
     /**
      * Crée un joueur
@@ -20,16 +25,7 @@ public class Player
         this.name = name;
         this.n = nextN++;
         this.color = BarbarianColor.values()[n];
-
-        switch(n)
-        {
-            case 0:  this.initPosition = DungeonPosition.P_BARBARIAN_1;  break;
-            case 1:  this.initPosition = DungeonPosition.P_BARBARIAN_2;  break;
-            case 2:  this.initPosition = DungeonPosition.P_BARBARIAN_3;  break;
-            case 3:  this.initPosition = DungeonPosition.P_BARBARIAN_4;  break;
-    
-            default: this.initPosition = null;
-        }
+        this.initPosition = POSITIONS[n];
     }
 
     /**

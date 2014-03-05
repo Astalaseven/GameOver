@@ -87,11 +87,11 @@ public class Display
     public static String[] createPlayers()
     {
         int nbPlayers = 0;
-        final String[] names = new String[Game.maxPlayer];
+        final String[] names = new String[Game.MAX_PLAYER];
         boolean newPlayer = true;
         Console console = System.console();
 
-        while (newPlayer && (nbPlayers < Game.maxPlayer))
+        while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
             String name = "";
 
@@ -115,8 +115,8 @@ public class Display
             console.printf("Joueur %s créé avec succès !\n", name);
             ++nbPlayers;
 
-            if ((nbPlayers >= Game.minPlayer)
-                    && (nbPlayers <= (Game.maxPlayer - 1)))
+            if ((nbPlayers >= Game.MIN_PLAYER)
+                    && (nbPlayers <= (Game.MAX_PLAYER - 1)))
             {
                 String str = " ";
                 char answer;

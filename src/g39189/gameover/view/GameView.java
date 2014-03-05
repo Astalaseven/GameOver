@@ -11,7 +11,7 @@ import java.io.Console;
 
 public class GameView
 {
-    private static String[] names = new String[Game.maxPlayer];
+    private static String[] names = new String[Game.MAX_PLAYER];
 
     public static void main(String[] args)
     {
