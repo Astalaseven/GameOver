@@ -53,7 +53,7 @@ public class Dungeon
      * Retourne la valeur d’une carte
      * 
      * @param pos
-     *            la position de la carte dans le dungeon
+     *            la position de la carte dans le donjon
      * @return la valeur d’une carte
      */
     public Room getRoom(DungeonPosition pos)
@@ -124,8 +124,8 @@ public class Dungeon
 
             WeaponType weapon = armed ? WeaponType.values()[j] : null;
             BarbarianColor color = colored ? BarbarianColor.values()[j] : null;
-            Room room = new Room(type, true, weapon, color);
-            donjon.add(room);
+
+            donjon.add(new Room(type, true, weapon, color));
 
             i++;
             j++;

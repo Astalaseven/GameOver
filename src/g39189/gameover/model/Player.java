@@ -59,9 +59,9 @@ public class Player
     }
 
     /**
-     * Retourne l’id du joueur
+     * Retourne le numéro du joueur
      * 
-     * @return l’id du joueur
+     * @return le numéro du joueur
      */
     public int getId()
     {

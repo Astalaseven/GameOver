@@ -242,7 +242,7 @@ public class Display
             {
                 try
                 {
-                    pos = new DungeonPosition(column, row);
+                    pos = new DungeonPosition(row, column);
                 }
                 catch (GameOverException e)
                 {
@@ -259,7 +259,7 @@ public class Display
             {
                 try
                 {
-                    pos = new DungeonPosition(column, row);
+                    pos = new DungeonPosition(row, column);
                 }
                 catch (GameOverException e)
                 {
