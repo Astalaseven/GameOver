@@ -33,23 +33,4 @@ public enum InitPosition
     {
         return row;
     }
-
-    /**
-     * Retourne le nom de la position en fonction de sa colonne
-     * 
-     * @param column
-     *            colonne utilisée pour retrouver le nom de l’enum
-     * @return le nom de la position
-     */
-    public String getName(int column)
-    {
-        String name = null;
-
-        for (InitPosition pos : InitPosition.values())
-        {
-            name = (pos.column == column) ? pos.name() : null;
-        }
-
-        return name;
-    }
 }
