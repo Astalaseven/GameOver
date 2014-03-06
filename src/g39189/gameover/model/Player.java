@@ -7,7 +7,7 @@ public class Player
     private String name;
     private BarbarianColor color;
     private final DungeonPosition initPosition;
-    private final static DungeonPosition[] POSITIONS =
+    private final DungeonPosition[] POSITIONS =
         {
             DungeonPosition.P_BARBARIAN_1, DungeonPosition.P_BARBARIAN_2,
             DungeonPosition.P_BARBARIAN_3, DungeonPosition.P_BARBARIAN_4
