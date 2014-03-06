@@ -46,7 +46,11 @@ public class Dungeon
      */
     public static Dungeon getInstance()
     {
-        return (instance != null) ? instance : (instance = new Dungeon());
+        if (instance == null)
+        {
+            instance = new Dungeon();
+        }
+        return instance;
     }
 
     /**
@@ -69,7 +73,7 @@ public class Dungeon
      */
     public void show(DungeonPosition pos)
     {
-        roomss[pos.getRow()][pos.getColumn()].setHidden(false);
+        getRoom(pos).setHidden(false);
     }
 
     /**
@@ -117,10 +121,6 @@ public class Dungeon
 
         while (i < nb)
         {
-            if (j > 3)
-            {
-                j = 0;
-            }
 
             WeaponType weapon = armed ? WeaponType.values()[j] : null;
             BarbarianColor color = colored ? BarbarianColor.values()[j] : null;
@@ -128,7 +128,7 @@ public class Dungeon
             donjon.add(new Room(type, true, weapon, color));
 
             i++;
-            j++;
+            j = (j + 1) % 4;
         }
     }
 }

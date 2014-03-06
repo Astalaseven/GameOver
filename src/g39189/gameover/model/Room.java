@@ -79,13 +79,16 @@ public class Room
         return color;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
+    /**
+     * Génère le hashcode d’une carte
      */
     @Override
     public int hashCode()
     {
+        // utilisation d’un nombre premier assez grand et proche d’une puissance
+        // de 2 pour une distribution optimale des données dans le bucket
+        // peut être simplifié par un déplacement vers la gauche de 5 bits et
+        // une soustraction
         final int prime = 31;
         int result = 1;
         result = (prime * result) + ((color == null) ? 0 : color.hashCode());
