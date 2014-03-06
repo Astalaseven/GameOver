@@ -87,7 +87,7 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute les cartes dans la liste dungeon
+     * Crée et ajoute les cartes dans la liste donjon
      */
     private void populateDungeon()
     {
@@ -99,7 +99,7 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute une carte à la liste dungeon
+     * Crée et ajoute une carte à la liste donjon
      * 
      * @param type
      *            le type de carte à créer

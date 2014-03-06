@@ -2,10 +2,8 @@ package g39189.gameover.model;
 
 public enum InitPosition
 {
-    NORD_OUEST(-1, 0),
-    SUD_EST(Dungeon.N, Dungeon.N - 1),
-    NORD_EST(0, Dungeon.N),
-    SUD_OUEST(Dungeon.N - 1, -1);
+    NORD_OUEST(-1, 0),      SUD_EST(Dungeon.N, Dungeon.N - 1),
+    NORD_EST(0, Dungeon.N), SUD_OUEST(Dungeon.N - 1, -1);
 
     private final int column;
     private final int row;
@@ -41,6 +39,7 @@ public enum InitPosition
      * 
      * @param column
      *            colonne utilisée pour retrouver le nom de l’enum
+     * @return le nom de la position
      */
     public String getName(int column)
     {
