@@ -38,12 +38,16 @@ public class GameView
                     Display.printPlayer(player);
                     Display.printDungeon(Dungeon.getInstance());
 
+                    // Demande à l’utilisateur quel mouvement et quelle arme
+                    // il souhaite choisir
                     int dir = Display.askMov();
                     int wea = Display.askWeapon();
 
                     Direction direction = Direction.values()[dir];
                     WeaponType weapon = WeaponType.values()[wea];
 
+                    // Si le coup du joueur s’est mal passé,
+                    // il laisse la main au suivant
                     if (!game.play(direction, weapon))
                     {
                         game.getCurrentPlayer();

@@ -138,7 +138,6 @@ public class Game
         }
         // Si la carte n’était pas encore retournée, la retourne
         dungeon.show(newPos);
-        Display.printRoom(room);
 
         // Si le joueur n’a pas la bonne arme, il a perdu
         if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != wea))

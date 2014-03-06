@@ -87,8 +87,6 @@ public class Room
     {
         // utilisation d’un nombre premier assez grand et proche d’une puissance
         // de 2 pour une distribution optimale des données dans le bucket
-        // peut être simplifié par un déplacement vers la gauche de 5 bits et
-        // une soustraction
         final int prime = 31;
         int result = 1;
         result = (prime * result) + ((color == null) ? 0 : color.hashCode());
@@ -105,17 +103,19 @@ public class Room
     @Override
     public boolean equals(Object obj)
     {
+        // si l’objet se teste lui-même, on considère qu’il est égal
         if (this == obj)
         {
             return true;
         }
+        // si l’objet est null ou d’une classe autre que Room, il est différent
         if ((obj == null) || (getClass() != obj.getClass()))
         {
             return false;
         }
 
-        // les tests ci-dessus nous assurent que l’objet n’est pas nul
-        // et est de la classe Room, nous pouvons donc caster l’objet
+        // les tests ci-dessus nous assurent que l’objet n’est pas null
+        // et est de la classe Room, nous pouvons donc le caster
         Room other = (Room) obj;
         if ((color != other.color) || (hidden != other.hidden) 
                 || (type != other.type) || (weapon != other.weapon))
