@@ -54,7 +54,7 @@ public class Dungeon
     }
 
     /**
-     * Retourne la valeur d’une carte
+     * Retourne la valeur d’une carte sur base d’une position
      * 
      * @param pos
      *            la position de la carte dans le donjon

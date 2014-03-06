@@ -108,29 +108,14 @@ public class Room
         {
             return true;
         }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
+        if ((obj == null) || (getClass() != obj.getClass()))
         {
             return false;
         }
 
         Room other = (Room) obj;
-        if (color != other.color)
-        {
-            return false;
-        }
-        if (hidden != other.hidden)
-        {
-            return false;
-        }
-        if (type != other.type)
-        {
-            return false;
-        }
-        if (weapon != other.weapon)
+        if ((color != other.color) || (hidden != other.hidden) 
+                || (type != other.type) || (weapon != other.weapon))
         {
             return false;
         }
