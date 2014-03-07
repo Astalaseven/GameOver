@@ -20,7 +20,7 @@ Classpath
 Compilation
 ---------
 
-    javac -O -d ~/GameOver/bin ~/GameOver/src/g39189/gameover/*/*.java
+    javac -O -g:none -d ~/GameOver/bin ~/GameOver/src/g39189/gameover/*/*.java
 
 Exécution
 ---------
