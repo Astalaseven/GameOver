@@ -33,6 +33,7 @@ public class Game
         }
 
         players = new ArrayList<Player>();
+
         for (String name : names)
         {
             if (name != null)

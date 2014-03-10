@@ -50,6 +50,7 @@ public class Dungeon
         {
             instance = new Dungeon();
         }
+
         return instance;
     }
 
