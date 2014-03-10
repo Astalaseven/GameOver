@@ -120,7 +120,6 @@ public class Dungeon
 
         for(int i = 0; i < nb; i++)
         {
-
             WeaponType weapon = armed ? WeaponType.values()[j] : null;
             BarbarianColor color = colored ? BarbarianColor.values()[j] : null;
 
