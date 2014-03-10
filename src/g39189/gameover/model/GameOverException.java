@@ -10,8 +10,7 @@ public class GameOverException extends Exception
      */
     public GameOverException(String err)
     {
-        System.out.print(err);
-        System.out.print("  −  Tapez sur Enter pour continuer");
+        System.out.print(err + "  −  Tapez sur Enter pour continuer");
         System.console().readLine();
     }
 }
