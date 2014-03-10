@@ -102,7 +102,7 @@ public class Game
      * 
      * @param dungeon
      */
-    void setDungeon(Dungeon dungeon)
+    protected void setDungeon(Dungeon dungeon)
     {
         this.dungeon = dungeon;
     }
@@ -162,6 +162,10 @@ public class Game
         if (isOver())
         {
             idWinner = idCurrent;
+            
+            // TODO
+            System.out.println("Fin de la partie :");
+            System.out.println("Le joueur " + players.get(idWinner).getName() + " a gagné !");
         }
 
         lastPosition = newPos;

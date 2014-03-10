@@ -19,8 +19,7 @@ public class Room
      * @param color
      *            couleur de la carte
      */
-    public Room(RoomType type, boolean hidden, WeaponType weapon,
-            BarbarianColor color)
+    Room(RoomType type, boolean hidden, WeaponType weapon, BarbarianColor color)
     {
         this.type = type;
         this.hidden = hidden;

@@ -116,10 +116,9 @@ public class Dungeon
      */
     private void addRoom(RoomType type, int nb, boolean colored, boolean armed)
     {
-        int i = 0;
         int j = 0;
 
-        while (i < nb)
+        for(int i = 0; i < nb; i++)
         {
 
             WeaponType weapon = armed ? WeaponType.values()[j] : null;
@@ -127,7 +126,6 @@ public class Dungeon
 
             donjon.add(new Room(type, true, weapon, color));
 
-            i++;
             j = (j + 1) % 4;
         }
     }
