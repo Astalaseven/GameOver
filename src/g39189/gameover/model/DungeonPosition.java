@@ -9,7 +9,7 @@ public class DungeonPosition
 
     private int column;
     private int row;
-    private static int dungeonCpt = 0;
+    private static int dungeonCpt;
 
     static
     {

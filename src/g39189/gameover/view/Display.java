@@ -54,10 +54,12 @@ public class Display
         {
             details = formatRoom(room.getWeapon());
         }
+
         if (room.getColor() != null)
         {
             details = formatRoom(room.getColor());
         }
+
         if (room.isHidden() || (details == null))
         {
             details = formatRoom(" ");
@@ -403,13 +405,10 @@ public class Display
 
         try
         {
-
             pos = new DungeonPosition(0, 0);
-
         }
         catch (GameOverException e)
         {
-
             e.printStackTrace();
         }
 
