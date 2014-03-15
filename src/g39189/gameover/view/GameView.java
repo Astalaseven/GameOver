@@ -38,11 +38,8 @@ public class GameView
 
                     // Demande à l’utilisateur quel mouvement et quelle arme
                     // il souhaite choisir
-                    int dir = Display.askMov();
-                    int wea = Display.askWeapon();
-
-                    Direction direction = Direction.values()[dir];
-                    WeaponType weapon = WeaponType.values()[wea];
+                    Direction direction = Display.askMov();
+                    WeaponType weapon = Display.askWeapon();
 
                     // Si le coup du joueur s’est mal passé,
                     // il laisse la main au suivant

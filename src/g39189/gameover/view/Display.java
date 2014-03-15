@@ -134,9 +134,9 @@ public class Display
     /**
      * Demande à l’utilisateur quel mouvement il souhaite faire
      * 
-     * @return le mouvement sous forme d’entier
+     * @return le mouvement choisi par le joueur
      */
-    public static int askMov()
+    public static Direction askMov()
     {
         Console console = System.console();
         String answer = " ";
@@ -150,15 +150,15 @@ public class Display
                     MVT_KEY.charAt(2), MVT_KEY.charAt(3));
         }
         
-        return Integer.parseInt(answer);
+        return Direction.values()[Integer.parseInt(answer)];
     }
 
     /**
      * Demande à l’utilisateur quelle arme il souhaite prendre
      * 
-     * @return l’arme sous forme d’entier
+     * @return l’arme choisie par le joueur
      */
-    public static int askWeapon()
+    public static WeaponType askWeapon()
     {
         Console console = System.console();
         String answer = " ";
@@ -172,7 +172,7 @@ public class Display
                     WPN_KEY.charAt(2), WPN_KEY.charAt(3));
         }
         
-        return Integer.parseInt(answer);
+        return WeaponType.values()[Integer.parseInt(answer)];
     }
 
     /**
