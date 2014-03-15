@@ -1,18 +1,14 @@
 package g39189.gameover.view;
 
-import g39189.gameover.model.Dungeon;
-import g39189.gameover.model.DungeonPosition;
-import g39189.gameover.model.Game;
-import g39189.gameover.model.GameOverException;
-import g39189.gameover.model.InitPosition;
-import g39189.gameover.model.Player;
-import g39189.gameover.model.Room;
-import g39189.gameover.model.RoomType;
+import g39189.gameover.model.*;
 
 import java.io.Console;
 
 public class Display
 {
+    private static String MVT_KEY = "0123";
+    private static String WPN_KEY = "0123";
+    
     /**
      * Affiche une ligne de séparation
      */
@@ -147,26 +143,16 @@ public class Display
     public static int askMov()
     {
         Console console = System.console();
-        int answer = -1;
-
-        while ((answer < 0) || (answer > 3))
+        String answer = " ";
+        
+        while(!answer.matches("[" + MVT_KEY + "]"))
         {
             console.printf("Quel mouvement souhaitez-vous faire ?\n");
-
-            try
-            {
-                // char - 48 pour convertir l’ascii en int
-                answer = console.readLine(
-                        "UP (0), DOWN (1), RIGHT (2), LEFT (3)\n"
-                        ).charAt(0) - 48;
-            }
-            catch (StringIndexOutOfBoundsException err)
-            {
-                continue;
-            }
+            answer = console.readLine("UP (%s), DOWN (%s), RIGHT (%s), LEFT (%s)\n", 
+                    MVT_KEY.charAt(0), MVT_KEY.charAt(1), MVT_KEY.charAt(2), MVT_KEY.charAt(3));
         }
-
-        return answer;
+        
+        return Integer.parseInt(answer);
     }
 
     /**
@@ -177,27 +163,16 @@ public class Display
     public static int askWeapon()
     {
         Console console = System.console();
-        int answer = -1;
-
-        while ((answer < 0) || (answer > 3))
+        String answer = " ";
+        
+        while(!answer.matches("[" + WPN_KEY + "]"))
         {
             console.printf("Équipez-vous d’une arme !\n");
-
-            try
-            {
-                // char - 48 pour convertir l’ascii en int
-                answer = console.readLine(
-                        "POTION (0), ARROWS (1), BLUDGEON (2), GUN (3)\n"
-                        ).charAt(0) - 48;
-
-            }
-            catch (StringIndexOutOfBoundsException err)
-            {
-                continue;
-            }
+            answer = console.readLine("POTION (%s), ARROWS (%s), BLUDGEON (%s), GUN (%s)\n", 
+                    WPN_KEY.charAt(0), WPN_KEY.charAt(1), WPN_KEY.charAt(2), WPN_KEY.charAt(3));
         }
-
-        return answer;
+        
+        return Integer.parseInt(answer);
     }
 
     /**
@@ -415,6 +390,8 @@ public class Display
         printRoom(dungeon.getRoom(pos));
         System.out.println();
         printLine();
+        
+        askMov();
         // printSkull();
         // printGameOver();
         // Player player = new Player("Jean");
