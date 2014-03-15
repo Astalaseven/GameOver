@@ -30,10 +30,10 @@ public class Display
      */
     public static void printRoomInDungeon(Room room)
     {
-        String template = String.format("| %1$8s ", room.getType());
+        String template = String.format("| %8s ", room.getType());
         boolean hidden = room.isHidden();
 
-        System.out.print(hidden ? String.format("| %1$8s ", " ") : template);
+        System.out.print(hidden ? String.format("| %8s ", " ") : template);
     }
 
     /**
@@ -73,7 +73,7 @@ public class Display
      */
     private static String formatRoom(Object o)
     {
-        return String.format("| %1$8s ", o);
+        return String.format("| %8s ", o);
     }
 
     /**
@@ -113,7 +113,8 @@ public class Display
             console.printf("Joueur %s créé avec succès !\n", name);
             ++nbPlayers;
 
-            if ((nbPlayers >= Game.MIN_PLAYER) && (nbPlayers < Game.MAX_PLAYER))
+            if ((nbPlayers >= Game.MIN_PLAYER)
+                    && (nbPlayers < Game.MAX_PLAYER))
             {
                 String str = " ";                
                 
@@ -185,8 +186,8 @@ public class Display
     {
         printLine();
 
-        String template = String.format("| %1$10s : %2$10s \t %3$10s : %4$10s %n"
-                                      + "| %5$10s : %6$10s", 
+        String template = String.format("| %10s : %10s \t %10s : %10s %n"
+                                      + "| %10s : %10s", 
                  bold("Nom du joueur"), player.getName(), 
                  bold("Couleur"), player.getColor(),
                  bold("Position init"), InitPosition.values()[player.getId()]);
@@ -264,18 +265,18 @@ public class Display
         System.out.println("| Carte retournée :");
         printLine();
 
-        String template = String.format("| %1$10s : %2$10s", bold("Type"),
+        String template = String.format("| %10s : %10s", bold("Type"),
                 room.getType());
 
         // TODO fix princess display
         if (room.getColor() != null)
         {
-            template += String.format("%n| %1$10s : %2$10s", bold("Couleur"),
+            template += String.format("%n| %10s : %10s", bold("Couleur"),
                     room.getColor());
         }
         else if (room.getWeapon() != null)
         {
-            template += String.format("%n| %1$10s : %2$10s", bold("Arme"),
+            template += String.format("%n| %10s : %10s", bold("Arme"),
                     room.getWeapon());
         }
         else if ((room.getType() == RoomType.BLORK)
