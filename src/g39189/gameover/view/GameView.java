@@ -11,8 +11,6 @@ import java.io.Console;
 
 public class GameView
 {
-    private static String[] names = new String[Game.MAX_PLAYER];
-
     public static void main(String[] args)
     {
         try
@@ -21,7 +19,7 @@ public class GameView
 
             Console console = System.console();
 
-            names = Display.createPlayers();
+            String[] names = Display.createPlayers();
 
             Game game = new Game(names);
 
