@@ -48,7 +48,6 @@ public class GameView
                     // il laisse la main au suivant
                     if (!game.play(direction, weapon))
                     {
-                        game.getCurrentPlayer();
                         game.nextPlayer();
                         throw new GameOverException("Mauvaise arme !");
                     }

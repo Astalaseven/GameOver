@@ -91,7 +91,7 @@ public class Display
 
         while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
-            String name = "";
+            String name = " ";
 
             try
             {
@@ -113,22 +113,18 @@ public class Display
             console.printf("Joueur %s créé avec succès !\n", name);
             ++nbPlayers;
 
-            if ((nbPlayers >= Game.MIN_PLAYER)
-                    && (nbPlayers <= (Game.MAX_PLAYER - 1)))
+            if ((nbPlayers >= Game.MIN_PLAYER) && (nbPlayers < Game.MAX_PLAYER))
             {
-                String str = " ";
-                char answer;
-
-                do
+                String str = " ";                
+                
+                while(!str.matches("[ON]"))
                 {
                     str = console.readLine("Créer un autre joueur ? (O/n) ");
                     str = str.toUpperCase();
+                    str = (str.length() > 0) ? str : "O";
+                }
 
-                    answer = (str.length() > 0) ? str.charAt(0) : 'O';
-
-                } while ((answer != 'O') && (answer != 'N'));
-
-                newPlayer = (answer == 'O');
+                newPlayer = (str.startsWith("O"));
             }
         }
 
@@ -148,8 +144,10 @@ public class Display
         while(!answer.matches("[" + MVT_KEY + "]"))
         {
             console.printf("Quel mouvement souhaitez-vous faire ?\n");
-            answer = console.readLine("UP (%s), DOWN (%s), RIGHT (%s), LEFT (%s)\n", 
-                    MVT_KEY.charAt(0), MVT_KEY.charAt(1), MVT_KEY.charAt(2), MVT_KEY.charAt(3));
+            answer = console.readLine(
+                    "UP (%s), DOWN (%s), RIGHT (%s), LEFT (%s)\n",
+                    MVT_KEY.charAt(0), MVT_KEY.charAt(1),
+                    MVT_KEY.charAt(2), MVT_KEY.charAt(3));
         }
         
         return Integer.parseInt(answer);
@@ -168,8 +166,10 @@ public class Display
         while(!answer.matches("[" + WPN_KEY + "]"))
         {
             console.printf("Équipez-vous d’une arme !\n");
-            answer = console.readLine("POTION (%s), ARROWS (%s), BLUDGEON (%s), GUN (%s)\n", 
-                    WPN_KEY.charAt(0), WPN_KEY.charAt(1), WPN_KEY.charAt(2), WPN_KEY.charAt(3));
+            answer = console.readLine(
+                    "POTION (%s), ARROWS (%s), BLUDGEON (%s), GUN (%s)\n", 
+                    WPN_KEY.charAt(0), WPN_KEY.charAt(1),
+                    WPN_KEY.charAt(2), WPN_KEY.charAt(3));
         }
         
         return Integer.parseInt(answer);
@@ -253,18 +253,6 @@ public class Display
     }
 
     /**
-     * Met le texte passé en paramètre en gras
-     * 
-     * @param str
-     *            le texte à mettre en gras
-     * @return le texte mis en gras
-     */
-    public static String bold(String str)
-    {
-        return "\033[1m" + str + "\033[0m";
-    }
-
-    /**
      * Affiche la carte retournée
      * 
      * @param room
@@ -301,6 +289,58 @@ public class Display
     }
 
     /**
+     * "Nettoie" la sortie de la console
+     */
+    public static void clearScreen()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+    
+    /**
+     * Met le texte passé en paramètre en gras
+     * 
+     * @param str
+     *            le texte à mettre en gras
+     * @return le texte mis en gras
+     */
+    public static String bold(String str)
+    {
+        return "\033[1m" + str + "\033[0m";
+    }
+
+    /**
+     * Affiche le nom du jeu en ASCII
+     * @param skull vrai s’il faut afficher la tête de mort, faux sinon
+     */
+    public static void printGameOver(boolean skull)
+    {
+        clearScreen();
+
+        String gameover = 
+                  "**************************************************************************\n"
+                + "**************************************************************************\n"
+                + "**                                                                      **\n"
+                + "**   #####     #    #     # #######    ####### #     # ####### ######   **\n"
+                + "**  #     #   # #   ##   ## #          #     # #     # #       #     #  **\n"
+                + "**  #        #   #  # # # # #          #     # #     # #       #     #  **\n"
+                + "**  #  #### #     # #  #  # #####      #     # #     # #####   ######   **\n"
+                + "**  #     # ####### #     # #          #     #  #   #  #       #   #    **\n"
+                + "**  #     # #     # #     # #          #     #   # #   #       #    #   **\n"
+                + "**   #####  #     # #     # #######    #######    #    ####### #     #  **\n"
+                + "**                                                                      **\n"
+                + "**************************************************************************\n"
+                + "**************************************************************************\n";
+
+        System.out.println(gameover);
+
+        if (skull)
+        {
+            printSkull();
+        }
+    }
+    
+    /**
      * Affiche un crâne en ASCII
      */
     public static void printSkull()
@@ -336,39 +376,6 @@ public class Display
 
         System.out.println(skull);
         System.out.println();
-    }
-
-    public static void clearScreen()
-    {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    public static void printGameOver(boolean skull)
-    {
-        clearScreen();
-
-        String gameover = 
-                  "**************************************************************************\n"
-                + "**************************************************************************\n"
-                + "**                                                                      **\n"
-                + "**   #####     #    #     # #######    ####### #     # ####### ######   **\n"
-                + "**  #     #   # #   ##   ## #          #     # #     # #       #     #  **\n"
-                + "**  #        #   #  # # # # #          #     # #     # #       #     #  **\n"
-                + "**  #  #### #     # #  #  # #####      #     # #     # #####   ######   **\n"
-                + "**  #     # ####### #     # #          #     #  #   #  #       #   #    **\n"
-                + "**  #     # #     # #     # #          #     #   # #   #       #    #   **\n"
-                + "**   #####  #     # #     # #######    #######    #    ####### #     #  **\n"
-                + "**                                                                      **\n"
-                + "**************************************************************************\n"
-                + "**************************************************************************\n";
-
-        System.out.println(gameover);
-
-        if (skull)
-        {
-            printSkull();
-        }
     }
 
     public static void main(String[] args)
