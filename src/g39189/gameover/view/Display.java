@@ -163,6 +163,17 @@ public class Display
         // WeaponType weapon = WeaponType.ARROWS;
         // printCurrPlayer(player, weapon);
     }
+    
+    /**
+     * Message de fin de partie, affiche quel joueur a gagné
+     * @param player
+     *            le joueur qui a gagné la partie
+     */
+    public static void printEndOfGame(Player player)
+    {
+        System.out.println("Fin de la partie :");
+        System.out.println("Le joueur " + player.getName() + " a gagné !");
+    }
 
     /**
      * Affiche le donjon
@@ -387,5 +398,4 @@ public class Display
     {
         return String.format("| %8s ", o);
     }
-
 }

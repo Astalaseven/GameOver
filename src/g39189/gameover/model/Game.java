@@ -58,7 +58,7 @@ public class Game
     }
 
     /**
-     * Retourne la valeur de idCurrent
+     * Retourne l’id du joueur courant
      * 
      * @return l’id du joueur actuel
      */
@@ -68,7 +68,7 @@ public class Game
     }
 
     /**
-     * Retourne la valeur de dungeon
+     * Retourne le donjon
      * 
      * @return le plateau de jeu
      */
@@ -116,7 +116,7 @@ public class Game
     }
 
     /**
-     * Exécute un coup d’un joueur
+     * Exécute le coup d’un joueur
      * 
      * @param dir
      *            la direction vers laquelle le joueur souhaite se déplacer
@@ -144,6 +144,7 @@ public class Game
         {
             throw new GameOverException("Carte déjà retournée");
         }
+
         // Si la carte n’était pas encore retournée, la retourne
         dungeon.show(newPos);
 
@@ -171,10 +172,7 @@ public class Game
         if (isOver())
         {
             idWinner = idCurrent;
-            
-            // TODO
-            System.out.println("Fin de la partie :");
-            System.out.println("Le joueur " + players.get(idWinner).getName() + " a gagné !");
+            Display.printEndOfGame(players.get(idWinner));
         }
 
         lastPosition = newPos;
