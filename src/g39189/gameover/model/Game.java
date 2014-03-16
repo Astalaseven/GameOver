@@ -193,6 +193,7 @@ public class Game
      * Mutateur prévu pour les tests
      * 
      * @param dungeon
+     *            un donjon personnalisé
      */
     protected void setDungeon(Dungeon dungeon)
     {
