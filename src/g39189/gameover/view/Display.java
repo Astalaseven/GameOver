@@ -171,8 +171,10 @@ public class Display
      */
     public static void printEndOfGame(Player player)
     {
-        System.out.println("Fin de la partie :");
-        System.out.println("Le joueur " + player.getName() + " a gagné !");
+        printLine();
+        System.out.println("| Fin de la partie :");
+        System.out.println("| Le joueur " + player.getName() + " a gagné !");
+        printLine();
     }
 
     /**
