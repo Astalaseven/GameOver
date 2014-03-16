@@ -6,8 +6,14 @@ import java.io.Console;
 
 public class Display
 {
-    private static String MVT_KEYS = "0123";
-    private static String WPN_KEYS = "0123";
+    /**
+     * Touches utilisées pour déplacer un joueur
+     */
+    public final static String MVT_KEYS = "0123";
+    /**
+     * Touches utilisées pour choisir une arme
+     */
+    public final static String WPN_KEYS = "0123";
     
     /**
      * Affiche une ligne de séparation
@@ -151,7 +157,7 @@ public class Display
                     MVT_KEYS.charAt(2), MVT_KEYS.charAt(3));
         }
 
-        return Direction.values()[Integer.parseInt(answer)];
+        return Direction.values()[MVT_KEYS.indexOf(answer)];
     }
 
     /**
@@ -173,7 +179,7 @@ public class Display
                     WPN_KEYS.charAt(2), WPN_KEYS.charAt(3));
         }
 
-        return WeaponType.values()[Integer.parseInt(answer)];
+        return WeaponType.values()[WPN_KEYS.indexOf(answer)];
     }
 
     /**
@@ -256,24 +262,30 @@ public class Display
     /**
      * Affiche la carte retournée
      * 
-     * @param blork
+     * @param room
      *            la carte passée en paramètre
      */
-    public static void printBlork(Room blork)
+    public static void printRoom(Room room)
     {
         printLine();
         System.out.println("| Carte retournée :");
         printLine();
 
         String template = String.format("| %10s : %10s", bold("Type"),
-                blork.getType());
+                room.getType());
 
-        if (blork.getWeapon() != null)
+        if (room.getColor() != null)
+        {
+            template += String.format("%n| %10s : %10s", bold("Couleur"),
+                    room.getColor());
+        }
+        else if (room.getWeapon() != null)
         {
             template += String.format("%n| %10s : %10s", bold("Arme"),
-                    blork.getWeapon());
+                    room.getWeapon());
         }
-        else
+        else if ((room.getType() == RoomType.BLORK)
+                && (room.getWeapon() == null))
         {
             template += String.format(" invincible");
         }
@@ -387,7 +399,7 @@ public class Display
             e.printStackTrace();
         }
 
-        printBlork(dungeon.getRoom(pos));
+        printRoom(dungeon.getRoom(pos));
         System.out.println();
         printLine();
         

@@ -6,7 +6,13 @@ import java.util.ArrayList;
 
 public class Game
 {
+    /**
+     * Nombre minimal de joueurs nécessaires
+     */
     public final static int MIN_PLAYER = 2;
+    /**
+     * Nombre maximal de joueurs nécessaires
+     */
     public final static int MAX_PLAYER = 4;
 
     private Dungeon dungeon;
@@ -144,7 +150,7 @@ public class Game
         if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != wea))
         {
             Display.printGameOver(true);
-            Display.printBlork(room);
+            Display.printRoom(room);
             rejoue = false;
         }
 

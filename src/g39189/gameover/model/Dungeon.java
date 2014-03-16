@@ -5,6 +5,9 @@ import java.util.LinkedList;
 
 public class Dungeon
 {
+    /**
+     * Taille du donjon
+     */
     public final static int N = 5;
 
     private Room[][] roomss = new Room[N][N];
