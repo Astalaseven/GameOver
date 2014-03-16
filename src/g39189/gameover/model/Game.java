@@ -18,10 +18,10 @@ public class Game
     private Dungeon dungeon;
     private ArrayList<Player> players;
     private int idCurrent;
+    private int idWinner;
     private DungeonPosition lastPosition;
     private boolean keyFound;
     private boolean princessFound;
-    private int idWinner;
 
     /**
      * Constructeur de Game
@@ -38,7 +38,7 @@ public class Game
             throw new GameOverException("Nombre de concurrents invalide");
         }
 
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
 
         for (String name : names)
         {
@@ -58,16 +58,6 @@ public class Game
     }
 
     /**
-     * Retourne la valeur de dungeon
-     * 
-     * @return le plateau de jeu
-     */
-    public Dungeon getDungeon()
-    {
-        return dungeon;
-    }
-
-    /**
      * Retourne la valeur de idCurrent
      * 
      * @return l’id du joueur actuel
@@ -78,13 +68,13 @@ public class Game
     }
 
     /**
-     * Indique si la partie est finie
+     * Retourne la valeur de dungeon
      * 
-     * @return vrai si le joueur a trouvé une clé et sa princesse, faux sinon
+     * @return le plateau de jeu
      */
-    public boolean isOver()
+    public Dungeon getDungeon()
     {
-        return keyFound && princessFound;
+        return dungeon;
     }
 
     /**
@@ -105,13 +95,31 @@ public class Game
     }
 
     /**
-     * Mutateur prévu pour les tests
+     * Indique si la partie est finie
      * 
-     * @param dungeon
+     * @return vrai si le joueur a trouvé une clé et sa princesse, faux sinon
      */
-    protected void setDungeon(Dungeon dungeon)
+    public boolean isOver()
     {
-        this.dungeon = dungeon;
+        return keyFound && princessFound;
+    }
+
+    /**
+     * Passe au joueur suivant
+     */
+    public void nextPlayer()
+    {
+        ++idCurrent;
+
+        if (idCurrent >= players.size())
+        {
+            idCurrent = 0;
+        }
+
+        dungeon.hideAll();
+        keyFound = false;
+        princessFound = false;
+        lastPosition = players.get(idCurrent).getInitPosition();
     }
 
     /**
@@ -181,26 +189,12 @@ public class Game
     }
 
     /**
-     * Passe au joueur suivant
+     * Mutateur prévu pour les tests
+     * 
+     * @param dungeon
      */
-    public void nextPlayer()
+    protected void setDungeon(Dungeon dungeon)
     {
-        ++idCurrent;
-
-        if (idCurrent >= players.size())
-        {
-            idCurrent = 0;
-        }
-
-        dungeon.hideAll();
-        keyFound = false;
-        princessFound = false;
-        lastPosition = players.get(idCurrent).getInitPosition();
-    }
-
-    public static void main(String[] args) throws GameOverException
-    {
-        // Game game = new Game("Paul", "Jean");
-        // System.out.println(game.players.get(0).getId());
+        this.dungeon = dungeon;
     }
 }

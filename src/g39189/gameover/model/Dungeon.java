@@ -10,9 +10,9 @@ public class Dungeon
      */
     public final static int N = 5;
 
-    private Room[][] roomss = new Room[N][N];
     private static Dungeon instance;
     private LinkedList<Room> donjon = new LinkedList<>();
+    private Room[][] roomss = new Room[N][N];
 
     /**
      * Constructeur de Dungeon
@@ -41,7 +41,7 @@ public class Dungeon
     {
         this.roomss = configuration;
     }
-
+    
     /**
      * Retourne l’instance, la crée si elle n’existe pas encore
      * 
@@ -70,17 +70,6 @@ public class Dungeon
     }
 
     /**
-     * Retourne une carte pour l’afficher
-     * 
-     * @param pos
-     *            la position de la carte à retourner
-     */
-    public void show(DungeonPosition pos)
-    {
-        getRoom(pos).setHidden(false);
-    }
-
-    /**
      * Retourne toutes les cartes pour les cacher
      */
     public void hideAll()
@@ -95,15 +84,14 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute les cartes dans la liste donjon
+     * Retourne une carte pour l’afficher
+     * 
+     * @param pos
+     *            la position de la carte à retourner
      */
-    private void populateDungeon()
+    public void show(DungeonPosition pos)
     {
-        addRoom(RoomType.BLORK, 16, false, true);
-        addRoom(RoomType.PRINCESS, 4, true, false);
-        addRoom(RoomType.KEY, 2, false, false);
-        addRoom(RoomType.BLORK, 2, false, false);
-        addRoom(RoomType.GATE, 1, false, false);
+        getRoom(pos).setHidden(false);
     }
 
     /**
@@ -131,5 +119,17 @@ public class Dungeon
 
             j = (j + 1) % 4;
         }
+    }
+
+    /**
+     * Crée et ajoute les cartes dans la liste donjon
+     */
+    private void populateDungeon()
+    {
+        addRoom(RoomType.BLORK, 16, false, true);
+        addRoom(RoomType.PRINCESS, 4, true, false);
+        addRoom(RoomType.KEY, 2, false, false);
+        addRoom(RoomType.BLORK, 2, false, false);
+        addRoom(RoomType.GATE, 1, false, false);
     }
 }

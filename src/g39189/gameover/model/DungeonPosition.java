@@ -2,9 +2,21 @@ package g39189.gameover.model;
 
 public class DungeonPosition
 {
+    /**
+     * Position initiale du premier joueur
+     */
     public final static DungeonPosition P_BARBARIAN_1;
+    /**
+     * Position initiale du deuxième joueur
+     */
     public final static DungeonPosition P_BARBARIAN_2;
+    /**
+     * Position initiale du troisième joueur
+     */
     public final static DungeonPosition P_BARBARIAN_3;
+    /**
+     * Position initiale du quatrième joueur
+     */
     public final static DungeonPosition P_BARBARIAN_4;
 
     private int column;
@@ -20,7 +32,7 @@ public class DungeonPosition
     }
 
     /**
-     * Constructeur de DungeonPosition
+     * Crée une nouvelle position
      * 
      * @param column
      *            colonne initiale
@@ -46,7 +58,7 @@ public class DungeonPosition
     }
 
     /**
-     * Constructeur de DungeonPosition
+     * Retourne la position initiale du joueur
      */
     private DungeonPosition()
     {
@@ -54,17 +66,6 @@ public class DungeonPosition
         column = init.getColumn();
         row = init.getRow();
         ++dungeonCpt;
-    }
-
-    /**
-     * Affiche une position selon sa colonne et sa ligne
-     * 
-     * @return position au format [colonne,ligne]
-     */
-    @Override
-    public String toString()
-    {
-        return "[" + row + "," + column + "]";
     }
 
     /**
@@ -88,25 +89,41 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la position au-dessus de la position actuelle
+     * Avance le joueur d’une case
      * 
-     * @return nouvelle position située au-dessus de l’actuelle
+     * @param dir
+     *            la direction dans laquelle avancer
+     * @return la nouvelle position du joueur
      * @throws GameOverException
-     *             si la ligne du dessus n’existe pas
+     *             si le mouvement n’est pas possible
      */
-    private DungeonPosition up() throws GameOverException
+    public DungeonPosition move(Direction dir) throws GameOverException
     {
-        DungeonPosition pos = new DungeonPosition(0, 0);
+        DungeonPosition movDir = null;
 
-        if (((row - 1) < 0) || (column < 0) || (column > (Dungeon.N - 1)))
+        switch (dir)
         {
-            throw new GameOverException("Impossible de monter");
+            case UP:    movDir = up();      break;
+            case DOWN:  movDir = down();    break;
+            case RIGHT: movDir = right();   break;
+            case LEFT:  movDir = left();    break;
+
+            default:
+                throw new GameOverException("Direction inconnue");
         }
 
-        pos.column = column;
-        pos.row = row - 1;
+        return movDir;
+    }
 
-        return pos;
+    /**
+     * Affiche une position selon sa colonne et sa ligne
+     * 
+     * @return position au format [colonne,ligne]
+     */
+    @Override
+    public String toString()
+    {
+        return "[" + row + "," + column + "]";
     }
 
     /**
@@ -128,6 +145,28 @@ public class DungeonPosition
 
         pos.column = column;
         pos.row = row + 1;
+
+        return pos;
+    }
+
+    /**
+     * Retourne la position à gauche de la position actuelle
+     * 
+     * @return nouvelle position située à gauche de l’actuelle
+     * @throws GameOverException
+     *             si la colonne à gauche n’existe pas
+     */
+    private DungeonPosition left() throws GameOverException
+    {
+        DungeonPosition pos = new DungeonPosition(0, 0);
+
+        if (((column - 1) < 0) || (row < 0) || (row > (Dungeon.N - 1)))
+        {
+            throw new GameOverException("Impossible d’aller à gauche");
+        }
+
+        pos.column = column - 1;
+        pos.row = row;
 
         return pos;
     }
@@ -156,51 +195,24 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la position à gauche de la position actuelle
+     * Retourne la position au-dessus de la position actuelle
      * 
-     * @return nouvelle position située à gauche de l’actuelle
+     * @return nouvelle position située au-dessus de l’actuelle
      * @throws GameOverException
-     *             si la colonne à gauche n’existe pas
+     *             si la ligne du dessus n’existe pas
      */
-    private DungeonPosition left() throws GameOverException
+    private DungeonPosition up() throws GameOverException
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if (((column - 1) < 0) || (row < 0) || (row > (Dungeon.N - 1)))
+        if (((row - 1) < 0) || (column < 0) || (column > (Dungeon.N - 1)))
         {
-            throw new GameOverException("Impossible d’aller à gauche");
+            throw new GameOverException("Impossible de monter");
         }
 
-        pos.column = column - 1;
-        pos.row = row;
+        pos.column = column;
+        pos.row = row - 1;
 
         return pos;
-    }
-
-    /**
-     * Avance le joueur d’une case
-     * 
-     * @param dir
-     *            la direction dans laquelle avancer
-     * @return la nouvelle position du joueur
-     * @throws GameOverException
-     *             si le mouvement n’est pas possible
-     */
-    public DungeonPosition move(Direction dir) throws GameOverException
-    {
-        DungeonPosition movDir = null;
-
-        switch (dir)
-        {
-            case UP:    movDir = up();      break;
-            case DOWN:  movDir = down();    break;
-            case RIGHT: movDir = right();   break;
-            case LEFT:  movDir = left();    break;
-
-            default:
-                throw new GameOverException("Direction inconnue");
-        }
-
-        return movDir;
     }
 }
