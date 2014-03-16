@@ -84,14 +84,7 @@ public class Game
      */
     public Player getWinner()
     {
-        Player player = null;
-
-        if (isOver())
-        {
-            player = players.get(idWinner);
-        }
-
-        return player;
+        return (isOver() ? players.get(idWinner) : null);
     }
 
     /**
@@ -101,7 +94,7 @@ public class Game
      */
     public boolean isOver()
     {
-        return keyFound && princessFound;
+        return (keyFound && princessFound);
     }
 
     /**
