@@ -144,7 +144,7 @@ public class Game
         if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != wea))
         {
             Display.printGameOver(true);
-            Display.printRoom(room);
+            Display.printBlork(room);
             rejoue = false;
         }
 

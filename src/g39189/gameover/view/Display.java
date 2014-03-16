@@ -6,8 +6,8 @@ import java.io.Console;
 
 public class Display
 {
-    private static String MVT_KEY = "0123";
-    private static String WPN_KEY = "0123";
+    private static String MVT_KEYS = "0123";
+    private static String WPN_KEYS = "0123";
     
     /**
      * Affiche une ligne de séparation
@@ -142,15 +142,15 @@ public class Display
         Console console = System.console();
         String answer = " ";
         
-        while(!answer.matches("[" + MVT_KEY + "]"))
+        while(!answer.matches("[" + MVT_KEYS + "]"))
         {
             console.printf("Quel mouvement souhaitez-vous faire ?\n");
             answer = console.readLine(
                     "UP (%s), DOWN (%s), RIGHT (%s), LEFT (%s)\n",
-                    MVT_KEY.charAt(0), MVT_KEY.charAt(1),
-                    MVT_KEY.charAt(2), MVT_KEY.charAt(3));
+                    MVT_KEYS.charAt(0), MVT_KEYS.charAt(1),
+                    MVT_KEYS.charAt(2), MVT_KEYS.charAt(3));
         }
-        
+
         return Direction.values()[Integer.parseInt(answer)];
     }
 
@@ -164,15 +164,15 @@ public class Display
         Console console = System.console();
         String answer = " ";
         
-        while(!answer.matches("[" + WPN_KEY + "]"))
+        while(!answer.matches("[" + WPN_KEYS + "]"))
         {
             console.printf("Équipez-vous d’une arme !\n");
             answer = console.readLine(
-                    "POTION (%s), ARROWS (%s), BLUDGEON (%s), GUN (%s)\n", 
-                    WPN_KEY.charAt(0), WPN_KEY.charAt(1),
-                    WPN_KEY.charAt(2), WPN_KEY.charAt(3));
+                    "POTION (%s), ARROWS (%s), BLUDGEON (%s), GUN (%s)\n",
+                    WPN_KEYS.charAt(0), WPN_KEYS.charAt(1),
+                    WPN_KEYS.charAt(2), WPN_KEYS.charAt(3));
         }
-        
+
         return WeaponType.values()[Integer.parseInt(answer)];
     }
 
@@ -187,8 +187,8 @@ public class Display
         printLine();
 
         String template = String.format("| %10s : %10s \t %10s : %10s %n"
-                                      + "| %10s : %10s", 
-                 bold("Nom du joueur"), player.getName(), 
+                                      + "| %10s : %10s",
+                 bold("Nom du joueur"), player.getName(),
                  bold("Couleur"), player.getColor(),
                  bold("Position init"), InitPosition.values()[player.getId()]);
 
@@ -256,31 +256,24 @@ public class Display
     /**
      * Affiche la carte retournée
      * 
-     * @param room
+     * @param blork
      *            la carte passée en paramètre
      */
-    public static void printRoom(Room room)
+    public static void printBlork(Room blork)
     {
         printLine();
         System.out.println("| Carte retournée :");
         printLine();
 
         String template = String.format("| %10s : %10s", bold("Type"),
-                room.getType());
+                blork.getType());
 
-        // TODO fix princess display
-        if (room.getColor() != null)
-        {
-            template += String.format("%n| %10s : %10s", bold("Couleur"),
-                    room.getColor());
-        }
-        else if (room.getWeapon() != null)
+        if (blork.getWeapon() != null)
         {
             template += String.format("%n| %10s : %10s", bold("Arme"),
-                    room.getWeapon());
+                    blork.getWeapon());
         }
-        else if ((room.getType() == RoomType.BLORK)
-                && (room.getWeapon() == null))
+        else
         {
             template += String.format(" invincible");
         }
@@ -295,7 +288,6 @@ public class Display
     public static void clearScreen()
     {
         System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
     
     /**
@@ -395,7 +387,7 @@ public class Display
             e.printStackTrace();
         }
 
-        printRoom(dungeon.getRoom(pos));
+        printBlork(dungeon.getRoom(pos));
         System.out.println();
         printLine();
         
