@@ -15,7 +15,7 @@ public class GameView
     {
         try
         {
-            Display.printGameOver(false);
+            Display.printGameOver();
 
             Console console = System.console();
 
@@ -25,7 +25,7 @@ public class GameView
 
             while (!game.isOver())
             {
-                Display.printGameOver(false);
+                Display.printGameOver();
 
                 try
                 {
@@ -59,7 +59,5 @@ public class GameView
         {
             e.printStackTrace();
         }
-
     }
-
 }

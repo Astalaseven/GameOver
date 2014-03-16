@@ -15,7 +15,7 @@ public class Dungeon
     private Room[][] roomss = new Room[N][N];
 
     /**
-     * Constructeur de Dungeon
+     * Remplis la liste donjon avec les cartes et les place sur le plateau
      */
     private Dungeon()
     {
@@ -95,16 +95,16 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute une carte à la liste donjon
+     * Crée et ajoute un nombre de cartes passé en paramètre à la liste donjon
      * 
      * @param type
      *            le type de carte à créer
      * @param nb
      *            le nombre de cartes à créer
      * @param colored
-     *            indique si la carte à une couleur
+     *            indique si la carte a une couleur
      * @param armed
-     *            indique si la carte à une arme
+     *            indique si la carte a une arme
      */
     private void addRoom(RoomType type, int nb, boolean colored, boolean armed)
     {

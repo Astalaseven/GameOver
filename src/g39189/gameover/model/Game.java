@@ -157,7 +157,8 @@ public class Game
         // Si le joueur n’a pas la bonne arme, il a perdu
         if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != wea))
         {
-            Display.printGameOver(true);
+            Display.printGameOver();
+            Display.printSkull();
             Display.printRoom(room);
             rejoue = false;
         }

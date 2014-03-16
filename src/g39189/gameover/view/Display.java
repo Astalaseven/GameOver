@@ -107,7 +107,7 @@ public class Display
             }
             catch (GameOverException e)
             {
-                printGameOver(false);
+                printGameOver();
                 continue;
             }
 
@@ -138,7 +138,7 @@ public class Display
     {
 
         final Dungeon dungeon = Dungeon.getInstance();
-        printDungeon(dungeon);
+//        printDungeon(dungeon);
         DungeonPosition pos = null;
 
         try
@@ -169,8 +169,9 @@ public class Display
      * 
      * @param dungeon
      *            le donjon à afficher
+     * @throws GameOverException si la position à afficher n’existe pas
      */
-    public static void printDungeon(Dungeon dungeon)
+    public static void printDungeon(Dungeon dungeon) throws GameOverException
     {
         printLine();
 
@@ -186,34 +187,18 @@ public class Display
 
             for (int column = 0; column < Dungeon.N; column++)
             {
-                try
-                {
-                    pos = new DungeonPosition(row, column);
-                }
-                catch (GameOverException e)
-                {
-                    e.printStackTrace();
-                }
+                pos = new DungeonPosition(row, column);
 
-                Room room = dungeon.getRoom(pos);
-                printRoomInDungeon(room);
+                printRoomInDungeon(dungeon.getRoom(pos));
             }
 
             System.out.println("|");
 
             for (int column = 0; column < Dungeon.N; column++)
             {
-                try
-                {
-                    pos = new DungeonPosition(row, column);
-                }
-                catch (GameOverException e)
-                {
-                    e.printStackTrace();
-                }
+                pos = new DungeonPosition(row, column);
 
-                Room room = dungeon.getRoom(pos);
-                printRoomInDungeonDetails(room);
+                printRoomInDungeonDetails(dungeon.getRoom(pos));
             }
         }
 
@@ -223,33 +208,25 @@ public class Display
 
     /**
      * Affiche le nom du jeu en ASCII
-     * @param skull vrai s’il faut afficher la tête de mort, faux sinon
      */
-    public static void printGameOver(boolean skull)
+    public static void printGameOver()
     {
         clearScreen();
 
-        String gameover = 
-                  "**************************************************************************\n"
-                + "**************************************************************************\n"
-                + "**                                                                      **\n"
-                + "**   #####     #    #     # #######    ####### #     # ####### ######   **\n"
-                + "**  #     #   # #   ##   ## #          #     # #     # #       #     #  **\n"
-                + "**  #        #   #  # # # # #          #     # #     # #       #     #  **\n"
-                + "**  #  #### #     # #  #  # #####      #     # #     # #####   ######   **\n"
-                + "**  #     # ####### #     # #          #     #  #   #  #       #   #    **\n"
-                + "**  #     # #     # #     # #          #     #   # #   #       #    #   **\n"
-                + "**   #####  #     # #     # #######    #######    #    ####### #     #  **\n"
-                + "**                                                                      **\n"
-                + "**************************************************************************\n"
-                + "**************************************************************************\n";
-
-        System.out.println(gameover);
-
-        if (skull)
-        {
-            printSkull();
-        }
+        System.out.println( 
+    "**************************************************************************\n"
+  + "**************************************************************************\n"
+  + "**                                                                      **\n"
+  + "**   #####     #    #     # #######    ####### #     # ####### ######   **\n"
+  + "**  #     #   # #   ##   ## #          #     # #     # #       #     #  **\n"
+  + "**  #        #   #  # # # # #          #     # #     # #       #     #  **\n"
+  + "**  #  #### #     # #  #  # #####      #     # #     # #####   ######   **\n"
+  + "**  #     # ####### #     # #          #     #  #   #  #       #   #    **\n"
+  + "**  #     # #     # #     # #          #     #   # #   #       #    #   **\n"
+  + "**   #####  #     # #     # #######    #######    #    ####### #     #  **\n"
+  + "**                                                                      **\n"
+  + "**************************************************************************\n"
+  + "**************************************************************************\n");
     }
 
     /**
@@ -369,7 +346,7 @@ public class Display
     {
         System.out.println();
 
-        String skull = 
+        System.out.println(
                   "\t\t             uu$$$$$$$$$$$uu             \n"
                 + "\t\t          uu$$$$$$$$$$$$$$$$$uu          \n"
                 + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         \n"
@@ -394,9 +371,8 @@ public class Display
                 + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ \n"
                 + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
                 + "\t\t    $$$$$                      $$$$$     \n"
-                + "\t\t     $$$                        $$$      \n";
+                + "\t\t     $$$                        $$$      \n");
 
-        System.out.println(skull);
         System.out.println();
     }
 
