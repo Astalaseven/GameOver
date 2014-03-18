@@ -99,7 +99,7 @@ public class Game
      */
     public boolean isOver()
     {
-        return (keyFound && princessFound);
+        return (idWinner != -1);
     }
 
     /**
@@ -175,7 +175,7 @@ public class Game
             keyFound = true;
         }
 
-        if (isOver())
+        if (keyFound && princessFound)
         {
             idWinner = idCurrent;
             Display.printEndOfGame(players.get(idWinner));
