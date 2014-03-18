@@ -1,5 +1,10 @@
 package g39189.gameover.model;
 
+/**
+ * Cette classe représente un joueur (player).
+ * 
+ * @author Bovyn Gatien - 39189
+ */
 public class Player
 {
     private int n;
@@ -69,6 +74,14 @@ public class Player
     {
         return n;
     }
+    
+    /**
+     * Remet le compteur de joueurs à zéro
+     */
+    static void resetN()
+    {
+        nextN = 0;
+    }
 
     @Override
     public String toString()
@@ -77,10 +90,7 @@ public class Player
                 + ", initPosition=" + initPosition + "]";
     }
 
-    static void resetN()
-    {
-        nextN = 0;
-    }
+
 
 //    public static void main(String[] args)
 //    {

@@ -4,6 +4,11 @@ import g39189.gameover.view.Display;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Bovyn Gatien - 39189
+ *
+ */
 public class Game
 {
     /**
@@ -134,6 +139,7 @@ public class Game
         {
             throw new GameOverException("La partie est finie");
         }
+
         // Si la partie n’est pas finie, fait le mouvement
         DungeonPosition newPos = lastPosition.move(dir);
         Player player = players.get(idCurrent);

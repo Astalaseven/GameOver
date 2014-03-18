@@ -1,5 +1,11 @@
 package g39189.gameover.model;
 
+/**
+ * Cette classe représente un élément du donjon, une carte dans le jeu
+ * original.
+ * @author Bovyn Gatien - 39189
+ *
+ */
 public class Room
 {
     private RoomType type;

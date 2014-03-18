@@ -15,8 +15,7 @@ public class PlayTest
     
     /**
      * Met en place le jeu
-     * (Appelé avant chaque appel à une méthode)
-     * @throws GameOverException 
+     * (Appelé avant chaque appel à une méthode) 
      */
     @Before
     public void setUp() throws GameOverException
@@ -39,7 +38,6 @@ public class PlayTest
 
     /**
      * Initialise le donjon
-     * @throws GameOverException
      */
     private void initializeDungeon() throws GameOverException
     {
@@ -59,7 +57,6 @@ public class PlayTest
 
     /**
      * Le joueur tombe sur un blork avec la bonne arme
-     * @throws GameOverException
      */
     @Test
     public void playTest0() throws GameOverException

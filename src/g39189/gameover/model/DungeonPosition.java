@@ -1,5 +1,10 @@
 package g39189.gameover.model;
 
+/**
+ * Cette classe représente une position dans le plateau de jeu.
+ * 
+ * @author Bovyn Gatien - 39189
+ */
 public class DungeonPosition
 {
     /**
@@ -58,7 +63,7 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la position initiale du joueur
+     * Initialise la position initiale du joueur
      */
     private DungeonPosition()
     {

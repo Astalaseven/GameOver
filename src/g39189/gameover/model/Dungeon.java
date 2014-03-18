@@ -3,6 +3,11 @@ package g39189.gameover.model;
 import java.util.Collections;
 import java.util.LinkedList;
 
+/**
+ * Cette classe représente le donjon, c'est-à-dire le plateau de jeu.
+ * @author Bovyn Gatien - 39189
+ *
+ */
 public class Dungeon
 {
     /**
