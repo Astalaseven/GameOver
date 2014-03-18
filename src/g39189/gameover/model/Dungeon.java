@@ -15,7 +15,7 @@ public class Dungeon
     private Room[][] roomss = new Room[N][N];
 
     /**
-     * Remplis la liste donjon avec les cartes et les place sur le plateau
+     * Remplit la liste donjon avec les cartes et les place sur le plateau
      */
     private Dungeon()
     {
@@ -32,7 +32,7 @@ public class Dungeon
     }
 
     /**
-     * Constructeur utilisé pour les tests
+     * Construit un donjon avec le plateau passé en paramètre
      * 
      * @param configuration
      *            un donjon personnalisé

@@ -15,12 +15,12 @@ public class Player
             DungeonPosition.P_BARBARIAN_3, DungeonPosition.P_BARBARIAN_4
         };
 
-
     /**
      * Crée un joueur
      * 
      * @param name
      *            nom du joueur
+     * @throws GameOverException 
      */
     public Player(String name)
     {
@@ -77,12 +77,17 @@ public class Player
                 + ", initPosition=" + initPosition + "]";
     }
 
-    public static void main(String[] args)
+    static void resetN()
     {
-        Player player = new Player("Paul");
-        System.out.println(player);
-        Player player0 = new Player("Jean");
-        System.out.println(player0);
+        nextN = 0;
     }
+
+//    public static void main(String[] args)
+//    {
+//        Player player = new Player("Paul");
+//        System.out.println(player);
+//        Player player0 = new Player("Jean");
+//        System.out.println(player0);
+//    }
 
 }

@@ -190,4 +190,13 @@ public class Game
     {
         this.dungeon = dungeon;
     }
+    
+    /**
+     * Supprime tous les joueurs et remet à zéro le compteur
+     */
+    protected void deletePlayers()
+    {
+        Player.resetN();
+        players.clear();
+    }
 }
