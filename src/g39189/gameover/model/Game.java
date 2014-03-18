@@ -175,6 +175,8 @@ public class Game
             keyFound = true;
         }
 
+        // Si le joueur a trouvé une clé et sa princesse, il a gagné et
+        // la partie est finie
         if (keyFound && princessFound)
         {
             idWinner = idCurrent;
