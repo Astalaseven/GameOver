@@ -6,22 +6,30 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GameOverTest
+public class PlayTest
 {
     private Game game;
     private Room[] rooms = new Room[Dungeon.N];
+    private DungeonPosition pos0;
+    private DungeonPosition pos1;
     
     /**
-     * Sets up the test fixture. 
-     * (Called before every test case method.)
+     * Met en place le jeu
+     * (Appelé avant chaque appel à une méthode)
      * @throws GameOverException 
      */
     @Before
     public void setUp() throws GameOverException
     {
         game = new Game("Test0", "Test1");
+        pos0 = new DungeonPosition(0, 0);
+        pos1 = new DungeonPosition(1, 0);
     }
     
+    /**
+     * Supprime les joueurs et réinitialise le jeu
+     * (Appelé à la fin de chaque méthode)
+     */
     @After
     public void tearDown()
     {
@@ -60,6 +68,8 @@ public class GameOverTest
         initializeDungeon();
 
         assertTrue(game.play(Direction.DOWN, WeaponType.ARROWS));
+        assertFalse(game.getDungeon().getRoom(pos0).isHidden());
+        assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
     }
     
     /**
@@ -73,6 +83,8 @@ public class GameOverTest
         initializeDungeon();
 
         assertFalse(game.play(Direction.DOWN, WeaponType.POTION));
+        assertFalse(game.getDungeon().getRoom(pos0).isHidden());
+        assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
     }
     
     /**
@@ -85,6 +97,8 @@ public class GameOverTest
         initializeDungeon();
 
         assertFalse(game.play(Direction.DOWN, WeaponType.POTION));
+        assertFalse(game.getDungeon().getRoom(pos0).isHidden());
+        assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
     }
     
     /**
@@ -117,5 +131,36 @@ public class GameOverTest
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
         assertFalse(game.isOver());
         assertNotEquals(game.getWinner(), game.getCurrentPlayer());
+    }
+    
+    /**
+     * Trouve une clé et une princesse de sa couleur
+     */
+    @Test
+    public void playTest5() throws GameOverException
+    {
+        rooms[0] = new Room(RoomType.KEY, true, null, null);
+        rooms[1] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
+        initializeDungeon();
+
+        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertTrue(game.isOver());
+        assertEquals(game.getWinner(), game.getCurrentPlayer());
+    }
+    
+    /**
+     * Trouve une clé et une princesse de sa couleur
+     */
+    @Test
+    public void playTest6() throws GameOverException
+    {
+        rooms[0] = new Room(RoomType.GATE, true, null, null);
+        initializeDungeon();
+
+        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertFalse(game.isOver());
+        assertEquals(game.getCurrentPlayer().getColor(), BarbarianColor.RED);
+        assertEquals(game.getWinner(), null);
     }
 }
