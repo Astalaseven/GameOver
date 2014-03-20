@@ -4,6 +4,13 @@ import g39189.gameover.model.*;
 
 import java.io.Console;
 
+import sun.io.Converters;
+
+/**
+ * Classe utilisée pour interagir avec l’utilisateur
+ * 
+ * @author Bovyn Gatien - 39189
+ */
 public class Display
 {
     /**
@@ -15,6 +22,8 @@ public class Display
      */
     public final static String WPN_KEYS = "0123";
     
+    private static Console console = System.console();
+    
     /**
      * Demande à l’utilisateur quel mouvement il souhaite faire
      * 
@@ -22,7 +31,6 @@ public class Display
      */
     public static Direction askMov()
     {
-        Console console = System.console();
         String answer = " ";
         
         while(!answer.matches("[" + MVT_KEYS + "]"))
@@ -44,7 +52,6 @@ public class Display
      */
     public static WeaponType askWeapon()
     {
-        Console console = System.console();
         String answer = " ";
         
         while(!answer.matches("[" + WPN_KEYS + "]"))
@@ -90,7 +97,6 @@ public class Display
         int nbPlayers = 0;
         final String[] names = new String[Game.MAX_PLAYER];
         boolean newPlayer = true;
-        Console console = System.console();
 
         while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
@@ -137,24 +143,24 @@ public class Display
     public static void main(String[] args)
     {
 
-        final Dungeon dungeon = Dungeon.getInstance();
-//        printDungeon(dungeon);
-        DungeonPosition pos = null;
-
-        try
-        {
-            pos = new DungeonPosition(0, 0);
-        }
-        catch (GameOverException e)
-        {
-            e.printStackTrace();
-        }
-
-        printRoom(dungeon.getRoom(pos));
-        System.out.println();
-        printLine();
-        
-        askMov();
+//        final Dungeon dungeon = Dungeon.getInstance();
+////        printDungeon(dungeon);
+//        DungeonPosition pos = null;
+//
+//        try
+//        {
+//            pos = new DungeonPosition(0, 0);
+//        }
+//        catch (GameOverException e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//        printRoom(dungeon.getRoom(pos));
+//        System.out.println();
+//        printLine();
+//        
+//        askMov();
         // printSkull();
         // printGameOver();
         // Player player = new Player("Jean");
@@ -162,6 +168,15 @@ public class Display
 
         // WeaponType weapon = WeaponType.ARROWS;
         // printCurrPlayer(player, weapon);
+        printDungeon();
+        try
+        {
+            askNewPosition();
+        }
+        catch (GameOverException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -319,7 +334,7 @@ public class Display
     public static void printRoomInDungeon(Room room)
     {
         String template = String.format("| %8s ", room.getType());
-        boolean hidden = room.isHidden();
+        boolean hidden = false;//room.isHidden();
 
         System.out.print(hidden ? String.format("| %8s ", " ") : template);
     }
@@ -344,7 +359,7 @@ public class Display
             details = formatRoom(room.getColor());
         }
 
-        if (room.isHidden() || (details == null))
+        if (/*room.isHidden() ||*/ (details == null))
         {
             details = formatRoom(" ");
         }
@@ -399,5 +414,64 @@ public class Display
     private static String formatRoom(Object o)
     {
         return String.format("| %8s ", o);
+    }
+    
+    /**
+     * Affiche un tableau permettant au joueur de choisir où se déplacer
+     */
+    public static void printDungeon()
+    {
+        int cpt = 1;
+
+        System.out.println("==========================");
+        
+        for (int row = 0; row < Dungeon.N; row++)
+        {
+            if (row != 0)
+            {
+                System.out.println("|");
+                System.out.println("==========================");
+            }
+
+            for (int column = 0; column < Dungeon.N; column++)
+            {
+                String output = String.format("| %2s ", cpt);
+                System.out.print(output);
+                cpt++;
+            }
+        }
+
+        System.out.println("|");
+        System.out.println("==========================");
+    }
+    
+    private static DungeonPosition convertToPosition(int entier) throws GameOverException
+    {
+        int row = (int) Math.floor(entier / 6);
+        int column = entier - (row * 5) - 1;
+
+        return new DungeonPosition(row, column);
+    }
+
+    public static DungeonPosition askNewPosition() throws GameOverException
+    {
+        String answer;
+        int nb = 0;
+        
+        Display.printDungeon();
+
+        while (nb < 1 || nb > 25)
+        {
+            answer = "-1";
+
+            while (!answer.matches("[0-9]{1,2}"))
+            {
+                answer = console.readLine("Choisissez une nouvelle position : ");
+            }
+            
+            nb = Integer.parseInt(answer);
+        }
+        
+        return convertToPosition(nb);
     }
 }

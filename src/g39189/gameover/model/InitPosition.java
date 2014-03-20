@@ -2,8 +2,8 @@ package g39189.gameover.model;
 
 /**
  * Positions initiales des joueurs
- * @author Bovyn Gatien - 39189
  * 
+ * @author Bovyn Gatien - 39189
  */
 public enum InitPosition
 {

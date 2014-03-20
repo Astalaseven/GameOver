@@ -98,6 +98,44 @@ public class Dungeon
     {
         getRoom(pos).setHidden(false);
     }
+    
+    /**
+     * Permet d’échanger 2 positions
+     * @param pos0
+     * @param pos1
+     */
+    public void swap(DungeonPosition pos0, DungeonPosition pos1)
+    {
+        Room roomTmp =  roomss[pos0.getRow()][pos0.getColumn()];
+
+        roomss[pos0.getRow()][pos0.getColumn()] = instance.getRoom(pos1);
+        roomss[pos1.getRow()][pos1.getColumn()] = roomTmp;
+    }
+    
+    /**
+     * Indique si une pièce est entourée de pièces toutes visibles
+     */
+    private boolean isSurrounded(DungeonPosition pos)
+    {
+        boolean posUp = false;
+        boolean posDown = false;
+        boolean posLeft = false;
+        boolean posRight = false;
+
+        try
+        {
+            posUp = instance.getRoom(pos.up()).isHidden();
+            posDown = instance.getRoom(pos.down()).isHidden();
+            posLeft = instance.getRoom(pos.left()).isHidden();
+            posRight = instance.getRoom(pos.right()).isHidden();
+        }
+        catch (GameOverException err)
+        {
+
+        }
+
+        return posUp || posDown || posLeft || posRight;
+    }
 
     /**
      * Crée et ajoute un nombre de cartes passé en paramètre à la liste donjon

@@ -12,6 +12,7 @@ public class Player
     private String name;
     private BarbarianColor color;
     private final DungeonPosition initPosition;
+    private boolean beginner;
     
     // stocke les positions initiales des joueurs
     private final DungeonPosition[] POSITIONS =
@@ -44,6 +45,15 @@ public class Player
     {
         return name;
     }
+    
+    /**
+     * Retourne la valeur de beginner
+     * @return true si le joueur est débutant, faux sinon
+     */
+    public boolean isBeginner()
+    {
+        return beginner;
+    }
 
     /**
      * Retourne la valeur de color
@@ -73,6 +83,14 @@ public class Player
     public int getId()
     {
         return n;
+    }
+    
+    /**
+     * Modifie la valeur de beginner
+     */
+    public void setBeginner(boolean beginner)
+    {
+        this.beginner = beginner;
     }
     
     /**

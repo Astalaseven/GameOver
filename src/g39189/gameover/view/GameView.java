@@ -1,7 +1,9 @@
 package g39189.gameover.view;
 
+import g39189.gameover.model.BarbarianState;
 import g39189.gameover.model.Direction;
 import g39189.gameover.model.Dungeon;
+import g39189.gameover.model.DungeonPosition;
 import g39189.gameover.model.Game;
 import g39189.gameover.model.GameOverException;
 import g39189.gameover.model.Player;
@@ -41,12 +43,26 @@ public class GameView
                     Direction direction = Display.askMov();
                     WeaponType weapon = Display.askWeapon();
 
-                    // Si le coup du joueur s’est mal passé,
-                    // il laisse la main au suivant
-                    if (!game.play(direction, weapon))
+                    switch (game.play(direction, weapon))
                     {
-                        game.nextPlayer();
-                        throw new GameOverException("Mauvaise arme !");
+                        case GAMEOVER:
+                            game.nextPlayer();
+                            throw new GameOverException("Mauvaise arme !");
+                            break;
+                        case MOVE_BLORK:
+                            DungeonPosition pos = Display.askNewPosition();
+                            game.playBlorkInvincible(pos);
+                            break;
+                        case BEAM_ME_UP:
+                            DungeonPosition pos = Display.askNewPosition();
+                            weapon = Display.askWeapon();
+                            game.playGate(pos, weapon);
+                            break;
+                        case WIN:
+                        case JOKER:
+                        default:
+                            throw new GameOverException("Statut inconnu");
+                            break;
                     }
                 }
                 catch (GameOverException e)
