@@ -5,9 +5,11 @@ import g39189.gameover.view.Display;
 import java.util.ArrayList;
 
 /**
+ * Cette classe représente une partie.
+ * Une partie se finit lorsqu’un joueur trouve la princesse
+ * de sa couleur et une clé.
  * 
  * @author Bovyn Gatien - 39189
- *
  */
 public class Game
 {
@@ -15,6 +17,7 @@ public class Game
      * Nombre minimal de joueurs nécessaires
      */
     public final static int MIN_PLAYER = 2;
+
     /**
      * Nombre maximal de joueurs nécessaires
      */
@@ -54,12 +57,13 @@ public class Game
             }
         }
 
-        dungeon = Dungeon.getInstance();
         idCurrent = 0;
-        lastPosition = players.get(0).getInitPosition();
+        idWinner = -1;
         keyFound = false;
         princessFound = false;
-        idWinner = -1;
+        dungeon = Dungeon.getInstance();
+        lastPosition = players.get(0).getInitPosition();
+
     }
 
     /**

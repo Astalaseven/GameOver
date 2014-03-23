@@ -10,10 +10,13 @@ public class Display
      * Touches utilisées pour déplacer un joueur
      */
     public final static String MVT_KEYS = "0123";
+
     /**
      * Touches utilisées pour choisir une arme
      */
     public final static String WPN_KEYS = "0123";
+
+    private static Console console = System.console();
     
     /**
      * Demande à l’utilisateur quel mouvement il souhaite faire
@@ -22,7 +25,6 @@ public class Display
      */
     public static Direction askMov()
     {
-        Console console = System.console();
         String answer = " ";
         
         while(!answer.matches("[" + MVT_KEYS + "]"))
@@ -44,7 +46,6 @@ public class Display
      */
     public static WeaponType askWeapon()
     {
-        Console console = System.console();
         String answer = " ";
         
         while(!answer.matches("[" + WPN_KEYS + "]"))
@@ -90,8 +91,7 @@ public class Display
         int nbPlayers = 0;
         final String[] names = new String[Game.MAX_PLAYER];
         boolean newPlayer = true;
-        Console console = System.console();
-
+        
         while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
             String name = " ";
@@ -247,12 +247,14 @@ public class Display
      */
     public static void printLine()
     {
+    	String line = "";
+
         for (int i = 0; i < 56; i++)
         {
-            System.out.print("=");
+            line += "=";
         }
 
-        System.out.println();
+        System.out.println(line);
     }
 
     /**
@@ -357,10 +359,8 @@ public class Display
      */
     public static void printSkull()
     {
-        System.out.println();
-
         System.out.println(
-                  "\t\t             uu$$$$$$$$$$$uu             \n"
+                "\n\t\t             uu$$$$$$$$$$$uu             \n"
                 + "\t\t          uu$$$$$$$$$$$$$$$$$uu          \n"
                 + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         \n"
                 + "\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        \n"
@@ -384,9 +384,7 @@ public class Display
                 + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ \n"
                 + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
                 + "\t\t    $$$$$                      $$$$$     \n"
-                + "\t\t     $$$                        $$$      \n");
-
-        System.out.println();
+                + "\t\t     $$$                        $$$      \n\n");
     }
 
     /**
