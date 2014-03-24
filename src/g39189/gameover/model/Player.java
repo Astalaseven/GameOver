@@ -83,20 +83,4 @@ public class Player
     {
         nextN = 0;
     }
-
-    @Override
-    public String toString()
-    {
-        return "Player [n=" + n + ", name=" + name + ", color=" + color
-                + ", initPosition=" + initPosition + "]";
-    }
-
-    // public static void main(String[] args)
-    // {
-    // Player player = new Player("Paul");
-    // System.out.println(player);
-    // Player player0 = new Player("Jean");
-    // System.out.println(player0);
-    // }
-
 }

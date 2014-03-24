@@ -11,14 +11,17 @@ public class DungeonPosition
      * Position initiale du premier joueur
      */
     public final static DungeonPosition P_BARBARIAN_1;
+
     /**
      * Position initiale du deuxième joueur
      */
     public final static DungeonPosition P_BARBARIAN_2;
+
     /**
      * Position initiale du troisième joueur
      */
     public final static DungeonPosition P_BARBARIAN_3;
+
     /**
      * Position initiale du quatrième joueur
      */

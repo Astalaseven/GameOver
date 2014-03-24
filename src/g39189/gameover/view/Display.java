@@ -133,36 +133,6 @@ public class Display
 
         return names;
     }
-
-    public static void main(String[] args)
-    {
-
-        final Dungeon dungeon = Dungeon.getInstance();
-//        printDungeon(dungeon);
-        DungeonPosition pos = null;
-
-        try
-        {
-            pos = new DungeonPosition(0, 0);
-        }
-        catch (GameOverException e)
-        {
-            e.printStackTrace();
-        }
-
-        printRoom(dungeon.getRoom(pos));
-        System.out.println();
-        printLine();
-        
-        askMov();
-        // printSkull();
-        // printGameOver();
-        // Player player = new Player("Jean");
-        // printPlayer(player);
-
-        // WeaponType weapon = WeaponType.ARROWS;
-        // printCurrPlayer(player, weapon);
-    }
     
     /**
      * Message de fin de partie, affiche quel joueur a gagné

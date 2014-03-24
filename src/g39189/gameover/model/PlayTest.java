@@ -78,6 +78,7 @@ public class PlayTest
 
         assertTrue(game.play(Direction.DOWN, WeaponType.ARROWS));
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
+
         assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
     }
     
@@ -93,6 +94,7 @@ public class PlayTest
 
         assertFalse(game.play(Direction.DOWN, WeaponType.POTION));
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
+
         assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
     }
     
@@ -107,6 +109,7 @@ public class PlayTest
 
         assertFalse(game.play(Direction.DOWN, WeaponType.POTION));
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
+
         assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
     }
     
@@ -122,8 +125,10 @@ public class PlayTest
 
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
+
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
         assertFalse(game.getDungeon().getRoom(pos1).isHidden());
+
         assertTrue(game.isOver());
         assertEquals(game.getWinner(), game.getCurrentPlayer());
     }
@@ -139,9 +144,8 @@ public class PlayTest
         initializeDungeon();
 
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
-        assertFalse(game.getDungeon().getRoom(pos0).isHidden());
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
-        assertFalse(game.getDungeon().getRoom(pos1).isHidden());
+
         assertFalse(game.isOver());
         assertNotEquals(game.getWinner(), game.getCurrentPlayer());
     }
@@ -163,7 +167,7 @@ public class PlayTest
     }
     
     /**
-     * Trouve une clé et une princesse de sa couleur
+     * Trouve une porte
      */
     @Test
     public void playTest6() throws GameOverException
