@@ -44,7 +44,7 @@ public class Dungeon
      */
     Dungeon(Room[][] configuration)
     {
-        this.roomss = configuration;
+        roomss = configuration;
     }
     
     /**
@@ -115,7 +115,7 @@ public class Dungeon
     {
         int j = 0;
 
-        for(int i = 0; i < nb; i++)
+        for (int i = 0; i < nb; i++)
         {
             WeaponType weapon = armed ? WeaponType.values()[j] : null;
             BarbarianColor color = colored ? BarbarianColor.values()[j] : null;

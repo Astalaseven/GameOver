@@ -35,7 +35,7 @@ public class PlayTest
         game.deletePlayers();
         game = null;        
     }
-
+    
     /**
      * Initialise le donjon
      */
@@ -53,6 +53,18 @@ public class PlayTest
 
         Dungeon dungeon = new Dungeon(roomss);
         game.setDungeon(dungeon);
+    }
+
+    /**
+     * Position en dehors du tableau
+     */
+    @Test(expected=GameOverException.class)
+    public void constructTest0() throws GameOverException
+    {
+        new DungeonPosition(-1, 0);
+        new DungeonPosition(5, 4);
+        new DungeonPosition(0, 5);
+        new DungeonPosition(4, -1);
     }
 
     /**
@@ -109,7 +121,9 @@ public class PlayTest
         initializeDungeon();
 
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertFalse(game.getDungeon().getRoom(pos0).isHidden());
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertFalse(game.getDungeon().getRoom(pos1).isHidden());
         assertTrue(game.isOver());
         assertEquals(game.getWinner(), game.getCurrentPlayer());
     }
@@ -125,7 +139,9 @@ public class PlayTest
         initializeDungeon();
 
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertFalse(game.getDungeon().getRoom(pos0).isHidden());
         assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertFalse(game.getDungeon().getRoom(pos1).isHidden());
         assertFalse(game.isOver());
         assertNotEquals(game.getWinner(), game.getCurrentPlayer());
     }

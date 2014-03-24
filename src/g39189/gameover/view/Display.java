@@ -17,7 +17,7 @@ public class Display
     public final static String WPN_KEYS = "0123";
 
     private static Console console = System.console();
-    
+
     /**
      * Demande à l’utilisateur quel mouvement il souhaite faire
      * 
@@ -27,7 +27,7 @@ public class Display
     {
         String answer = " ";
         
-        while(!answer.matches("[" + MVT_KEYS + "]"))
+        while (!answer.matches("[" + MVT_KEYS + "]"))
         {
             console.printf("Quel mouvement souhaitez-vous faire ?\n");
             answer = console.readLine(
@@ -48,7 +48,7 @@ public class Display
     {
         String answer = " ";
         
-        while(!answer.matches("[" + WPN_KEYS + "]"))
+        while (!answer.matches("[" + WPN_KEYS + "]"))
         {
             console.printf("Équipez-vous d’une arme !\n");
             answer = console.readLine(
@@ -91,7 +91,7 @@ public class Display
         int nbPlayers = 0;
         final String[] names = new String[Game.MAX_PLAYER];
         boolean newPlayer = true;
-        
+
         while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
             String name = " ";
@@ -118,9 +118,9 @@ public class Display
             if ((nbPlayers >= Game.MIN_PLAYER)
                     && (nbPlayers < Game.MAX_PLAYER))
             {
-                String str = " ";                
-                
-                while(!str.matches("[ON]"))
+                String str = " ";
+
+                while (!str.matches("[ON]"))
                 {
                     str = console.readLine("Créer un autre joueur ? (O/n) ");
                     str = str.toUpperCase();
@@ -182,7 +182,8 @@ public class Display
      * 
      * @param dungeon
      *            le donjon à afficher
-     * @throws GameOverException si la position à afficher n’existe pas
+     * @throws GameOverException
+     *             si la position à afficher n’existe pas
      */
     public static void printDungeon(Dungeon dungeon) throws GameOverException
     {
@@ -247,7 +248,7 @@ public class Display
      */
     public static void printLine()
     {
-    	String line = "";
+        String line = "";
 
         for (int i = 0; i < 56; i++)
         {
@@ -311,7 +312,7 @@ public class Display
         System.out.println(template);
         printLine();
     }
-    
+
     /**
      * Affiche le type de la carte retournée
      * 
@@ -353,7 +354,7 @@ public class Display
 
         System.out.print(details);
     }
-    
+
     /**
      * Affiche un crâne en ASCII
      */

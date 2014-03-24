@@ -108,10 +108,18 @@ public class DungeonPosition
 
         switch (dir)
         {
-            case UP:    movDir = up();      break;
-            case DOWN:  movDir = down();    break;
-            case RIGHT: movDir = right();   break;
-            case LEFT:  movDir = left();    break;
+            case UP:
+                movDir = up();
+                break;
+            case DOWN:
+                movDir = down();
+                break;
+            case RIGHT:
+                movDir = right();
+                break;
+            case LEFT:
+                movDir = left();
+                break;
 
             default:
                 throw new GameOverException("Direction inconnue");
@@ -142,8 +150,8 @@ public class DungeonPosition
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if (((row + 1) > (Dungeon.N - 1))
-                || (column < 0) || (column > (Dungeon.N - 1)))
+        if (((row + 1) > (Dungeon.N - 1)) || (column < 0)
+                || (column > (Dungeon.N - 1)))
         {
             throw new GameOverException("Impossible de descendre");
         }
@@ -187,8 +195,8 @@ public class DungeonPosition
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if (((column + 1) > (Dungeon.N - 1))
-                || (row < 0) || (row > (Dungeon.N - 1)))
+        if (((column + 1) > (Dungeon.N - 1)) || (row < 0)
+                || (row > (Dungeon.N - 1)))
         {
             throw new GameOverException("Impossible d’aller à droite");
         }

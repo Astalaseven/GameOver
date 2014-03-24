@@ -11,8 +11,9 @@ public class Player
     private static int nextN;
     private String name;
     private BarbarianColor color;
+
     private final DungeonPosition initPosition;
-    
+
     // stocke les positions initiales des joueurs
     private final DungeonPosition[] POSITIONS =
         {
@@ -25,24 +26,14 @@ public class Player
      * 
      * @param name
      *            nom du joueur
-     * @throws GameOverException 
+     * @throws GameOverException
      */
     public Player(String name)
     {
         this.name = name;
-        this.n = nextN++;
-        this.color = BarbarianColor.values()[n];
-        this.initPosition = POSITIONS[n];
-    }
-
-    /**
-     * Retourne la valeur de name
-     * 
-     * @return le nom du joueur
-     */
-    public String getName()
-    {
-        return name;
+        n = nextN++;
+        color = BarbarianColor.values()[n];
+        initPosition = POSITIONS[n];
     }
 
     /**
@@ -56,6 +47,16 @@ public class Player
     }
 
     /**
+     * Retourne le numéro du joueur
+     * 
+     * @return le numéro du joueur
+     */
+    public int getId()
+    {
+        return n;
+    }
+
+    /**
      * Retourne la valeur de initPosition
      * 
      * @return la position initiale du joueur
@@ -66,13 +67,13 @@ public class Player
     }
 
     /**
-     * Retourne le numéro du joueur
+     * Retourne la valeur de name
      * 
-     * @return le numéro du joueur
+     * @return le nom du joueur
      */
-    public int getId()
+    public String getName()
     {
-        return n;
+        return name;
     }
     
     /**
@@ -90,14 +91,12 @@ public class Player
                 + ", initPosition=" + initPosition + "]";
     }
 
-
-
-//    public static void main(String[] args)
-//    {
-//        Player player = new Player("Paul");
-//        System.out.println(player);
-//        Player player0 = new Player("Jean");
-//        System.out.println(player0);
-//    }
+    // public static void main(String[] args)
+    // {
+    // Player player = new Player("Paul");
+    // System.out.println(player);
+    // Player player0 = new Player("Jean");
+    // System.out.println(player0);
+    // }
 
 }

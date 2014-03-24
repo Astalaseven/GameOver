@@ -5,9 +5,8 @@ import g39189.gameover.view.Display;
 import java.util.ArrayList;
 
 /**
- * Cette classe représente une partie.
- * Une partie se finit lorsqu’un joueur trouve la princesse
- * de sa couleur et une clé.
+ * Cette classe représente une partie. Une partie se finit lorsqu’un joueur
+ * trouve la princesse de sa couleur et une clé.
  * 
  * @author Bovyn Gatien - 39189
  */
@@ -130,8 +129,8 @@ public class Game
      *            la direction vers laquelle le joueur souhaite se déplacer
      * @param wea
      *            l’arme choisie par le joueur
-     * @return faux si le joueur ne peut pas vaincre la carte dévoilée,
-     *         vrai sinon
+     * @return faux si le joueur ne peut pas vaincre la carte dévoilée, vrai
+     *         sinon
      * @throws GameOverException
      *             si la partie est finie ou si la carte sur laquelle le joueur
      *             se déplace a déjà été retournée
@@ -166,14 +165,11 @@ public class Game
             rejoue = false;
         }
 
-        // Si la carte est la princesse de la couleur du joueur
         if (room.getColor() == player.getColor())
         {
             princessFound = true;
         }
-
-        // Si la carte est une clé
-        if (room.getType() == RoomType.KEY)
+        else if (room.getType() == RoomType.KEY)
         {
             keyFound = true;
         }
@@ -192,6 +188,15 @@ public class Game
     }
 
     /**
+     * Supprime tous les joueurs et remet à zéro le compteur
+     */
+    protected void deletePlayers()
+    {
+        Player.resetN();
+        players.clear();
+    }
+
+    /**
      * Mutateur prévu pour les tests
      * 
      * @param dungeon
@@ -200,14 +205,5 @@ public class Game
     protected void setDungeon(Dungeon dungeon)
     {
         this.dungeon = dungeon;
-    }
-    
-    /**
-     * Supprime tous les joueurs et remet à zéro le compteur
-     */
-    protected void deletePlayers()
-    {
-        Player.resetN();
-        players.clear();
     }
 }
