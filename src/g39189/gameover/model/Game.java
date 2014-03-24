@@ -63,7 +63,6 @@ public class Game
         princessFound = false;
         dungeon = Dungeon.getInstance();
         lastPosition = players.get(0).getInitPosition();
-
     }
 
     /**
