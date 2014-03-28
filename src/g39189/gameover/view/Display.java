@@ -9,12 +9,12 @@ public class Display
     /**
      * Touches utilisées pour déplacer un joueur
      */
-    public final static String MVT_KEYS = "0123";
+    public final static String MVT_KEYS = "8246";
 
     /**
      * Touches utilisées pour choisir une arme
      */
-    public final static String WPN_KEYS = "0123";
+    public final static String WPN_KEYS = "1234";
     
     /**
      * Touche permettant de quitter le jeu
@@ -43,9 +43,11 @@ public class Display
         {
             console.printf("Quel mouvement souhaitez-vous faire ?\n");
             answer = console.readLine(
-                    "UP (%s), DOWN (%s), RIGHT (%s), LEFT (%s)\n",
-                    MVT_KEYS.charAt(0), MVT_KEYS.charAt(1),
-                    MVT_KEYS.charAt(2), MVT_KEYS.charAt(3));
+                      "\t    (%s)\n"
+                    + "\t (%s)   (%s)\n"
+                    + "\t    (%s)\n",
+                    MVT_KEYS.charAt(0), MVT_KEYS.charAt(2),
+                    MVT_KEYS.charAt(3), MVT_KEYS.charAt(1));
             answer = answer.toUpperCase();
         }
         
@@ -173,6 +175,8 @@ public class Display
         try
         {
             printDungeon(Dungeon.getInstance());
+            askMov();
+            askWeapon();
         }
         catch (GameOverException e)
         {
