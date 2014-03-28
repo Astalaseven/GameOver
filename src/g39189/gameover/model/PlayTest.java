@@ -61,10 +61,10 @@ public class PlayTest
     @Test(expected=GameOverException.class)
     public void constructTest0() throws GameOverException
     {
-        new DungeonPosition(-1, 0);
-        new DungeonPosition(5, 4);
-        new DungeonPosition(0, 5);
-        new DungeonPosition(4, -1);
+        DungeonPosition pos = new DungeonPosition(-1, 0);
+        pos = new DungeonPosition(5, 4);
+        pos = new DungeonPosition(0, 5);
+        pos = new DungeonPosition(4, -1);
     }
 
     /**

@@ -1,5 +1,7 @@
 package g39189.gameover.model;
 
+import java.util.Objects;
+
 /**
  * Cette classe représente un élément du donjon, une carte dans le jeu
  * original.
@@ -96,17 +98,7 @@ public class Room
     @Override
     public int hashCode()
     {
-        // utilisation d’un nombre premier assez grand et proche d’une puissance
-        // de 2 pour une distribution optimale des données dans le bucket
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((color == null) ? 0 : color.hashCode());
-
-        // 1231 et 1237 sont les valeurs utilisées dans le hashCode de Boolean
-        result = (prime * result) + (hidden ? 1231 : 1237);
-        result = (prime * result) + ((type == null) ? 0 : type.hashCode());
-        result = (prime * result) + ((weapon == null) ? 0 : weapon.hashCode());
-        return result;
+        return Objects.hash(color, hidden, type, weapon);
     }
 
     /**

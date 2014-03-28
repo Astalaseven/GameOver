@@ -22,6 +22,10 @@ public class GameView
             String[] names = Display.createPlayers();
 
             Game game = new Game(names);
+            
+            console.readLine("\nTapez sur %s à n’importe quel moment "
+                    + "pour quitter.\n(Tapez sur Enter pour commencer "
+                    + "la partie)", Display.QUIT_KEY);
 
             while (!game.isOver())
             {

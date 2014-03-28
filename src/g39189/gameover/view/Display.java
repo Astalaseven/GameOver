@@ -15,8 +15,20 @@ public class Display
      * Touches utilisées pour choisir une arme
      */
     public final static String WPN_KEYS = "0123";
+    
+    /**
+     * Touche permettant de quitter le jeu
+     */
+    public final static String QUIT_KEY = "Q";
 
     private static Console console = System.console();
+    
+    private static String dungeonLine;
+    
+    static
+    {
+        dungeonLine = dungeonLine();
+    }
 
     /**
      * Demande à l’utilisateur quel mouvement il souhaite faire
@@ -27,13 +39,18 @@ public class Display
     {
         String answer = " ";
         
-        while (!answer.matches("[" + MVT_KEYS + "]"))
+        while (!answer.matches("[" + MVT_KEYS + QUIT_KEY + "]"))
         {
             console.printf("Quel mouvement souhaitez-vous faire ?\n");
             answer = console.readLine(
                     "UP (%s), DOWN (%s), RIGHT (%s), LEFT (%s)\n",
                     MVT_KEYS.charAt(0), MVT_KEYS.charAt(1),
                     MVT_KEYS.charAt(2), MVT_KEYS.charAt(3));
+            answer = answer.toUpperCase();
+        }
+        
+        if (answer.contains("Q")) {
+            System.exit(0);
         }
 
         return Direction.values()[MVT_KEYS.indexOf(answer)];
@@ -48,13 +65,18 @@ public class Display
     {
         String answer = " ";
         
-        while (!answer.matches("[" + WPN_KEYS + "]"))
+        while (!answer.matches("[" + WPN_KEYS + QUIT_KEY + "]"))
         {
             console.printf("Équipez-vous d’une arme !\n");
             answer = console.readLine(
                     "POTION (%s), ARROWS (%s), BLUDGEON (%s), GUN (%s)\n",
                     WPN_KEYS.charAt(0), WPN_KEYS.charAt(1),
                     WPN_KEYS.charAt(2), WPN_KEYS.charAt(3));
+            answer = answer.toUpperCase();
+        }
+        
+        if (answer.contains("Q")) {
+            System.exit(0);
         }
 
         return WeaponType.values()[WPN_KEYS.indexOf(answer)];
@@ -146,6 +168,18 @@ public class Display
         System.out.println("| Le joueur " + player.getName() + " a gagné !");
         printLine();
     }
+    
+    public static void main(String[] args) {
+        try
+        {
+            printDungeon(Dungeon.getInstance());
+        }
+        catch (GameOverException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Affiche le donjon
@@ -157,38 +191,70 @@ public class Display
      */
     public static void printDungeon(Dungeon dungeon) throws GameOverException
     {
-        printLine();
+        String template = "";
+        DungeonPosition pos = null;
+
+        // Indique la position du premier joueur
+        template += String.format("%27s%n", Color.red("*"));
 
         for (int row = 0; row < Dungeon.N; row++)
         {
-            if (row != 0)
-            {
-                System.out.println("|");
-                printLine();
-            }
+            template += dungeonLine;
+            
+            // Indique la position du troisième joueur
+            template += (row == 4) ?
+                    String.format("%18s", Color.blue("*")) : "\t";
 
-            DungeonPosition pos = null;
-
+            // Ajoute le type des cartes sur la ligne
             for (int column = 0; column < Dungeon.N; column++)
             {
                 pos = new DungeonPosition(row, column);
+                Room room = dungeon.getRoom(pos);
 
-                printRoomInDungeon(dungeon.getRoom(pos));
+                template += String.format(" %s", "|");
+                template += room.isHidden() ? String.format("%11s", " ")
+                        : String.format("%11s", room.getType());
             }
 
-            System.out.println("|");
+            template += " |";
+            
+            // Indique la position du quatrième joueur
+            template += (row == 0)
+                    ? String.format("%12s", Color.yellow("*")) : "";
+            
+            template += "\n\t";
 
+            // Ajoute le détail des cartes sur la ligne (arme, couleur…)
             for (int column = 0; column < Dungeon.N; column++)
             {
                 pos = new DungeonPosition(row, column);
-
-                printRoomInDungeonDetails(dungeon.getRoom(pos));
+                Room room = dungeon.getRoom(pos);
+                
+                template += String.format(" %s", "|");
+                template += formatRoomInDungeonDetails(room);
             }
+            
+            template += " |\n";
         }
-
-        System.out.println("|");
-        printLine();
+        
+        template += dungeonLine;
+        
+        // Indique la position du deuxième joueur
+        template += String.format("%79s", Color.green("*"));
+        
+        System.out.println(template);
     }
+    
+    private static String dungeonLine()
+    {
+        String line = String.format("%9s", " ");
+        for (int i = 0; i < 66; i++)
+        {
+            line += "−";
+        }
+        return line += "\n";
+    }
+
 
     /**
      * Affiche le nom du jeu en ASCII
@@ -284,45 +350,35 @@ public class Display
     }
 
     /**
-     * Affiche le type de la carte retournée
-     * 
-     * @param room
-     *            la carte à afficher
-     */
-    public static void printRoomInDungeon(Room room)
-    {
-        String template = String.format("| %8s ", room.getType());
-        boolean hidden = room.isHidden();
-
-        System.out.print(hidden ? String.format("| %8s ", " ") : template);
-    }
-
-    /**
-     * Affiche des détails sur la carte retournée (arme, couleur…)
+     * Retourne des détails sur la carte retournée (arme, couleur…)
      * 
      * @param room
      *            la carte à détailler
      */
-    public static void printRoomInDungeonDetails(Room room)
+    public static String formatRoomInDungeonDetails(Room room)
     {
         String details = null;
-
+        
         if (room.getWeapon() != null)
         {
-            details = formatRoom(room.getWeapon());
-        }
-
-        if (room.getColor() != null)
+            details = String.format("%10s", room.getWeapon());
+        } 
+        else if (room.getColor() != null)
         {
-            details = formatRoom(room.getColor());
+            details = String.format("%10s", room.getColor());
+        }
+        else if ((room.getType() == RoomType.BLORK)
+                && (room.getWeapon() == null))
+        {
+            details = "INVINCIBLE";
         }
 
         if (room.isHidden() || (details == null))
         {
-            details = formatRoom(" ");
+            details = " ";
         }
-
-        System.out.print(details);
+        
+        return String.format("%11s", details);
     }
 
     /**
@@ -356,17 +412,5 @@ public class Display
                 + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
                 + "\t\t    $$$$$                      $$$$$     \n"
                 + "\t\t     $$$                        $$$      \n\n");
-    }
-
-    /**
-     * Format d’affichage d’une carte
-     * 
-     * @param o
-     *            une carte
-     * @return la valeur de la carte formatée
-     */
-    private static String formatRoom(Object o)
-    {
-        return String.format("| %8s ", o);
     }
 }
