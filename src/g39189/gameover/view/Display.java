@@ -9,7 +9,7 @@ public class Display
     /**
      * Touches utilisées pour déplacer un joueur
      */
-    public final static String MVT_KEYS = "8246";
+    public final static String MVT_KEYS = "8264";
 
     /**
      * Touches utilisées pour choisir une arme
@@ -43,11 +43,11 @@ public class Display
         {
             console.printf("Quel mouvement souhaitez-vous faire ?\n");
             answer = console.readLine(
-                      "\t    (%s)\n"
-                    + "\t (%s)   (%s)\n"
-                    + "\t    (%s)\n",
-                    MVT_KEYS.charAt(0), MVT_KEYS.charAt(2),
-                    MVT_KEYS.charAt(3), MVT_KEYS.charAt(1));
+                      "\t    (%s)\n"       //     UP
+                    + "\t (%s)   (%s)\n"   // LEFT  RIGHT
+                    + "\t    (%s)\n",      //    DOWN
+                    MVT_KEYS.charAt(0), MVT_KEYS.charAt(3),
+                    MVT_KEYS.charAt(2), MVT_KEYS.charAt(1));
             answer = answer.toUpperCase();
         }
         
