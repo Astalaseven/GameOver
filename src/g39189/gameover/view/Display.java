@@ -51,7 +51,8 @@ public class Display
             answer = answer.toUpperCase();
         }
         
-        if (answer.contains("Q")) {
+        if (answer.contains("Q"))
+        {
             System.exit(0);
         }
 
@@ -77,7 +78,8 @@ public class Display
             answer = answer.toUpperCase();
         }
         
-        if (answer.contains("Q")) {
+        if (answer.contains("Q"))
+        {
             System.exit(0);
         }
 
