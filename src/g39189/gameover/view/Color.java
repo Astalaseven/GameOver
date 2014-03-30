@@ -2,7 +2,7 @@ package g39189.gameover.view;
 
 /**
  * Regroupe des méthodes permettant d’avoir des chaînes de caractères en
- * couleur sous Linux
+ * couleur sous Linux.
  *
  * @author Bovyn Gatien - 39189
  */
@@ -11,7 +11,7 @@ public class Color
     
     /**
      * Retourne une chaîne de caractère qui sera imprimée en rouge
-     * dans la console
+     * dans la console.
      * 
      * @param str
      * @return la chaîne passée en paramètre entourée de codes ANSI
@@ -24,7 +24,7 @@ public class Color
     
     /**
      * Retourne une chaîne de caractère qui sera imprimée en vert
-     * dans la console
+     * dans la console.
      * 
      * @param str
      * @return la chaîne passée en paramètre entourée de codes ANSI
@@ -37,7 +37,7 @@ public class Color
     
     /**
      * Retourne une chaîne de caractère qui sera imprimée en bleu
-     * dans la console
+     * dans la console.
      * 
      * @param str
      * @return la chaîne passée en paramètre entourée de codes ANSI
@@ -50,7 +50,7 @@ public class Color
     
     /**
      * Retourne une chaîne de caractère qui sera imprimée en jaune
-     * dans la console
+     * dans la console.
      * 
      * @param str
      * @return la chaîne passée en paramètre entourée de codes ANSI

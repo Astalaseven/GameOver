@@ -4,6 +4,11 @@ import g39189.gameover.model.*;
 
 import java.io.Console;
 
+/**
+ * Gère les affichages et demandes à l’utilisateur.
+ * 
+ * @author Bovyn Gatien - 39189
+ */
 public class Display
 {
     /**
@@ -31,7 +36,7 @@ public class Display
     }
 
     /**
-     * Demande à l’utilisateur quel mouvement il souhaite faire
+     * Demande à l’utilisateur quel mouvement il souhaite faire.
      * 
      * @return le mouvement choisi par le joueur
      */
@@ -60,7 +65,7 @@ public class Display
     }
 
     /**
-     * Demande à l’utilisateur quelle arme il souhaite prendre
+     * Demande à l’utilisateur quelle arme il souhaite prendre.
      * 
      * @return l’arme choisie par le joueur
      */
@@ -87,7 +92,7 @@ public class Display
     }
 
     /**
-     * Met le texte passé en paramètre en gras
+     * Met le texte passé en paramètre en gras.
      * 
      * @param str
      *            le texte à mettre en gras
@@ -99,7 +104,7 @@ public class Display
     }
 
     /**
-     * "Nettoie" la sortie de la console
+     * "Nettoie" la sortie de la console.
      */
     public static void clearScreen()
     {
@@ -108,7 +113,7 @@ public class Display
 
     /**
      * Demande à l’utilisateur d’entrer les noms des joueurs 
-     * (minimum 2, maximum 4)
+     * (minimum 2, maximum 4).
      * 
      * @return un tableau contenant les noms des joueurs
      */
@@ -161,7 +166,7 @@ public class Display
     }
     
     /**
-     * Message de fin de partie, affiche quel joueur a gagné
+     * Message de fin de partie, affiche quel joueur a gagné.
      * @param player
      *            le joueur qui a gagné la partie
      */
@@ -172,23 +177,9 @@ public class Display
         System.out.println("| Le joueur " + player.getName() + " a gagné !");
         printLine();
     }
-    
-    public static void main(String[] args) {
-        try
-        {
-            printDungeon(Dungeon.getInstance());
-            askMov();
-            askWeapon();
-        }
-        catch (GameOverException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 
     /**
-     * Affiche le donjon
+     * Affiche le donjon.
      * 
      * @param dungeon
      *            le donjon à afficher
@@ -263,7 +254,7 @@ public class Display
 
 
     /**
-     * Affiche le nom du jeu en ASCII
+     * Affiche le nom du jeu en ASCII.
      */
     public static void printGameOver()
     {
@@ -286,7 +277,7 @@ public class Display
     }
 
     /**
-     * Affiche une ligne de séparation
+     * Affiche une ligne de séparation.
      */
     public static void printLine()
     {
@@ -301,7 +292,7 @@ public class Display
     }
 
     /**
-     * Affiche la fiche signalétique d’un joueur
+     * Affiche la fiche signalétique d’un joueur.
      * 
      * @param player
      *            le joueur à afficher
@@ -321,7 +312,7 @@ public class Display
     }
 
     /**
-     * Affiche la carte retournée
+     * Affiche la carte retournée.
      * 
      * @param room
      *            la carte passée en paramètre
@@ -356,39 +347,7 @@ public class Display
     }
 
     /**
-     * Retourne des détails sur la carte retournée (arme, couleur…)
-     * 
-     * @param room
-     *            la carte à détailler
-     */
-    public static String formatRoomInDungeonDetails(Room room)
-    {
-        String details = null;
-        
-        if (room.getWeapon() != null)
-        {
-            details = String.format("%10s", room.getWeapon());
-        } 
-        else if (room.getColor() != null)
-        {
-            details = String.format("%10s", room.getColor());
-        }
-        else if ((room.getType() == RoomType.BLORK)
-                && (room.getWeapon() == null))
-        {
-            details = "INVINCIBLE";
-        }
-
-        if (room.isHidden() || (details == null))
-        {
-            details = " ";
-        }
-        
-        return String.format("%11s", details);
-    }
-
-    /**
-     * Affiche un crâne en ASCII
+     * Affiche un crâne en ASCII.
      */
     public static void printSkull()
     {
@@ -418,5 +377,37 @@ public class Display
                 + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
                 + "\t\t    $$$$$                      $$$$$     \n"
                 + "\t\t     $$$                        $$$      \n\n");
+    }
+    
+    /**
+     * Retourne des détails sur la carte retournée (arme, couleur…).
+     * 
+     * @param room
+     *            la carte à détailler
+     */
+    private static String formatRoomInDungeonDetails(Room room)
+    {
+        String details = null;
+        
+        if (room.getWeapon() != null)
+        {
+            details = String.format("%10s", room.getWeapon());
+        } 
+        else if (room.getColor() != null)
+        {
+            details = String.format("%10s", room.getColor());
+        }
+        else if ((room.getType() == RoomType.BLORK)
+                && (room.getWeapon() == null))
+        {
+            details = "INVINCIBLE";
+        }
+
+        if (room.isHidden() || (details == null))
+        {
+            details = " ";
+        }
+        
+        return String.format("%11s", details);
     }
 }

@@ -31,7 +31,7 @@ public class Game
     private boolean princessFound;
 
     /**
-     * Constructeur de Game
+     * Initialise une partie.
      * 
      * @param names
      *            noms des joueurs
@@ -65,7 +65,7 @@ public class Game
     }
 
     /**
-     * Retourne l’id du joueur courant
+     * Retourne l’id du joueur courant.
      * 
      * @return l’id du joueur actuel
      */
@@ -75,7 +75,7 @@ public class Game
     }
 
     /**
-     * Retourne le donjon
+     * Retourne le donjon.
      * 
      * @return le plateau de jeu
      */
@@ -85,7 +85,7 @@ public class Game
     }
 
     /**
-     * Retourne le joueur gagnant
+     * Retourne le joueur gagnant.
      * 
      * @return le joueur gagnant si la partie est finie, sinon null
      */
@@ -95,7 +95,7 @@ public class Game
     }
 
     /**
-     * Indique si la partie est finie
+     * Indique si la partie est finie.
      * 
      * @return vrai si le joueur a trouvé une clé et sa princesse, faux sinon
      */
@@ -105,7 +105,7 @@ public class Game
     }
 
     /**
-     * Passe au joueur suivant
+     * Passe au joueur suivant.
      */
     public void nextPlayer()
     {
@@ -123,7 +123,7 @@ public class Game
     }
 
     /**
-     * Exécute le coup d’un joueur
+     * Exécute le coup d’un joueur.
      * 
      * @param dir
      *            la direction vers laquelle le joueur souhaite se déplacer
@@ -188,7 +188,7 @@ public class Game
     }
 
     /**
-     * Supprime tous les joueurs et remet à zéro le compteur
+     * Supprime tous les joueurs et remet à zéro le compteur.
      */
     protected void deletePlayers()
     {
@@ -197,7 +197,7 @@ public class Game
     }
 
     /**
-     * Mutateur prévu pour les tests
+     * Mutateur prévu pour les tests.
      * 
      * @param dungeon
      *            un donjon personnalisé

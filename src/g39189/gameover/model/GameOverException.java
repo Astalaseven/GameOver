@@ -10,7 +10,9 @@ package g39189.gameover.model;
 public class GameOverException extends Exception
 {
     /**
-     * Constructeur de l’exception GameOverException
+     * Affiche le message d’erreur suite à une GameOverException
+     * Nécessite que l’utilisateur tape sur Enter pour que le programme
+     * continue son exécution.
      * 
      * @param err
      *            le message d’erreur à afficher

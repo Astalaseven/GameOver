@@ -20,7 +20,7 @@ public class Dungeon
     private Room[][] roomss = new Room[N][N];
 
     /**
-     * Remplit la liste donjon avec les cartes et les place sur le plateau
+     * Remplit la liste donjon avec les cartes et les place sur le plateau.
      */
     private Dungeon()
     {
@@ -37,7 +37,7 @@ public class Dungeon
     }
 
     /**
-     * Construit un donjon avec le plateau passé en paramètre
+     * Construit un donjon avec le plateau passé en paramètre.
      * 
      * @param configuration
      *            un donjon personnalisé
@@ -48,7 +48,7 @@ public class Dungeon
     }
     
     /**
-     * Retourne l’instance, la crée si elle n’existe pas encore
+     * Retourne l’instance, la crée si elle n’existe pas encore.
      * 
      * @return une instance unique de dungeon
      */
@@ -63,7 +63,7 @@ public class Dungeon
     }
 
     /**
-     * Retourne la valeur d’une carte sur base d’une position
+     * Retourne la valeur d’une carte sur base d’une position.
      * 
      * @param pos
      *            la position de la carte dans le donjon
@@ -75,7 +75,7 @@ public class Dungeon
     }
 
     /**
-     * Retourne toutes les cartes pour les cacher
+     * Retourne toutes les cartes pour les cacher.
      */
     public void hideAll()
     {
@@ -89,7 +89,7 @@ public class Dungeon
     }
 
     /**
-     * Retourne une carte pour l’afficher
+     * Retourne une carte pour l’afficher.
      * 
      * @param pos
      *            la position de la carte à retourner
@@ -100,7 +100,7 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute un nombre de cartes passé en paramètre à la liste donjon
+     * Crée et ajoute un nombre de cartes passé en paramètre à la liste donjon.
      * 
      * @param type
      *            le type de carte à créer
@@ -127,7 +127,7 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute les cartes dans la liste donjon
+     * Crée et ajoute les cartes dans la liste donjon.
      */
     private void populateDungeon()
     {

@@ -22,7 +22,8 @@ public class Player
         };
 
     /**
-     * Crée un joueur
+     * Crée un joueur avec un nom, un numéro, une couleur
+     * et une position initiale.
      * 
      * @param name
      *            nom du joueur
@@ -37,7 +38,7 @@ public class Player
     }
 
     /**
-     * Retourne la valeur de color
+     * Retourne la valeur de color.
      * 
      * @return la couleur du joueur
      */
@@ -47,7 +48,7 @@ public class Player
     }
 
     /**
-     * Retourne le numéro du joueur
+     * Retourne le numéro du joueur.
      * 
      * @return le numéro du joueur
      */
@@ -57,7 +58,7 @@ public class Player
     }
 
     /**
-     * Retourne la valeur de initPosition
+     * Retourne la valeur de initPosition.
      * 
      * @return la position initiale du joueur
      */
@@ -67,7 +68,7 @@ public class Player
     }
 
     /**
-     * Retourne la valeur de name
+     * Retourne la valeur de name.
      * 
      * @return le nom du joueur
      */
@@ -77,7 +78,7 @@ public class Player
     }
     
     /**
-     * Remet le compteur de joueurs à zéro
+     * Remet le compteur de joueurs à zéro.
      */
     static void resetN()
     {

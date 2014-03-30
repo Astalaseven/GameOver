@@ -16,7 +16,7 @@ public class Room
     private BarbarianColor color;
 
     /**
-     * Constructeur de Room
+     * Crée une nouvelle carte avec un type, une arme et une couleur.
      * 
      * @param type
      *            type de figure de l’élément du donjon
@@ -36,7 +36,7 @@ public class Room
     }
 
     /**
-     * Compare si 2 cartes sont égales
+     * Compare si 2 cartes sont égales.
      */
     @Override
     public boolean equals(Object obj)
@@ -63,7 +63,7 @@ public class Room
     }
 
     /**
-     * Retourne la valeur de color
+     * Retourne la valeur de color.
      * 
      * @return la couleur de la carte
      */
@@ -73,7 +73,7 @@ public class Room
     }
 
     /**
-     * Retourne la valeur de type
+     * Retourne la valeur de type.
      * 
      * @return le type de la carte
      */
@@ -83,7 +83,7 @@ public class Room
     }
 
     /**
-     * Retourne la valeur de weapon
+     * Retourne la valeur de weapon.
      * 
      * @return l’arme de la carte
      */
@@ -93,7 +93,7 @@ public class Room
     }
 
     /**
-     * Génère le hashcode d’une carte
+     * Génère le hashcode d’une carte.
      */
     @Override
     public int hashCode()
@@ -102,7 +102,7 @@ public class Room
     }
 
     /**
-     * Retourne la valeur de hidden
+     * Retourne la valeur de hidden.
      * 
      * @return vrai si la carte est cachée, faux si elle est dévoilée
      */
@@ -112,7 +112,7 @@ public class Room
     }
 
     /**
-     * Modifie la valeur de hidden
+     * Modifie la valeur de hidden.
      * 
      * @param hidden
      *            la nouvelle valeur de hidden

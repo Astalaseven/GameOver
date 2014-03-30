@@ -9,6 +9,14 @@ import g39189.gameover.model.WeaponType;
 
 import java.io.Console;
 
+/**
+ * Cette classe est destinée à l’interface utilisateur.
+ * Cette classe instancie le jeu. Tant que le jeu n’est pas fini,
+ * c’est-à-dire qu’aucun joueur n’a trouvé la princesse de sa couleur
+ * et une clé, elle demande au joueur d’introduire un mouvement et une arme.
+ *
+ * @author Bovyn Gatien - 39189
+ */
 public class GameView
 {
     public static void main(String[] args)
