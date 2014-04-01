@@ -149,7 +149,7 @@ public class DungeonPosition
      * @throws GameOverException
      *             si la ligne du dessous n’existe pas
      */
-    private DungeonPosition down() throws GameOverException
+    DungeonPosition down() throws GameOverException
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
@@ -172,7 +172,7 @@ public class DungeonPosition
      * @throws GameOverException
      *             si la colonne à gauche n’existe pas
      */
-    private DungeonPosition left() throws GameOverException
+    DungeonPosition left() throws GameOverException
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
@@ -194,7 +194,7 @@ public class DungeonPosition
      * @throws GameOverException
      *             si la colonne à droite n’existe pas
      */
-    private DungeonPosition right() throws GameOverException
+    DungeonPosition right() throws GameOverException
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
@@ -217,7 +217,7 @@ public class DungeonPosition
      * @throws GameOverException
      *             si la ligne du dessus n’existe pas
      */
-    private DungeonPosition up() throws GameOverException
+    DungeonPosition up() throws GameOverException
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
@@ -230,5 +230,17 @@ public class DungeonPosition
         pos.row = row - 1;
 
         return pos;
+    }
+    
+    /**
+     * Vérifie si la position est dans un coin du plateau
+     * @return vrai si la position est dans un coin, faux sinon
+     */
+    public boolean isCorner()
+    {
+        return (((column == 0) && (row == 0))
+                || ((column == 0) && (row == (Dungeon.N - 1)))
+                || ((column == (Dungeon.N - 1)) && (row == 0))
+                || ((column == (Dungeon.N - 1)) && (row == (Dungeon.N - 1))));
     }
 }

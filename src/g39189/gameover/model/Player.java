@@ -11,6 +11,7 @@ public class Player
     private static int nextN;
     private String name;
     private BarbarianColor color;
+    private boolean beginner;
 
     private final DungeonPosition initPosition;
 
@@ -75,6 +76,23 @@ public class Player
     public String getName()
     {
         return name;
+    }
+    
+    /**
+     * Retourne la valeur de beginner
+     * @return true si le joueur est débutant, faux sinon
+     */
+    public boolean isBeginner()
+    {
+        return beginner;
+    }
+    
+    /**
+     * Modifie la valeur de beginner
+     */
+    public void setBeginner(boolean beginner)
+    {
+        this.beginner = beginner;
     }
     
     /**

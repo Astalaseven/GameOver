@@ -177,6 +177,21 @@ public class Display
         System.out.println("| Le joueur " + player.getName() + " a gagné !");
         printLine();
     }
+    
+    public static void main(String[] args)
+    {
+        try
+        {
+            printDungeon(Dungeon.getInstance(), BarbarianState.MOVE_BLORK);
+            printDungeon(Dungeon.getInstance(), null);
+
+        }
+        catch (GameOverException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Affiche le donjon.
@@ -186,10 +201,14 @@ public class Display
      * @throws GameOverException
      *             si la position à afficher n’existe pas
      */
-    public static void printDungeon(Dungeon dungeon) throws GameOverException
+    public static void printDungeon(Dungeon dungeon, BarbarianState state) throws GameOverException
     {
         String template = "";
+        String hidden = " ";
+        int cpt = 1;
         DungeonPosition pos = null;
+        
+        System.out.println("DEBUG : " + state);
 
         // Indique la position du premier joueur
         template += String.format("%27s%n", Color.red("*"));
@@ -205,11 +224,17 @@ public class Display
             // Ajoute le type des cartes sur la ligne
             for (int column = 0; column < Dungeon.N; column++)
             {
+                if ((state == BarbarianState.MOVE_BLORK)
+                        || (state == BarbarianState.BEAM_ME_UP))
+                {
+                    hidden = String.valueOf(cpt++);
+                }
+                
                 pos = new DungeonPosition(row, column);
                 Room room = dungeon.getRoom(pos);
 
                 template += String.format(" %s", "|");
-                template += room.isHidden() ? String.format("%11s", " ")
+                template += room.isHidden() ? String.format("%11s", hidden)
                         : String.format("%11s", room.getType());
             }
 
@@ -409,5 +434,35 @@ public class Display
         }
         
         return String.format("%11s", details);
+    }
+    
+    private static DungeonPosition convertToPosition(int entier) throws GameOverException
+    {
+        int row = (int) Math.floor(entier / 6);
+        int column = entier - (row * 5) - 1;
+
+        return new DungeonPosition(row, column);
+    }
+
+    public static DungeonPosition askNewPosition() throws GameOverException
+    {
+        String answer;
+        int nb = 0;
+        
+        //Display.printDungeon();
+
+        while (nb < 1 || nb > 25)
+        {
+            answer = "-1";
+
+            while (!answer.matches("[0-9]{1,2}"))
+            {
+                answer = console.readLine("Choisissez une nouvelle position : ");
+            }
+            
+            nb = Integer.parseInt(answer);
+        }
+        
+        return convertToPosition(nb);
     }
 }
