@@ -34,6 +34,13 @@ public class Dungeon
                 roomss[row][column] = donjon.pop();
             }
         }
+        
+        // Debug
+//        roomss[0][0] = new Room(RoomType.GATE, true, null, null);
+//        roomss[2][0] = new Room(RoomType.KEY, true, null, null);
+//        roomss[4][4] = new Room(RoomType.BLORK, true, null, null);
+        roomss[0][0] = new Room(RoomType.KEY, true, null, null);
+        roomss[1][0] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
     }
 
     /**
@@ -42,7 +49,7 @@ public class Dungeon
      * @param configuration
      *            un donjon personnalisé
      */
-    Dungeon(Room[][] configuration)
+    private Dungeon(Room[][] configuration)
     {
         roomss = configuration;
     }

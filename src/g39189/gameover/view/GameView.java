@@ -1,6 +1,5 @@
 package g39189.gameover.view;
 
-import g39189.gameover.model.BarbarianState;
 import g39189.gameover.model.Direction;
 import g39189.gameover.model.Dungeon;
 import g39189.gameover.model.DungeonPosition;
@@ -32,7 +31,7 @@ public class GameView
             String[] names = Display.createPlayers();
 
             Game game = new Game(names);
-            
+       
             console.readLine("\nTapez sur %s à n’importe quel moment "
                     + "pour quitter.\n(Tapez sur Enter pour commencer "
                     + "la partie)", Display.QUIT_KEY);
@@ -61,7 +60,7 @@ public class GameView
                             break;
                         case GAMEOVER:
                             game.nextPlayer();
-                            throw new GameOverException("Mauvaise arme !");
+                            throw new GameOverException("Vous avez été tué !");
                         case MOVE_BLORK:
                             Display.printGameOver();
                             Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());

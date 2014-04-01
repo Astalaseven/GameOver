@@ -27,7 +27,7 @@ public class Room
      * @param color
      *            couleur de la carte
      */
-    Room(RoomType type, boolean hidden, WeaponType weapon, BarbarianColor color)
+    public Room(RoomType type, boolean hidden, WeaponType weapon, BarbarianColor color) // packgae
     {
         this.type = type;
         this.hidden = hidden;

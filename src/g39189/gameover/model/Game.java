@@ -177,6 +177,7 @@ public class Game
 
         // Si la carte n’était pas encore retournée, la retourne
         lastPosition = newPos;
+        System.out.println("DEBUG " + stateCurrent);
         dungeon.show(lastPosition);
 
         switch (room.getType())
@@ -239,12 +240,20 @@ public class Game
         
         dungeon.show(lastPosition);
         
-        if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != weapon))
+        if ((room.getType() == RoomType.BLORK) && (room.getWeapon() == null))
+        {
+            stateCurrent = BarbarianState.MOVE_BLORK;
+        }
+        else if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != weapon))
         {
             Display.printGameOver();
             Display.printSkull();
             Display.printRoom(room);
             stateCurrent = BarbarianState.GAMEOVER;
+        }
+        else
+        {
+            stateCurrent = BarbarianState.CONTINUE;
         }
         
         return stateCurrent;
@@ -264,16 +273,7 @@ public class Game
             throw new GameOverException("Statut incorrect ou partie terminée");
         }
         
-        if (dungeon.getRoom(pos).isHidden())
-        {
-            lastPosition = pos;
-            dungeon.show(pos);
-            stateCurrent = BarbarianState.CONTINUE;
-        }
-        else
-        {
-            throw new GameOverException("La carte est déjà retournée.");
-        }
+        stateCurrent = play(pos, weapon);
 
         return stateCurrent;
     }

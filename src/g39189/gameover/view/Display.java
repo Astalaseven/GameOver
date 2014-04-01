@@ -182,8 +182,14 @@ public class Display
     {
         try
         {
-            printDungeon(Dungeon.getInstance(), BarbarianState.MOVE_BLORK);
-            printDungeon(Dungeon.getInstance(), null);
+//            printDungeon(Dungeon.getInstance(), BarbarianState.MOVE_BLORK);
+//            printDungeon(Dungeon.getInstance(), null);
+            
+            for (int i = 1; i <= 25; i++) {
+                System.out.print(i + " ");
+                convertToPosition(i);
+                System.out.println();
+            }
 
         }
         catch (GameOverException e)
@@ -438,8 +444,13 @@ public class Display
     
     private static DungeonPosition convertToPosition(int entier) throws GameOverException
     {
-        int row = (int) Math.floor(entier / 6);
-        int column = entier - (row * 5) - 1;
+//        int row = (int) Math.floor(entier / 6);
+//        int column = entier - (row * 5) - 1;
+        --entier;
+        int row = entier / 5;
+        int column = entier % 5;
+        
+        System.out.println("DEBUG " + row + ", " + column);
 
         return new DungeonPosition(row, column);
     }
