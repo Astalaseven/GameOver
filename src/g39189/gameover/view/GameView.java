@@ -86,15 +86,15 @@ public class GameView
                             weapon = Display.askWeapon();
                             game.playGate(pos1, weapon);
                             break;
-                        case WIN:
-                            Display.printGameOver();
-                            System.out.println("DEBUG " + game.getCurrentState());
-                            break;
                         case JOKER:
                             break;
                         default:
                             throw new GameOverException("Statut inconnu");
                     }
+                    
+                    Display.printGameOver();
+                    Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+                    System.out.println("DEBUG OK");
                 }
                 catch (GameOverException e)
                 {
