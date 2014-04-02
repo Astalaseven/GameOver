@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.Console;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Cette classe est destinée à l’interface utilisateur.
@@ -34,7 +33,7 @@ public class GameView
 
             String[] names = new String[4];
 
-            if (args.length != 1)
+            if (args.length >= 1)
             {
                 names = parseFile(args[0]);
             }
@@ -88,6 +87,9 @@ public class GameView
                             game.playGate(pos1, weapon);
                             break;
                         case WIN:
+                            Display.printGameOver();
+                            System.out.println("DEBUG " + game.getCurrentState());
+                            break;
                         case JOKER:
                             break;
                         default:

@@ -214,6 +214,7 @@ public class Game
                 if (room.getColor() == player.getColor())
                 {
                     princessFound = true;
+                    System.out.println("DEBUG " + stateCurrent);
                 }
                 break;
             default:
@@ -227,6 +228,7 @@ public class Game
             idWinner = idCurrent;
             stateCurrent = BarbarianState.WIN;
             Display.printEndOfGame(players.get(idWinner));
+            System.out.println("DEBUG " + stateCurrent);
         }
 
         return stateCurrent;

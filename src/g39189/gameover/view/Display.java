@@ -143,7 +143,7 @@ public class Display
             }
 
             names[nbPlayers] = name;
-            console.printf("Joueur %s créé avec succès !\n", name);
+            console.printf("Joueur %s créé avec succès !\n", name.split(" ")[0]);
             ++nbPlayers;
 
             if ((nbPlayers >= Game.MIN_PLAYER)
