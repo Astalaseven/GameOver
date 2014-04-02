@@ -49,11 +49,16 @@ public class Game
 
         players = new ArrayList<>();
 
-        for (String name : names)
+        for (String info : names)
         {
-            if (name != null)
+            if (info != null)
             {
-                Player player = new Player(name);
+                String[] infos = info.split(" ");
+                String name = infos[0];
+                boolean beginner = (infos.length > 1)
+                        && (infos[1].equals("débutant"));
+
+                Player player = new Player(name, beginner);
                 players.add(player);
             }
         }

@@ -109,8 +109,10 @@ public class GameView
     /**
      * Lit les 4 premières lignes du fichier passé en paramètre
      * 
-     * @param fileName
-     * @return un tableau contenant
+     * @param fileName le fichier contenant les noms et statuts
+     * des joueurs
+     * @return un tableau contenant les noms des joueurs
+     * et leur statut (débutant ou non)
      */
     public static String[] parseFile(String fileName)
     {
@@ -127,7 +129,6 @@ public class GameView
                 cpt++;
                 line = stream.readLine();
             }
-            
         }
         catch (IOException err)
         {
