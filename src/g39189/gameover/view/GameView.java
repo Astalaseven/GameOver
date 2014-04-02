@@ -8,7 +8,11 @@ import g39189.gameover.model.GameOverException;
 import g39189.gameover.model.Player;
 import g39189.gameover.model.WeaponType;
 
+import java.io.BufferedReader;
 import java.io.Console;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Cette classe est destinée à l’interface utilisateur.
@@ -28,7 +32,16 @@ public class GameView
 
             Console console = System.console();
 
-            String[] names = Display.createPlayers();
+            String[] names = new String[4];
+
+            if (args.length != 1)
+            {
+                names = parseFile(args[0]);
+            }
+            else
+            {
+                names = Display.createPlayers();
+            }
 
             Game game = new Game(names);
        
@@ -76,7 +89,7 @@ public class GameView
                             break;
                         case WIN:
                         case JOKER:
-
+                            break;
                         default:
                             throw new GameOverException("Statut inconnu");
                     }
@@ -89,7 +102,38 @@ public class GameView
         }
         catch (GameOverException e)
         {
-            e.printStackTrace();
+            e.getMessage();
         }
+    }
+    
+    /**
+     * Lit les 4 premières lignes du fichier passé en paramètre
+     * 
+     * @param fileName
+     * @return un tableau contenant
+     */
+    public static String[] parseFile(String fileName)
+    {
+        String[] lines = new String[Game.MAX_PLAYER];
+        int cpt = 0;
+
+        try(BufferedReader stream = new BufferedReader(new FileReader(fileName)))
+        {
+            String line = stream.readLine();
+    
+            while (line != null && cpt < Game.MAX_PLAYER)
+            {
+                lines[cpt] = line;
+                cpt++;
+                line = stream.readLine();
+            }
+            
+        }
+        catch (IOException err)
+        {
+            err.getMessage();
+        }
+
+        return lines;
     }
 }

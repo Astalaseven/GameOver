@@ -30,9 +30,10 @@ public class Player
      *            nom du joueur
      * @throws GameOverException
      */
-    public Player(String name)
+    public Player(String name, boolean beginner)
     {
         this.name = name;
+        this.beginner = beginner;
         n = nextN++;
         color = BarbarianColor.values()[n];
         initPosition = POSITIONS[n];
