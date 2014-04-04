@@ -42,17 +42,14 @@ public class Game
      */
     public Game(String... names) throws GameOverException
     {
-        if ((names.length < MIN_PLAYER) || (names.length > MAX_PLAYER))
-        {
-            throw new GameOverException("Nombre de concurrents invalide");
-        }
-
         players = new ArrayList<>();
+        int cpt = 0;
 
         for (String info : names)
         {
             if (info != null)
             {
+                ++cpt;
                 String[] infos = info.split(" ");
                 String name = infos[0];
                 boolean beginner = (infos.length > 1)
@@ -61,6 +58,11 @@ public class Game
                 Player player = new Player(name, beginner);
                 players.add(player);
             }
+        }
+        
+        if ((cpt < 2) || (cpt > 4))
+        {
+            throw new GameOverException("Nombre de concurrents invalide");
         }
 
         dungeon = Dungeon.getInstance();
@@ -168,6 +170,13 @@ public class Game
             System.out.println("DEBUG : " + stateCurrent);
             throw new GameOverException("Le joueur ne peut pas jouer");
         }
+        
+        if (dungeon.isSurrounded(lastPosition))
+        {
+            System.out.println("debug 1");
+            stateCurrent = BarbarianState.GAMEOVER;
+            throw new GameOverException("Vous êtes bloqué !");
+        }
 
         // Si la partie n’est pas finie, fait le mouvement
         DungeonPosition newPos = lastPosition.move(dir);
@@ -191,13 +200,13 @@ public class Game
                 // Si le joueur tombe sur un blork invincible
                 if (room.getWeapon() == null)
                 {
-                    Display.printRoom(room);
+                    //Display.printRoom(room);
                     stateCurrent = BarbarianState.MOVE_BLORK;
                 }
                 // Si le joueur n’a pas la bonne arme, il a perdu
                 else if (room.getWeapon() != weapon)
                 {
-                    Display.printRoom(room);
+                    //Display.printRoom(room);
                     stateCurrent = BarbarianState.GAMEOVER;
                 }
                 break;
@@ -227,8 +236,16 @@ public class Game
         {
             idWinner = idCurrent;
             stateCurrent = BarbarianState.WIN;
-            Display.printEndOfGame(players.get(idWinner));
+            //Display.printEndOfGame(players.get(idWinner));
             System.out.println("DEBUG " + stateCurrent);
+        }
+        
+        
+        if (dungeon.isSurrounded(lastPosition))
+        {
+            System.out.println("debug 2");
+            stateCurrent = BarbarianState.GAMEOVER;
+            throw new GameOverException("Vous êtes bloqué !");
         }
 
         return stateCurrent;

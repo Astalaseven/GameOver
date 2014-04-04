@@ -455,12 +455,16 @@ public class Display
         return new DungeonPosition(row, column);
     }
 
+    /**
+     * Demande à l’utilisateur à quelle position il souhaite se déplacer
+     * ou déplacer une carte
+     * @return la nouvelle position
+     * @throws GameOverException si la conversion en position sort du tableau
+     */
     public static DungeonPosition askNewPosition() throws GameOverException
     {
         String answer;
         int nb = 0;
-        
-        //Display.printDungeon();
 
         while (nb < 1 || nb > 25)
         {

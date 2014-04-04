@@ -94,6 +94,7 @@ public class GameView
                     
                     Display.printGameOver();
                     Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+                    Display.printEndOfGame(game.getCurrentPlayer());
                     System.out.println("DEBUG OK");
                 }
                 catch (GameOverException e)
@@ -134,7 +135,8 @@ public class GameView
         }
         catch (IOException err)
         {
-            err.getMessage();
+            System.out.println("Impossible d’ouvrir le fichier");
+            System.exit(0);
         }
 
         return lines;
