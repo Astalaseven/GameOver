@@ -23,13 +23,13 @@ import java.io.IOException;
  */
 public class GameView
 {
+    private static Console console = System.console();
+    
     public static void main(String[] args)
     {
         try
         {
             Display.printGameOver();
-
-            Console console = System.console();
 
             String[] names = new String[4];
 
@@ -50,58 +50,21 @@ public class GameView
 
             while (!game.isOver())
             {
-                Display.printGameOver();
-
                 try
                 {
-                    Player player = game.getCurrentPlayer();
-
-                    console.printf("%s, à vous de jouer !\n", player.getName());
-
-                    Display.printPlayer(player);
-                    Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
-
-                    switch (game.getCurrentState())
-                    {
-                        case CONTINUE:
-                            // Demande à l’utilisateur quel mouvement et quelle arme
-                            // il souhaite choisir
-                            Direction direction = Display.askMov();
-                            WeaponType weapon = Display.askWeapon();
-                            game.play(direction, weapon);
-                            break;
-                        case GAMEOVER:
-                            game.nextPlayer();
-                            throw new GameOverException("Vous avez été tué !");
-                        case MOVE_BLORK:
-                            Display.printGameOver();
-                            Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
-                            DungeonPosition pos = Display.askNewPosition();
-                            game.playBlorkInvincible(pos);
-                            break;
-                        case BEAM_ME_UP:
-                            Display.printGameOver();
-                            Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
-                            DungeonPosition pos1 = Display.askNewPosition();
-                            weapon = Display.askWeapon();
-                            game.playGate(pos1, weapon);
-                            break;
-                        case JOKER:
-                            break;
-                        default:
-                            throw new GameOverException("Statut inconnu");
-                    }
-                    
                     Display.printGameOver();
-                    Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
-                    Display.printEndOfGame(game.getCurrentPlayer());
-                    System.out.println("DEBUG OK");
+                    play(game);
                 }
                 catch (GameOverException e)
                 {
                     continue;
                 }
             }
+            
+            Display.printGameOver();
+            Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+            Display.printEndOfGame(game.getCurrentPlayer());
+            System.out.println("DEBUG OK");
         }
         catch (GameOverException e)
         {
@@ -140,5 +103,74 @@ public class GameView
         }
 
         return lines;
+    }
+    
+    private static void play(Game game) throws GameOverException
+    {
+        Player player = game.getCurrentPlayer();
+        DungeonPosition pos = null;
+        Direction direction = null;
+        WeaponType weapon = null;
+
+        switch (game.getCurrentState())
+        {
+            case CONTINUE:
+                // Demande à l’utilisateur quel mouvement et quelle arme
+                // il souhaite choisir
+                Display.printPlayer(player);
+                Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+
+                // Si le joueur ne sait plus bouger, il perd son tour
+                if (game.getDungeon().isSurrounded(game.getLastPosition()))
+                {
+                    game.nextPlayer();
+                    throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
+                }
+
+                direction = Display.askMov();
+                weapon = Display.askWeapon();
+                game.play(direction, weapon);
+                break;
+            case GAMEOVER:
+                // Passe au joueur suivant
+                //Display.printSkull();
+                //Display.printRoom(game.getDungeon().getRoom(game.getLastPosition()));
+                Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+
+                game.nextPlayer();
+                throw new GameOverException("Vous avez été tué !");
+            case MOVE_BLORK:
+                Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+
+                pos = Display.askNewPosition();
+                game.playBlorkInvincible(pos);
+                break;
+            case BEAM_ME_UP:
+                Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+
+                pos = Display.askNewPosition();
+                weapon = Display.askWeapon();
+                game.playGate(pos, weapon);
+                break;
+            case JOKER:
+                Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+                System.out.println("DEBUG joker used");
+                console.printf("Joker activé ! ");
+                
+                weapon = Display.askWeapon();
+                game.playJoker(weapon);
+                break;
+            case READY_TO_GO:
+                console.printf("%s, à vous de jouer !\n\n", player.getName());
+                Display.printPlayer(player);
+                Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
+
+                direction = Display.askMov();
+                weapon = Display.askWeapon();
+                game.play(direction, weapon);
+                break;
+            default:
+                throw new GameOverException("Statut inconnu");
+        }
     }
 }

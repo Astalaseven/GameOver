@@ -76,7 +76,7 @@ public class PlayTest
         rooms[0] = new Room(RoomType.BLORK, true, WeaponType.ARROWS, null);
         initializeDungeon();
 
-        assertTrue(game.play(Direction.DOWN, WeaponType.ARROWS));
+        assertEquals(game.play(Direction.DOWN, WeaponType.ARROWS), BarbarianState.CONTINUE);
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
 
         assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
@@ -92,7 +92,7 @@ public class PlayTest
         rooms[0] = new Room(RoomType.BLORK, true, WeaponType.ARROWS, null);
         initializeDungeon();
 
-        assertFalse(game.play(Direction.DOWN, WeaponType.POTION));
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.GAMEOVER);
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
 
         assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
@@ -107,7 +107,7 @@ public class PlayTest
         rooms[0] = new Room(RoomType.BLORK, true, null, null);
         initializeDungeon();
 
-        assertFalse(game.play(Direction.DOWN, WeaponType.POTION));
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.MOVE_BLORK);
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
 
         assertEquals(game.getDungeon().getRoom(pos0), rooms[0]);
@@ -123,10 +123,10 @@ public class PlayTest
         rooms[1] = new Room(RoomType.KEY, true, null, null);
         initializeDungeon();
 
-        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.CONTINUE);
         assertFalse(game.getDungeon().getRoom(pos0).isHidden());
 
-        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.WIN);
         assertFalse(game.getDungeon().getRoom(pos1).isHidden());
 
         assertTrue(game.isOver());
@@ -143,8 +143,8 @@ public class PlayTest
         rooms[1] = new Room(RoomType.KEY, true, null, null);
         initializeDungeon();
 
-        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
-        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.CONTINUE);
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.CONTINUE);
 
         assertFalse(game.isOver());
         assertNotEquals(game.getWinner(), game.getCurrentPlayer());
@@ -160,8 +160,8 @@ public class PlayTest
         rooms[1] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
         initializeDungeon();
 
-        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
-        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.CONTINUE);
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.WIN);
         assertTrue(game.isOver());
         assertEquals(game.getWinner(), game.getCurrentPlayer());
     }
@@ -175,7 +175,7 @@ public class PlayTest
         rooms[0] = new Room(RoomType.GATE, true, null, null);
         initializeDungeon();
 
-        assertTrue(game.play(Direction.DOWN, WeaponType.POTION));
+        assertEquals(game.play(Direction.DOWN, WeaponType.POTION), BarbarianState.BEAM_ME_UP);
         assertFalse(game.isOver());
         assertEquals(game.getCurrentPlayer().getColor(), BarbarianColor.RED);
         assertEquals(game.getWinner(), null);

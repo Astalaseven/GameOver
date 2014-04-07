@@ -43,6 +43,7 @@ public class Dungeon
         roomss[2][0] = new Room(RoomType.KEY, true, null, null);
         roomss[1][0] = new Room(RoomType.KEY, true, null, null);
         roomss[4][4] = new Room(RoomType.BLORK, true, null, null);
+        roomss[3][0] = new Room(RoomType.BLORK, true, WeaponType.BLUDGEON, null);
 //        roomss[0][0] = new Room(RoomType.KEY, true, null, null);
 //        roomss[1][0] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
     }
@@ -53,7 +54,7 @@ public class Dungeon
      * @param configuration
      *            un donjon personnalisé
      */
-    private Dungeon(Room[][] configuration)
+    Dungeon(Room[][] configuration)
     {
         roomss = configuration;
     }
@@ -126,47 +127,32 @@ public class Dungeon
     /**
      * Indique si une pièce est entourée de pièces toutes visibles
      */
-    public boolean isSurrounded(DungeonPosition pos)
+    public boolean isSurrounded(DungeonPosition pos) throws GameOverException
     {
         boolean posUp = false;
         boolean posDown = false;
         boolean posLeft = false;
         boolean posRight = false;
 
-        try
+        // Si la position est dans le tableau, vérifie si elle est entourée de cartes cachées
+        if (((pos.getRow() - 1) >= 0) && (pos.getColumn() >= 0) && (pos.getColumn() < N))
         {
-            if ((pos.getRow() - 1) >= 0)
-            {
-                System.out.println("UP " + pos.up());
-                posUp = instance.getRoom(pos.up()).isHidden();
-            }
-            if ((pos.getRow() + 1) < N)
-            {
-                System.out.println("DOWN " + pos.down());
-                posDown = instance.getRoom(pos.down()).isHidden();
-            }
-            if ((pos.getColumn() - 1) >= 0)
-            {
-                System.out.println("LEFT " + pos.left());
-                posLeft = instance.getRoom(pos.left()).isHidden();
-            }
-            if ((pos.getColumn() + 1) < N)
-            {
-                System.out.println("RIGHT " + pos.right());
-                posRight = instance.getRoom(pos.right()).isHidden();
-            }
-//            posUp = !(pos.getRow() - 1 < 0) || (instance.getRoom(pos.up()).isHidden());
-//            posDown = !(pos.getRow() + 1 > N) || instance.getRoom(pos.down()).isHidden();
-//            posLeft = !(pos.getColumn() - 1 < 0) || instance.getRoom(pos.left()).isHidden();
-//            posRight = !(pos.getColumn() + 1 > N) || instance.getRoom(pos.right()).isHidden();
-            System.out.println(posUp + " " + posDown + " " + posLeft + " " + posRight);
+            posUp = instance.getRoom(pos.up()).isHidden();
         }
-        catch (GameOverException err)
+        if (((pos.getRow() + 1) < N) && (pos.getColumn() >= 0) && (pos.getColumn() < N))
         {
-
+            posDown = instance.getRoom(pos.down()).isHidden();
+        }
+        if (((pos.getColumn() - 1) >= 0) && (pos.getRow() >= 0) && (pos.getRow() < N))
+        {
+            posLeft = instance.getRoom(pos.left()).isHidden();
+        }
+        if (((pos.getColumn() + 1) < N) && (pos.getRow() >= 0) && (pos.getRow() < N))
+        {
+            posRight = instance.getRoom(pos.right()).isHidden();
         }
 
-        return posUp && posDown && posLeft && posRight;
+        return (!posUp && !posDown && !posLeft && !posRight);
     }
     
     private boolean contains(DungeonPosition pos)

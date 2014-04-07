@@ -122,6 +122,10 @@ public class Display
         int nbPlayers = 0;
         final String[] names = new String[Game.MAX_PLAYER];
         boolean newPlayer = true;
+        
+        console.printf("Un joueur a droit a un joker par tour s’il est débutant. "
+                + "Il suffit de rajouter « débutant » après son nom.\n"
+                + "Exemple : « JohnDoe débutant »\n\n");
 
         while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
@@ -143,7 +147,7 @@ public class Display
             }
 
             names[nbPlayers] = name;
-            console.printf("Joueur %s créé avec succès !\n", name.split(" ")[0]);
+            console.printf("Joueur %s créé avec succès !\n\n", name.split(" ")[0]);
             ++nbPlayers;
 
             if ((nbPlayers >= Game.MIN_PLAYER)
@@ -380,35 +384,35 @@ public class Display
     /**
      * Affiche un crâne en ASCII.
      */
-    public static void printSkull()
-    {
-        System.out.println(
-                "\n\t\t             uu$$$$$$$$$$$uu             \n"
-                + "\t\t          uu$$$$$$$$$$$$$$$$$uu          \n"
-                + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         \n"
-                + "\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        \n"
-                + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
-                + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
-                + "\t\t       u$$$$$$     $$$     $$$$$$u       \n"
-                + "\t\t        $$$$       u$u       $$$$        \n"
-                + "\t\t        $$$u       u$u       u$$$        \n"
-                + "\t\t        $$$u      u$$$u      u$$$        \n"
-                + "\t\t         $$$$$uu$$$   $$$uu$$$$$         \n"
-                + "\t\t           $$$$$$$     $$$$$$$           \n"
-                + "\t\t            u$$$$$$$u$$$$$$$u            \n"
-                + "\t\t             u$ $ $ $ $ $ $u             \n"
-                + "\t\t  uuu        $$u$ $ $ $ $u$$       uuu   \n"
-                + "\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  \n"
-                + "\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  \n"
-                + "\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ \n"
-                + "\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       \n"
-                + "\t\t           $$$$$$$$$$$$$$$$$$$           \n"
-                + "\t\t          uuuu$$$$$   $$$$$$uuuu         \n"
-                + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ \n"
-                + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
-                + "\t\t    $$$$$                      $$$$$     \n"
-                + "\t\t     $$$                        $$$      \n\n");
-    }
+//    public static void printSkull()
+//    {
+//        System.out.println(
+//                "\n\t\t             uu$$$$$$$$$$$uu             \n"
+//                + "\t\t          uu$$$$$$$$$$$$$$$$$uu          \n"
+//                + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         \n"
+//                + "\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        \n"
+//                + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
+//                + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
+//                + "\t\t       u$$$$$$     $$$     $$$$$$u       \n"
+//                + "\t\t        $$$$       u$u       $$$$        \n"
+//                + "\t\t        $$$u       u$u       u$$$        \n"
+//                + "\t\t        $$$u      u$$$u      u$$$        \n"
+//                + "\t\t         $$$$$uu$$$   $$$uu$$$$$         \n"
+//                + "\t\t           $$$$$$$     $$$$$$$           \n"
+//                + "\t\t            u$$$$$$$u$$$$$$$u            \n"
+//                + "\t\t             u$ $ $ $ $ $ $u             \n"
+//                + "\t\t  uuu        $$u$ $ $ $ $u$$       uuu   \n"
+//                + "\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  \n"
+//                + "\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  \n"
+//                + "\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ \n"
+//                + "\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       \n"
+//                + "\t\t           $$$$$$$$$$$$$$$$$$$           \n"
+//                + "\t\t          uuuu$$$$$   $$$$$$uuuu         \n"
+//                + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ \n"
+//                + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
+//                + "\t\t    $$$$$                      $$$$$     \n"
+//                + "\t\t     $$$                        $$$      \n\n");
+//    }
     
     /**
      * Retourne des détails sur la carte retournée (arme, couleur…).
