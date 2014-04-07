@@ -44,7 +44,7 @@ public class GameView
 
             Game game = new Game(names);
        
-            console.readLine("\nTapez sur %s à n’importe quel moment "
+            console.readLine("\nTapez sur « %s » à n’importe quel moment "
                     + "pour quitter.\n(Tapez sur Enter pour commencer "
                     + "la partie)", Display.QUIT_KEY);
 
@@ -64,7 +64,6 @@ public class GameView
             Display.printGameOver();
             Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
             Display.printEndOfGame(game.getCurrentPlayer());
-            System.out.println("DEBUG OK");
         }
         catch (GameOverException e)
         {
@@ -80,7 +79,7 @@ public class GameView
      * @return un tableau contenant les noms des joueurs
      * et leur statut (débutant ou non)
      */
-    public static String[] parseFile(String fileName)
+    private static String[] parseFile(String fileName)
     {
         String[] lines = new String[Game.MAX_PLAYER];
         int cpt = 0;

@@ -179,9 +179,6 @@ public class Game
 
         // Si la partie n’est pas finie, fait le mouvement
         DungeonPosition newPos = lastPosition.move(dir);
-        
-        System.out.println("DEBUG : " + newPos);
-        
         Player player = players.get(idCurrent);
         Room room = dungeon.getRoom(newPos);
 
@@ -192,9 +189,6 @@ public class Game
 
         // Si la carte n’était pas encore retournée, la retourne
         lastPosition = newPos;
-        
-        System.out.println("DEBUG " + stateCurrent);
-        
         dungeon.show(lastPosition);
 
         switch (room.getType())
@@ -206,11 +200,10 @@ public class Game
                     stateCurrent = BarbarianState.MOVE_BLORK;
                 }
                 // Si le joueur n’a pas la bonne arme, il a perdu
-                else if ((room.getWeapon() != weapon))
+                else if (room.getWeapon() != weapon)
                 {
                     if (players.get(idCurrent).isBeginner() && !jokerUsed)
                     {
-                        System.out.println("DEBUG play jokerNotUsed");
                         stateCurrent = BarbarianState.JOKER;   
                     }
                     else
@@ -232,7 +225,6 @@ public class Game
                 if (room.getColor() == player.getColor())
                 {
                     princessFound = true;
-                    System.out.println("DEBUG " + stateCurrent);
                 }
                 break;
             default:
@@ -245,11 +237,7 @@ public class Game
         {
             idWinner = idCurrent;
             stateCurrent = BarbarianState.WIN;
-            //Display.printEndOfGame(players.get(idWinner));
-            System.out.println("DEBUG " + stateCurrent);
         }
-        
-
 
         return stateCurrent;
     }
@@ -264,23 +252,19 @@ public class Game
         {
             throw new GameOverException("Carte déjà retournée");
         }
-        
-        System.out.println("DEBUG play " + jokerUsed + " " + stateCurrent);
-        //Display.printRoom(room);
 
         if ((room.getType() == RoomType.BLORK) && (room.getWeapon() == null))
         {
             dungeon.show(lastPosition);
             stateCurrent = BarbarianState.MOVE_BLORK;
         }
-        else if ((room.getType() == RoomType.BLORK) && (room.getWeapon() != weapon))
+        else if ((room.getType() == RoomType.BLORK)
+                && (room.getWeapon() != weapon))
         {
-            System.out.println("DEBUG joker !weapon " + room.getWeapon() + " " + weapon);
             if (getCurrentPlayer().isBeginner() && !jokerUsed)
             {
-                System.out.println("DEBUG joker arme " + room.getWeapon() + " " + weapon);
-                stateCurrent = jokerUsed ? BarbarianState.GAMEOVER : BarbarianState.JOKER;
-                System.out.println("DEBUG NOOOOOOOOOOOOOOOOOOO");
+                stateCurrent = jokerUsed ? BarbarianState.GAMEOVER
+                        : BarbarianState.JOKER;
             }
             else
             {
@@ -293,8 +277,6 @@ public class Game
             dungeon.show(lastPosition);
             stateCurrent = BarbarianState.CONTINUE;
         }
-
-        System.out.println("DEBUG play " + jokerUsed + " " + stateCurrent);
         
         return stateCurrent;
     }
