@@ -189,7 +189,7 @@ public class Game
 
         // Si la carte n’était pas encore retournée, la retourne
         lastPosition = newPos;
-        dungeon.show(lastPosition);
+//        dungeon.show(lastPosition);
 
         switch (room.getType())
         {
@@ -197,7 +197,15 @@ public class Game
                 // Si le joueur tombe sur un blork invincible
                 if (room.getWeapon() == null)
                 {
-                    stateCurrent = BarbarianState.MOVE_BLORK;
+                    if (players.get(idCurrent).isBeginner() && !jokerUsed)
+                    {
+                        jokerUsed = true;
+                        stateCurrent = BarbarianState.CONTINUE;
+                    }
+                    else
+                    {
+                        stateCurrent = BarbarianState.MOVE_BLORK;
+                    }
                 }
                 // Si le joueur n’a pas la bonne arme, il a perdu
                 else if (room.getWeapon() != weapon)
@@ -229,6 +237,11 @@ public class Game
                 break;
             default:
                 break;
+        }
+        
+        if (stateCurrent != BarbarianState.JOKER)
+        {
+            dungeon.show(lastPosition);
         }
 
         // Si le joueur a trouvé une clé et sa princesse, il a gagné et
@@ -330,8 +343,15 @@ public class Game
         dungeon.show(lastPosition);
         dungeon.show(pos);
         
-        stateCurrent = BarbarianState.GAMEOVER;
-
+        if (getCurrentPlayer().isBeginner() && !jokerUsed)
+        {
+            stateCurrent = BarbarianState.CONTINUE;
+        }
+        else
+        { 
+            stateCurrent = BarbarianState.GAMEOVER;
+        }
+    
         return stateCurrent;
     }
 
@@ -342,16 +362,6 @@ public class Game
     {
         Player.resetN();
         players.clear();
-    }
-    
-    /**
-     * Retourne la dernière position.
-     * 
-     * @return la dernière position
-     */
-    public DungeonPosition getLastPosition()
-    {
-        return lastPosition;
     }
 
     /**

@@ -43,7 +43,7 @@ public class Dungeon
         roomss[2][0] = new Room(RoomType.KEY, true, null, null);
         roomss[1][0] = new Room(RoomType.KEY, true, null, null);
         roomss[4][4] = new Room(RoomType.BLORK, true, null, null);
-        roomss[3][0] = new Room(RoomType.BLORK, true, WeaponType.BLUDGEON, null);
+        roomss[0][4] = new Room(RoomType.BLORK, true, WeaponType.BLUDGEON, null);
 //        roomss[0][0] = new Room(RoomType.KEY, true, null, null);
 //        roomss[1][0] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
     }

@@ -1,12 +1,6 @@
 package g39189.gameover.view;
 
-import g39189.gameover.model.Direction;
-import g39189.gameover.model.Dungeon;
-import g39189.gameover.model.DungeonPosition;
-import g39189.gameover.model.Game;
-import g39189.gameover.model.GameOverException;
-import g39189.gameover.model.Player;
-import g39189.gameover.model.WeaponType;
+import g39189.gameover.model.*;
 
 import java.io.BufferedReader;
 import java.io.Console;
@@ -87,7 +81,7 @@ public class GameView
         try(BufferedReader stream = new BufferedReader(new FileReader(fileName)))
         {
             String line = stream.readLine();
-    
+
             while (line != null && cpt < Game.MAX_PLAYER)
             {
                 lines[cpt] = line;
@@ -119,12 +113,12 @@ public class GameView
                 Display.printPlayer(player);
                 Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
 
-                // Si le joueur ne sait plus bouger, il perd son tour
-                if (game.getDungeon().isSurrounded(game.getLastPosition()))
-                {
-                    game.nextPlayer();
-                    throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
-                }
+//                // Si le joueur ne sait plus bouger, il perd son tour
+//                if (game.getDungeon().isSurrounded(game.getLastPosition()))
+//                {
+//                    game.nextPlayer();
+//                    throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
+//                }
 
                 direction = Display.askMov();
                 weapon = Display.askWeapon();
@@ -153,7 +147,6 @@ public class GameView
                 break;
             case JOKER:
                 Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
-                System.out.println("DEBUG joker used");
                 console.printf("Joker activé ! ");
                 
                 weapon = Display.askWeapon();

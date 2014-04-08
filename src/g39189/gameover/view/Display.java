@@ -14,17 +14,17 @@ public class Display
     /**
      * Touches utilisées pour déplacer un joueur
      */
-    public final static String MVT_KEYS = "8264";
+    final static String MVT_KEYS = "8264";
 
     /**
      * Touches utilisées pour choisir une arme
      */
-    public final static String WPN_KEYS = "1234";
+    final static String WPN_KEYS = "1234";
     
     /**
      * Touche permettant de quitter le jeu
      */
-    public final static String QUIT_KEY = "Q";
+    final static String QUIT_KEY = "Q";
 
     private static Console console = System.console();
     
@@ -40,7 +40,7 @@ public class Display
      * 
      * @return le mouvement choisi par le joueur
      */
-    public static Direction askMov()
+    static Direction askMov()
     {
         String answer = " ";
         
@@ -69,7 +69,7 @@ public class Display
      * 
      * @return l’arme choisie par le joueur
      */
-    public static WeaponType askWeapon()
+    static WeaponType askWeapon()
     {
         String answer = " ";
         
@@ -98,7 +98,7 @@ public class Display
      *            le texte à mettre en gras
      * @return le texte mis en gras
      */
-    public static String bold(String str)
+    static String bold(String str)
     {
         return "\033[1m" + str + "\033[0m";
     }
@@ -106,7 +106,7 @@ public class Display
     /**
      * "Nettoie" la sortie de la console.
      */
-    public static void clearScreen()
+    static void clearScreen()
     {
         System.out.print("\033[H\033[2J");
     }
@@ -117,7 +117,7 @@ public class Display
      * 
      * @return un tableau contenant les noms des joueurs
      */
-    public static String[] createPlayers()
+    static String[] createPlayers()
     {
         int nbPlayers = 0;
         final String[] names = new String[Game.MAX_PLAYER];
@@ -174,7 +174,7 @@ public class Display
      * @param player
      *            le joueur qui a gagné la partie
      */
-    public static void printEndOfGame(Player player)
+    static void printEndOfGame(Player player)
     {
         printLine();
         System.out.println("| Fin de la partie :");
@@ -182,7 +182,7 @@ public class Display
         printLine();
     }
     
-    public static void main(String[] args)
+    static void main(String[] args)
     {
         try
         {
@@ -211,7 +211,7 @@ public class Display
      * @throws GameOverException
      *             si la position à afficher n’existe pas
      */
-    public static void printDungeon(Dungeon dungeon, BarbarianState state) throws GameOverException
+    static void printDungeon(Dungeon dungeon, BarbarianState state) throws GameOverException
     {
         String template = "";
         String hidden = " ";
@@ -277,7 +277,7 @@ public class Display
         System.out.println(template);
     }
     
-    private static String dungeonLine()
+    static String dungeonLine()
     {
         String line = String.format("%9s", " ");
         for (int i = 0; i < 66; i++)
@@ -291,7 +291,7 @@ public class Display
     /**
      * Affiche le nom du jeu en ASCII.
      */
-    public static void printGameOver()
+    static void printGameOver()
     {
         clearScreen();
 
@@ -314,7 +314,7 @@ public class Display
     /**
      * Affiche une ligne de séparation.
      */
-    public static void printLine()
+    static void printLine()
     {
         String line = "";
 
@@ -332,7 +332,7 @@ public class Display
      * @param player
      *            le joueur à afficher
      */
-    public static void printPlayer(Player player)
+    static void printPlayer(Player player)
     {
         printLine();
 
@@ -352,7 +352,7 @@ public class Display
      * @param room
      *            la carte passée en paramètre
      */
-    public static void printRoom(Room room)
+    static void printRoom(Room room)
     {
         printLine();
         System.out.println("| Carte retournée :");
@@ -465,7 +465,7 @@ public class Display
      * @return la nouvelle position
      * @throws GameOverException si la conversion en position sort du tableau
      */
-    public static DungeonPosition askNewPosition() throws GameOverException
+    static DungeonPosition askNewPosition() throws GameOverException
     {
         String answer;
         int nb = 0;
