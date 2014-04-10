@@ -41,13 +41,11 @@ public class Game
     public Game(String... names) throws GameOverException
     {
         players = new ArrayList<>();
-        int cpt = 0;
 
         for (String info : names)
         {
             if (info != null)
             {
-                ++cpt;
                 String[] infos = info.split(" ");
                 String name = infos[0];
                 boolean beginner = (infos.length > 1)
@@ -58,7 +56,7 @@ public class Game
             }
         }
         
-        if ((cpt < 2) || (cpt > 4))
+        if ((players.size() < MIN_PLAYER) || (players.size() > MAX_PLAYER))
         {
             throw new GameOverException("Nombre de concurrents invalide");
         }
@@ -137,8 +135,8 @@ public class Game
 
         dungeon.hideAll();
         keyFound = false;
-        princessFound = false;
         lastPosition = players.get(idCurrent).getInitPosition();
+        princessFound = false;
         stateCurrent = BarbarianState.READY_TO_GO;
     }
 
@@ -197,15 +195,7 @@ public class Game
                 // Si le joueur tombe sur un blork invincible
                 if (room.getWeapon() == null)
                 {
-                    if (players.get(idCurrent).isBeginner() && !jokerUsed)
-                    {
-                        jokerUsed = true;
-                        stateCurrent = BarbarianState.CONTINUE;
-                    }
-                    else
-                    {
-                        stateCurrent = BarbarianState.MOVE_BLORK;
-                    }
+                    stateCurrent = BarbarianState.MOVE_BLORK;
                 }
                 // Si le joueur n’a pas la bonne arme, il a perdu
                 else if (room.getWeapon() != weapon)
@@ -268,7 +258,6 @@ public class Game
 
         if ((room.getType() == RoomType.BLORK) && (room.getWeapon() == null))
         {
-            dungeon.show(lastPosition);
             stateCurrent = BarbarianState.MOVE_BLORK;
         }
         else if ((room.getType() == RoomType.BLORK)
@@ -281,14 +270,17 @@ public class Game
             }
             else
             {
-                dungeon.show(lastPosition);
                 stateCurrent = BarbarianState.GAMEOVER;
             }
         }
         else
         {
-            dungeon.show(lastPosition);
             stateCurrent = BarbarianState.CONTINUE;
+        }
+        
+        if (!getCurrentPlayer().isBeginner() || jokerUsed)
+        {
+            dungeon.show(lastPosition);
         }
         
         return stateCurrent;
@@ -345,13 +337,14 @@ public class Game
         
         if (getCurrentPlayer().isBeginner() && !jokerUsed)
         {
+            jokerUsed = true;
             stateCurrent = BarbarianState.CONTINUE;
         }
         else
-        { 
+        {
             stateCurrent = BarbarianState.GAMEOVER;
         }
-    
+
         return stateCurrent;
     }
 

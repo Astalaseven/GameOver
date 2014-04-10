@@ -148,7 +148,7 @@ public class GameView
             case JOKER:
                 Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
                 console.printf("Joker activé ! ");
-                
+
                 weapon = Display.askWeapon();
                 game.playJoker(weapon);
                 break;
