@@ -218,7 +218,7 @@ public class Display
         int cpt = 1;
         DungeonPosition pos = null;
         
-        System.out.println("DEBUG : " + state);
+        //System.out.println("DEBUG : " + state);
 
         // Indique la position du premier joueur
         template += String.format("%27s%n", Color.red("*"));

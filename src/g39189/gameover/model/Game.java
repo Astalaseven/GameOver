@@ -134,6 +134,7 @@ public class Game
         }
 
         dungeon.hideAll();
+        jokerUsed = false;
         keyFound = false;
         lastPosition = players.get(idCurrent).getInitPosition();
         princessFound = false;
@@ -161,7 +162,8 @@ public class Game
             throw new GameOverException("La partie est finie");
         }
         
-        if (stateCurrent != BarbarianState.CONTINUE && stateCurrent != BarbarianState.READY_TO_GO)
+        if ((stateCurrent != BarbarianState.CONTINUE)
+                && (stateCurrent != BarbarianState.READY_TO_GO))
         {
             System.out.println("DEBUG : " + stateCurrent);
             throw new GameOverException("Le joueur ne peut pas jouer");
@@ -173,11 +175,11 @@ public class Game
             throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
         }
         
-        stateCurrent = BarbarianState.CONTINUE; // autre manière de le changer ?
+        // stateCurrent = BarbarianState.CONTINUE; // autre manière de le changer ?
 
         // Si la partie n’est pas finie, fait le mouvement
         DungeonPosition newPos = lastPosition.move(dir);
-        Player player = players.get(idCurrent);
+        
         Room room = dungeon.getRoom(newPos);
 
         if (!room.isHidden())
@@ -189,6 +191,35 @@ public class Game
         lastPosition = newPos;
 //        dungeon.show(lastPosition);
 
+        stateCurrent = play(lastPosition, weapon);
+        
+        System.out.println("DEBUG stateCurrent " + stateCurrent + " " + jokerUsed);
+
+        // Si le joueur a trouvé une clé et sa princesse, il a gagné et
+        // la partie est finie
+        if (keyFound && princessFound)
+        {
+            idWinner = idCurrent;
+            stateCurrent = BarbarianState.WIN;
+        }
+
+        return stateCurrent;
+    }
+    
+    private BarbarianState play(DungeonPosition pos, WeaponType weapon)
+            throws GameOverException
+    {
+        lastPosition = pos;
+        Player player = players.get(idCurrent);
+        Room room = dungeon.getRoom(lastPosition);
+        
+        if (!room.isHidden())
+        {
+            throw new GameOverException("Carte déjà retournée");
+        }
+        
+        stateCurrent = BarbarianState.CONTINUE;
+
         switch (room.getType())
         {
             case BLORK:
@@ -197,9 +228,10 @@ public class Game
                 {
                     stateCurrent = BarbarianState.MOVE_BLORK;
                 }
-                // Si le joueur n’a pas la bonne arme, il a perdu
+                // Si le joueur n’a pas la bonne arme, il perd son tour
                 else if (room.getWeapon() != weapon)
                 {
+                    // sauf s’il a un joker
                     if (players.get(idCurrent).isBeginner() && !jokerUsed)
                     {
                         stateCurrent = BarbarianState.JOKER;   
@@ -209,9 +241,11 @@ public class Game
                         stateCurrent = BarbarianState.GAMEOVER;
                     }
                 }
+                System.out.println("DEBUG BLORK stateCurrent " + stateCurrent);
                 break;
             case GATE:
-                // Si le joueur trouve une porte, il peut rejouer
+                // Si le joueur trouve une porte,
+                // il peut se déplacer et rejouer
                 stateCurrent = BarbarianState.BEAM_ME_UP;
                 break;
             case KEY:
@@ -230,55 +264,6 @@ public class Game
         }
         
         if (stateCurrent != BarbarianState.JOKER)
-        {
-            dungeon.show(lastPosition);
-        }
-
-        // Si le joueur a trouvé une clé et sa princesse, il a gagné et
-        // la partie est finie
-        if (keyFound && princessFound)
-        {
-            idWinner = idCurrent;
-            stateCurrent = BarbarianState.WIN;
-        }
-
-        return stateCurrent;
-    }
-    
-    private BarbarianState play(DungeonPosition pos, WeaponType weapon)
-            throws GameOverException
-    {
-        lastPosition = pos;
-        Room room = dungeon.getRoom(lastPosition);
-        
-        if (!room.isHidden())
-        {
-            throw new GameOverException("Carte déjà retournée");
-        }
-
-        if ((room.getType() == RoomType.BLORK) && (room.getWeapon() == null))
-        {
-            stateCurrent = BarbarianState.MOVE_BLORK;
-        }
-        else if ((room.getType() == RoomType.BLORK)
-                && (room.getWeapon() != weapon))
-        {
-            if (getCurrentPlayer().isBeginner() && !jokerUsed)
-            {
-                stateCurrent = jokerUsed ? BarbarianState.GAMEOVER
-                        : BarbarianState.JOKER;
-            }
-            else
-            {
-                stateCurrent = BarbarianState.GAMEOVER;
-            }
-        }
-        else
-        {
-            stateCurrent = BarbarianState.CONTINUE;
-        }
-        
-        if (!getCurrentPlayer().isBeginner() || jokerUsed)
         {
             dungeon.show(lastPosition);
         }
@@ -317,7 +302,8 @@ public class Game
     {
         if (stateCurrent != BarbarianState.MOVE_BLORK)
         {
-            throw new GameOverException("Statut incorrect");
+            throw new GameOverException("Statut incorrect, devrait être"
+                    + " : MOVE_BLORK");
         }
         
         if (isOver())
@@ -327,8 +313,8 @@ public class Game
         
         if (pos.isCorner())
         {
-            throw new GameOverException("La nouvelle position ne peut pas "
-                    + "être dans un coin");
+            throw new GameOverException("La nouvelle position ne peut pas"
+                    + " être dans un coin");
         }
         
         dungeon.swap(lastPosition, pos);
