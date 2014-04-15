@@ -47,9 +47,32 @@ public class Game
             if (info != null)
             {
                 String[] infos = info.split(" ");
-                String name = infos[0];
-                boolean beginner = (infos.length > 1)
-                        && (infos[1].equals("débutant"));
+                String name = "";
+                boolean beginner = false;
+                int i = 0;
+
+                for (i = 0; i < infos.length; i++)
+                {
+                    // Remet l’espace perdu lors du split
+                    if (i > 0 && i < infos.length - 1)
+                    {
+                        name += " ";
+                    }
+                    
+                    if (infos[i].equals("débutant"))
+                    {
+                        beginner = true;
+                    }
+                    else
+                    {
+                        name += infos[i];
+                    }
+                }
+                
+                
+//                String name = infos[0];
+//                boolean beginner = (infos.length > 1)
+//                        && (infos[1].equals("débutant"));
 
                 Player player = new Player(name, beginner);
                 players.add(player);
@@ -99,6 +122,16 @@ public class Game
     public Dungeon getDungeon()
     {
         return dungeon;
+    }
+    
+    /**
+     * Retourne la dernière position.
+     * 
+     * @return la dernière position
+     */
+    public DungeonPosition getLastPosition()
+    {
+        return lastPosition;
     }
 
     /**
@@ -169,14 +202,6 @@ public class Game
             throw new GameOverException("Le joueur ne peut pas jouer");
         }
 
-        if (dungeon.isSurrounded(lastPosition))
-        {
-            nextPlayer();
-            throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
-        }
-        
-        // stateCurrent = BarbarianState.CONTINUE; // autre manière de le changer ?
-
         // Si la partie n’est pas finie, fait le mouvement
         DungeonPosition newPos = lastPosition.move(dir);
         
@@ -187,9 +212,7 @@ public class Game
             throw new GameOverException("Carte déjà retournée");
         }
 
-        // Si la carte n’était pas encore retournée, la retourne
         lastPosition = newPos;
-//        dungeon.show(lastPosition);
 
         stateCurrent = play(lastPosition, weapon);
         
@@ -202,6 +225,12 @@ public class Game
             idWinner = idCurrent;
             stateCurrent = BarbarianState.WIN;
         }
+        
+//        if (dungeon.isSurrounded(lastPosition))
+//        {
+//            nextPlayer();
+//            throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
+//        }
 
         return stateCurrent;
     }
@@ -241,6 +270,7 @@ public class Game
                         stateCurrent = BarbarianState.GAMEOVER;
                     }
                 }
+
                 System.out.println("DEBUG BLORK stateCurrent " + stateCurrent);
                 break;
             case GATE:
@@ -249,7 +279,6 @@ public class Game
                 stateCurrent = BarbarianState.BEAM_ME_UP;
                 break;
             case KEY:
-                // Si la carte est une clé
                 keyFound = true;
                 break;
             case PRINCESS:
@@ -287,9 +316,15 @@ public class Game
     public BarbarianState playGate(DungeonPosition pos, WeaponType weapon)
             throws GameOverException
     {
-        if (stateCurrent != BarbarianState.BEAM_ME_UP || isOver())
+        if (stateCurrent != BarbarianState.BEAM_ME_UP)
         {
-            throw new GameOverException("Statut incorrect ou partie terminée");
+            throw new GameOverException("Statut incorrect, devrait être"
+                    + " : BEAM_ME_UP");
+        }
+
+        if (isOver())
+        {
+            throw new GameOverException("La partie est terminée");
         }
         
         stateCurrent = play(pos, weapon);

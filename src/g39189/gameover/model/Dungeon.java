@@ -118,9 +118,10 @@ public class Dungeon
      */
     public void swap(DungeonPosition pos0, DungeonPosition pos1)
     {
-        Room roomTmp = roomss[pos0.getRow()][pos0.getColumn()];
+//        Room roomTmp = roomss[pos0.getRow()][pos0.getColumn()];
+        Room roomTmp = getRoom(pos0);
 
-        roomss[pos0.getRow()][pos0.getColumn()] = instance.getRoom(pos1);
+        roomss[pos0.getRow()][pos0.getColumn()] = getRoom(pos1);
         roomss[pos1.getRow()][pos1.getColumn()] = roomTmp;
     }
     
@@ -137,28 +138,22 @@ public class Dungeon
         // Si la position est dans le tableau, vérifie si elle est entourée de cartes cachées
         if (((pos.getRow() - 1) >= 0) && (pos.getColumn() >= 0) && (pos.getColumn() < N))
         {
-            posUp = instance.getRoom(pos.up()).isHidden();
+            posUp = getRoom(pos.up()).isHidden();
         }
         if (((pos.getRow() + 1) < N) && (pos.getColumn() >= 0) && (pos.getColumn() < N))
         {
-            posDown = instance.getRoom(pos.down()).isHidden();
+            posDown = getRoom(pos.down()).isHidden();
         }
         if (((pos.getColumn() - 1) >= 0) && (pos.getRow() >= 0) && (pos.getRow() < N))
         {
-            posLeft = instance.getRoom(pos.left()).isHidden();
+            posLeft = getRoom(pos.left()).isHidden();
         }
         if (((pos.getColumn() + 1) < N) && (pos.getRow() >= 0) && (pos.getRow() < N))
         {
-            posRight = instance.getRoom(pos.right()).isHidden();
+            posRight = getRoom(pos.right()).isHidden();
         }
 
         return (!posUp && !posDown && !posLeft && !posRight);
-    }
-    
-    private boolean contains(DungeonPosition pos)
-    {
-        return ((pos.getColumn() < 0) || (pos.getColumn() > (Dungeon.N - 1))
-                || (pos.getRow() < 0) || (pos.getRow() > (Dungeon.N - 1)));
     }
 
     /**

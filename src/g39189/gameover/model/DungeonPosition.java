@@ -153,8 +153,7 @@ public class DungeonPosition
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if (((row + 1) > (Dungeon.N - 1)) || (column < 0)
-                || (column > (Dungeon.N - 1)))
+        if (((row + 1) >= Dungeon.N) || (column < 0) || (column >= Dungeon.N))
         {
             throw new GameOverException("Impossible de descendre");
         }
@@ -176,7 +175,7 @@ public class DungeonPosition
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if (((column - 1) < 0) || (row < 0) || (row > (Dungeon.N - 1)))
+        if (((column - 1) < 0) || (row < 0) || (row >= Dungeon.N))
         {
             throw new GameOverException("Impossible d’aller à gauche");
         }
@@ -198,8 +197,7 @@ public class DungeonPosition
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if (((column + 1) > (Dungeon.N - 1)) || (row < 0)
-                || (row > (Dungeon.N - 1)))
+        if (((column + 1) >= Dungeon.N) || (row < 0) || (row >= Dungeon.N))
         {
             throw new GameOverException("Impossible d’aller à droite");
         }
@@ -221,7 +219,7 @@ public class DungeonPosition
     {
         DungeonPosition pos = new DungeonPosition(0, 0);
 
-        if (((row - 1) < 0) || (column < 0) || (column > (Dungeon.N - 1)))
+        if (((row - 1) < 0) || (column < 0) || (column >= Dungeon.N))
         {
             throw new GameOverException("Impossible de monter");
         }
@@ -238,9 +236,7 @@ public class DungeonPosition
      */
     public boolean isCorner()
     {
-        return (((column == 0) && (row == 0))
-                || ((column == 0) && (row == (Dungeon.N - 1)))
-                || ((column == (Dungeon.N - 1)) && (row == 0))
-                || ((column == (Dungeon.N - 1)) && (row == (Dungeon.N - 1))));
+        return (((column % (Dungeon.N - 1)) == 0)
+                && ((row % (Dungeon.N - 1)) == 0));
     }
 }

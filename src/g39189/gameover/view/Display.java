@@ -104,7 +104,7 @@ public class Display
     }
 
     /**
-     * "Nettoie" la sortie de la console.
+     * Efface l’écran et met le curseur en haut à gauche de la console.
      */
     static void clearScreen()
     {
@@ -123,9 +123,9 @@ public class Display
         final String[] names = new String[Game.MAX_PLAYER];
         boolean newPlayer = true;
         
-        console.printf("Un joueur a droit a un joker par tour s’il est débutant. "
-                + "Il suffit de rajouter « débutant » après son nom.\n"
-                + "Exemple : « JohnDoe débutant »\n\n");
+        console.printf("Un joueur a droit a un joker par tour s’il est"
+                + " débutant. Il suffit de rajouter « débutant » après"
+                + " son nom.\nExemple : « JohnDoe débutant »\n\n");
 
         while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
@@ -147,7 +147,8 @@ public class Display
             }
 
             names[nbPlayers] = name;
-            console.printf("Joueur %s créé avec succès !\n\n", name.split(" ")[0]);
+//            console.printf("Joueur %s créé avec succès !\n\n", name.split(" ")[0]);
+            console.printf("Joueur %s créé avec succès !\n\n", name.replace(" débutant", ""));
             ++nbPlayers;
 
             if ((nbPlayers >= Game.MIN_PLAYER)
