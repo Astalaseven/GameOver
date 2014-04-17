@@ -304,13 +304,9 @@ public class Game
     {
         jokerUsed = true;
         
-        System.out.println("DEBUG playJoker");
-        
-        stateCurrent = play(lastPosition, weapon);
-        
         System.out.println("DEBUG stateCurrent playJoker " + stateCurrent);
         
-        return stateCurrent;
+        return play(lastPosition, weapon);
     }
     
     public BarbarianState playGate(DungeonPosition pos, WeaponType weapon)
@@ -326,10 +322,8 @@ public class Game
         {
             throw new GameOverException("La partie est terminée");
         }
-        
-        stateCurrent = play(pos, weapon);
 
-        return stateCurrent;
+        return play(pos, weapon);
     }
     
     public BarbarianState playBlorkInvincible(DungeonPosition pos)
