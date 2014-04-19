@@ -26,8 +26,8 @@ public class Game
     private boolean jokerUsed;
     private boolean keyFound;
     private DungeonPosition lastPosition;
-    private boolean princessFound;
     private ArrayList<Player> players;
+    private boolean princessFound;
     private BarbarianState stateCurrent;
 
     /**
@@ -57,7 +57,7 @@ public class Game
             for (i = 0; i < infos.length; i++)
             {
                 // Remet l’espace perdu lors du split
-                if (i > 0 && i < infos.length - 1)
+                if ((i > 0) && (i < (infos.length - 1)))
                 {
                     name += " ";
                 }
@@ -223,12 +223,6 @@ public class Game
             stateCurrent = BarbarianState.WIN;
         }
 
-//        if (dungeon.isSurrounded(lastPosition))
-//        {
-//            nextPlayer();
-//            throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
-//        }
-
         return stateCurrent;
     }
     
@@ -249,6 +243,7 @@ public class Game
         switch (room.getType())
         {
             case BLORK:
+
                 // Si le joueur tombe sur un blork invincible
                 if (room.getWeapon() == null)
                 {
@@ -270,21 +265,29 @@ public class Game
 
                 System.out.println("DEBUG BLORK stateCurrent " + stateCurrent);
                 break;
+
             case GATE:
+
                 // Si le joueur trouve une porte,
                 // il peut se déplacer et rejouer
                 stateCurrent = BarbarianState.BEAM_ME_UP;
                 break;
+
             case KEY:
+
                 keyFound = true;
                 break;
+
             case PRINCESS:
+
                 // Si la carte est la princesse de la couleur du joueur
                 if (room.getColor() == player.getColor())
                 {
                     princessFound = true;
                 }
+
                 break;
+
             default:
                 break;
         }

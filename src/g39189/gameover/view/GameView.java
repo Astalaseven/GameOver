@@ -90,10 +90,13 @@ public class GameView
                 cpt++;
                 line = stream.readLine();
             }
+            
+            console.printf("Chargement des joueurs"
+                    + " depuis le fichier « %s ».\n", fileName);
         }
         catch (IOException err)
         {
-            System.out.println("Impossible d’ouvrir le fichier");
+            System.err.println("Impossible d’ouvrir le fichier");
             System.exit(0);
         }
 
@@ -110,6 +113,7 @@ public class GameView
         switch (game.getCurrentState())
         {
             case CONTINUE:
+
                 Display.printPlayer(player);
                 Display.printDungeon(game.getDungeon(), game.getCurrentState());
 
@@ -117,41 +121,50 @@ public class GameView
                 if (game.getDungeon().isSurrounded(game.getLastPosition()))
                 {
                     game.nextPlayer();
-                    throw new GameOverException("Vous êtes bloqué et perdez votre tour !");
+                    throw new GameOverException("Vous êtes bloqué"
+                            + " et perdez votre tour !");
                 }
 
                 direction = Display.askMov();
                 weapon = Display.askWeapon();
                 game.play(direction, weapon);
                 break;
+
             case GAMEOVER:
-                //Display.printSkull();
-                //Display.printRoom(game.getDungeon().getRoom(game.getLastPosition()));
+
                 Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
 
                 game.nextPlayer();
                 throw new GameOverException("Vous avez été tué !");
+
             case MOVE_BLORK:
+
                 Display.printDungeon(game.getDungeon(), game.getCurrentState());
 
                 pos = Display.askNewPosition();
                 game.playBlorkInvincible(pos);
                 break;
+
             case BEAM_ME_UP:
+
                 Display.printDungeon(game.getDungeon(), game.getCurrentState());
 
                 pos = Display.askNewPosition();
                 weapon = Display.askWeapon();
                 game.playGate(pos, weapon);
                 break;
+
             case JOKER:
+
                 Display.printDungeon(game.getDungeon(), game.getCurrentState());
                 console.printf("Joker activé ! ");
 
                 weapon = Display.askWeapon();
                 game.playJoker(weapon);
                 break;
+
             case READY_TO_GO:
+
                 console.printf("%s, à vous de jouer !\n\n", player.getName());
                 Display.printPlayer(player);
                 Display.printDungeon(game.getDungeon(), game.getCurrentState());
@@ -160,6 +173,7 @@ public class GameView
                 weapon = Display.askWeapon();
                 game.play(direction, weapon);
                 break;
+
             default:
                 throw new GameOverException("Statut inconnu");
         }

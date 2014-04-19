@@ -3,6 +3,7 @@ package g39189.gameover.view;
 import g39189.gameover.model.*;
 
 import java.io.Console;
+import java.util.Arrays;
 
 /**
  * Gère les affichages et demandes à l’utilisateur.
@@ -13,6 +14,7 @@ public class Display
 {
     /**
      * Touches utilisées pour déplacer un joueur
+     * (UP, DOWN, RIGHT, LEFT)
      */
     final static String MVT_KEYS = "8264";
 
@@ -147,8 +149,8 @@ public class Display
             }
 
             names[nbPlayers] = name;
-//            console.printf("Joueur %s créé avec succès !\n\n", name.split(" ")[0]);
-            console.printf("Joueur %s créé avec succès !\n\n", name.replace(" débutant", ""));
+            console.printf("Joueur %s créé avec succès !\n\n",
+                    name.replace(" débutant", ""));
             ++nbPlayers;
 
             if ((nbPlayers >= Game.MIN_PLAYER)
@@ -212,25 +214,26 @@ public class Display
      * @throws GameOverException
      *             si la position à afficher n’existe pas
      */
-    static void printDungeon(Dungeon dungeon, BarbarianState state) throws GameOverException
+    static void printDungeon(Dungeon dungeon, BarbarianState state)
+            throws GameOverException
     {
-        String template = "";
+        // Le constructeur par défaut de StringBuffer est créé avec
+        // une capacité initiale de 16 caractères. Le donjon en fait 1282.
+        StringBuffer template = new StringBuffer(1282);
         String hidden = " ";
         int cpt = 1;
         DungeonPosition pos = null;
-        
-        //System.out.println("DEBUG : " + state);
 
         // Indique la position du premier joueur
-        template += String.format("%27s%n", Color.red("*"));
+        template.append(String.format("%27s%n", Color.red("*")));
 
         for (int row = 0; row < Dungeon.N; row++)
         {
-            template += dungeonLine;
+            template.append(dungeonLine);
             
             // Indique la position du troisième joueur
-            template += (row == 4) ?
-                    String.format("%18s", Color.blue("*")) : "\t";
+            template.append((row == 4) ?
+                    String.format("%18s", Color.blue("*")) : "\t");
 
             // Ajoute le type des cartes sur la ligne
             for (int column = 0; column < Dungeon.N; column++)
@@ -244,18 +247,18 @@ public class Display
                 pos = new DungeonPosition(row, column);
                 Room room = dungeon.getRoom(pos);
 
-                template += String.format(" %s", "|");
-                template += room.isHidden() ? String.format("%11s", hidden)
-                        : String.format("%11s", room.getType());
+                template.append(String.format(" %s", "|"));
+                template.append(room.isHidden() ? String.format("%11s", hidden)
+                        : String.format("%11s", room.getType()));
             }
 
-            template += " |";
+            template.append(" |");
             
             // Indique la position du quatrième joueur
-            template += (row == 0)
-                    ? String.format("%12s", Color.yellow("*")) : "";
-            
-            template += "\n\t";
+            template.append((row == 0)
+                    ? String.format("%12s", Color.yellow("*")) : "");
+
+            template.append("\n\t");
 
             // Ajoute le détail des cartes sur la ligne (arme, couleur…)
             for (int column = 0; column < Dungeon.N; column++)
@@ -263,29 +266,27 @@ public class Display
                 pos = new DungeonPosition(row, column);
                 Room room = dungeon.getRoom(pos);
                 
-                template += String.format(" %s", "|");
-                template += formatRoomInDungeonDetails(room);
+                template.append(String.format(" %s", "|"));
+                template.append(formatRoomInDungeonDetails(room));
             }
             
-            template += " |\n";
+            template.append(" |\n");
         }
         
-        template += dungeonLine;
+        template.append(dungeonLine);
         
         // Indique la position du deuxième joueur
-        template += String.format("%79s", Color.green("*"));
+        template.append(String.format("%79s", Color.green("*")));
         
         System.out.println(template);
     }
     
     static String dungeonLine()
     {
-        String line = String.format("%9s", " ");
-        for (int i = 0; i < 66; i++)
-        {
-            line += "−";
-        }
-        return line += "\n";
+        String line = "         ----------------------------"
+                + "--------------------------------------\n";
+
+        return line;
     }
 
 
@@ -381,39 +382,6 @@ public class Display
         System.out.println(template);
         printLine();
     }
-
-    /**
-     * Affiche un crâne en ASCII.
-     */
-//    public static void printSkull()
-//    {
-//        System.out.println(
-//                "\n\t\t             uu$$$$$$$$$$$uu             \n"
-//                + "\t\t          uu$$$$$$$$$$$$$$$$$uu          \n"
-//                + "\t\t         u$$$$$$$$$$$$$$$$$$$$$u         \n"
-//                + "\t\t        u$$$$$$$$$$$$$$$$$$$$$$$u        \n"
-//                + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
-//                + "\t\t       u$$$$$$$$$$$$$$$$$$$$$$$$$u       \n"
-//                + "\t\t       u$$$$$$     $$$     $$$$$$u       \n"
-//                + "\t\t        $$$$       u$u       $$$$        \n"
-//                + "\t\t        $$$u       u$u       u$$$        \n"
-//                + "\t\t        $$$u      u$$$u      u$$$        \n"
-//                + "\t\t         $$$$$uu$$$   $$$uu$$$$$         \n"
-//                + "\t\t           $$$$$$$     $$$$$$$           \n"
-//                + "\t\t            u$$$$$$$u$$$$$$$u            \n"
-//                + "\t\t             u$ $ $ $ $ $ $u             \n"
-//                + "\t\t  uuu        $$u$ $ $ $ $u$$       uuu   \n"
-//                + "\t\t u$$$$        $$$$$u$u$u$$$       $$$$u  \n"
-//                + "\t\t  $$$$$uu       $$$$$$$$$      uu$$$$$$  \n"
-//                + "\t\t $$$$$$$$$$$uu    $$$$$    uu$$$$$$$$$$$ \n"
-//                + "\t\t       $$$$$$$$$$$$$$$$$$$$$$$$$$$       \n"
-//                + "\t\t           $$$$$$$$$$$$$$$$$$$           \n"
-//                + "\t\t          uuuu$$$$$   $$$$$$uuuu         \n"
-//                + "\t\t $$$uuu$$$$$$$$$$       $$$$$$$$$$uuu$$$ \n"
-//                + "\t\t  $$$$$$$$$$                $$$$$$$$$$$  \n"
-//                + "\t\t    $$$$$                      $$$$$     \n"
-//                + "\t\t     $$$                        $$$      \n\n");
-//    }
     
     /**
      * Retourne des détails sur la carte retournée (arme, couleur…).
@@ -449,8 +417,6 @@ public class Display
     
     private static DungeonPosition convertToPosition(int entier) throws GameOverException
     {
-//        int row = (int) Math.floor(entier / 6);
-//        int column = entier - (row * 5) - 1;
         --entier;
         int row = entier / 5;
         int column = entier % 5;
