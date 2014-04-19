@@ -44,41 +44,38 @@ public class Game
 
         for (String info : names)
         {
-            if (info != null)
+            if (info == null)
             {
-                String[] infos = info.split(" ");
-                String name = "";
-                boolean beginner = false;
-                int i = 0;
+                continue;
+            }
 
-                for (i = 0; i < infos.length; i++)
+            String[] infos = info.split(" ");
+            String name = "";
+            boolean beginner = false;
+            int i = 0;
+
+            for (i = 0; i < infos.length; i++)
+            {
+                // Remet l’espace perdu lors du split
+                if (i > 0 && i < infos.length - 1)
                 {
-                    // Remet l’espace perdu lors du split
-                    if (i > 0 && i < infos.length - 1)
-                    {
-                        name += " ";
-                    }
-                    
-                    if (infos[i].equals("débutant"))
-                    {
-                        beginner = true;
-                    }
-                    else
-                    {
-                        name += infos[i];
-                    }
+                    name += " ";
                 }
                 
-                
-//                String name = infos[0];
-//                boolean beginner = (infos.length > 1)
-//                        && (infos[1].equals("débutant"));
-
-                Player player = new Player(name, beginner);
-                players.add(player);
+                if (infos[i].equals("débutant"))
+                {
+                    beginner = true;
+                }
+                else
+                {
+                    name += infos[i];
+                }
             }
+
+            Player player = new Player(name, beginner);
+            players.add(player);
         }
-        
+
         if ((players.size() < MIN_PLAYER) || (players.size() > MAX_PLAYER))
         {
             throw new GameOverException("Nombre de concurrents invalide");
@@ -215,7 +212,7 @@ public class Game
         lastPosition = newPos;
 
         stateCurrent = play(lastPosition, weapon);
-        
+
         System.out.println("DEBUG stateCurrent " + stateCurrent + " " + jokerUsed);
 
         // Si le joueur a trouvé une clé et sa princesse, il a gagné et
@@ -225,7 +222,7 @@ public class Game
             idWinner = idCurrent;
             stateCurrent = BarbarianState.WIN;
         }
-        
+
 //        if (dungeon.isSurrounded(lastPosition))
 //        {
 //            nextPlayer();
