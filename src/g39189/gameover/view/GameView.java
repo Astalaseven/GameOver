@@ -70,21 +70,21 @@ public class GameView
     /**
      * Lit les 4 premières lignes du fichier passé en paramètre
      * 
-     * @param fileName le fichier contenant les noms et statuts
+     * @param file le fichier contenant les noms et statuts
      * des joueurs
      * @return un tableau contenant les noms des joueurs
      * et leur statut (débutant ou non)
      */
-    private static String[] parseFile(String fileName)
+    private static String[] parseFile(String file)
     {
         String[] lines = new String[Game.MAX_PLAYER];
         int cpt = 0;
 
-        try(BufferedReader stream = new BufferedReader(new FileReader(fileName)))
+        try (BufferedReader stream = new BufferedReader(new FileReader(file)))
         {
             String line = stream.readLine();
 
-            while (line != null && cpt < Game.MAX_PLAYER)
+            while ((line != null) && (cpt < Game.MAX_PLAYER))
             {
                 lines[cpt] = line;
                 cpt++;
@@ -92,7 +92,7 @@ public class GameView
             }
             
             console.printf("Chargement des joueurs"
-                    + " depuis le fichier « %s ».\n", fileName);
+                    + " depuis le fichier « %s ».\n", file);
         }
         catch (IOException err)
         {
