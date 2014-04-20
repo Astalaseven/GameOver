@@ -41,11 +41,13 @@ public class Dungeon
         roomss[1][1] = new Room(RoomType.KEY, true, null, null);
         roomss[2][1] = new Room(RoomType.KEY, true, null, null);
         roomss[2][0] = new Room(RoomType.KEY, true, null, null);
-        roomss[1][0] = new Room(RoomType.KEY, true, null, null);
+        roomss[1][0] = new Room(RoomType.GATE, true, null, null);
         roomss[4][4] = new Room(RoomType.BLORK, true, null, null);
         roomss[0][4] = new Room(RoomType.BLORK, true, WeaponType.BLUDGEON, null);
-//        roomss[0][0] = new Room(RoomType.KEY, true, null, null);
-//        roomss[1][0] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
+        roomss[3][0] = new Room(RoomType.KEY, true, null, null);
+        roomss[4][0] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
+        roomss[4][1] = new Room(RoomType.KEY, true, null, null);
+        roomss[3][1] = new Room(RoomType.KEY, true, null, null);
     }
 
     /**
@@ -113,12 +115,12 @@ public class Dungeon
 
     /**
      * Permet d’échanger 2 positions
+     * 
      * @param pos0 la position initiale
      * @param pos1 la nouvelle position
      */
     public void swap(DungeonPosition pos0, DungeonPosition pos1)
     {
-//        Room roomTmp = roomss[pos0.getRow()][pos0.getColumn()];
         Room roomTmp = getRoom(pos0);
 
         roomss[pos0.getRow()][pos0.getColumn()] = getRoom(pos1);
@@ -126,7 +128,7 @@ public class Dungeon
     }
     
     /**
-     * Indique si une pièce est entourée de pièces toutes visibles
+     * Indique si le joueur peut encore se déplacer
      */
     public boolean isSurrounded(DungeonPosition pos) throws GameOverException
     {

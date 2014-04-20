@@ -46,7 +46,7 @@ public class Game
         {
             if (info == null)
             {
-                continue;
+                break;
             }
 
             String[] infos = info.split(" ");
@@ -232,12 +232,12 @@ public class Game
         lastPosition = pos;
         Player player = players.get(idCurrent);
         Room room = dungeon.getRoom(lastPosition);
-        
+
         if (!room.isHidden())
         {
             throw new GameOverException("Carte déjà retournée");
         }
-        
+
         stateCurrent = BarbarianState.CONTINUE;
 
         switch (room.getType())
@@ -268,8 +268,6 @@ public class Game
 
             case GATE:
 
-                // Si le joueur trouve une porte,
-                // il peut se déplacer et rejouer
                 stateCurrent = BarbarianState.BEAM_ME_UP;
                 break;
 
@@ -280,7 +278,6 @@ public class Game
 
             case PRINCESS:
 
-                // Si la carte est la princesse de la couleur du joueur
                 if (room.getColor() == player.getColor())
                 {
                     princessFound = true;
