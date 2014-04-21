@@ -114,7 +114,7 @@ public class Dungeon
     }
 
     /**
-     * Permet d’échanger 2 positions
+     * Permet d’échanger 2 positions.
      * 
      * @param pos0 la position initiale
      * @param pos1 la nouvelle position
@@ -128,7 +128,7 @@ public class Dungeon
     }
     
     /**
-     * Indique si le joueur peut encore se déplacer
+     * Indique si une pièce est entourée de pièces toutes visibles.
      */
     public boolean isSurrounded(DungeonPosition pos) throws GameOverException
     {

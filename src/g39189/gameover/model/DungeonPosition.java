@@ -40,7 +40,7 @@ public class DungeonPosition
     }
 
     /**
-     * Crée une nouvelle position
+     * Crée une nouvelle position.
      * 
      * @param column
      *            colonne initiale
@@ -66,7 +66,7 @@ public class DungeonPosition
     }
 
     /**
-     * Initialise la position initiale du joueur
+     * Initialise la position initiale du joueur.
      */
     private DungeonPosition()
     {
@@ -77,7 +77,7 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la valeur de column
+     * Retourne la valeur de column.
      * 
      * @return la colonne de la position
      */
@@ -87,7 +87,7 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la valeur de row
+     * Retourne la valeur de row.
      * 
      * @return la ligne de la position
      */
@@ -97,7 +97,7 @@ public class DungeonPosition
     }
 
     /**
-     * Avance le joueur d’une case
+     * Avance le joueur d’une case.
      * 
      * @param dir
      *            la direction dans laquelle avancer
@@ -132,7 +132,7 @@ public class DungeonPosition
     }
 
     /**
-     * Affiche une position selon sa colonne et sa ligne
+     * Affiche une position selon sa colonne et sa ligne.
      * 
      * @return position au format [colonne,ligne]
      */
@@ -143,7 +143,7 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la position en dessous de la position actuelle
+     * Retourne la position en dessous de la position actuelle.
      * 
      * @return nouvelle position située en dessous de l’actuelle
      * @throws GameOverException
@@ -165,7 +165,7 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la position à gauche de la position actuelle
+     * Retourne la position à gauche de la position actuelle.
      * 
      * @return nouvelle position située à gauche de l’actuelle
      * @throws GameOverException
@@ -187,7 +187,7 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la position à droite de la position actuelle
+     * Retourne la position à droite de la position actuelle.
      * 
      * @return nouvelle position située à droite de l’actuelle
      * @throws GameOverException
@@ -209,7 +209,7 @@ public class DungeonPosition
     }
 
     /**
-     * Retourne la position au-dessus de la position actuelle
+     * Retourne la position au-dessus de la position actuelle.
      * 
      * @return nouvelle position située au-dessus de l’actuelle
      * @throws GameOverException
@@ -231,7 +231,7 @@ public class DungeonPosition
     }
     
     /**
-     * Vérifie si la position est dans un coin du plateau
+     * Indique si la position est dans un coin du plateau.
      * @return vrai si la position est dans un coin, faux sinon
      */
     public boolean isCorner()
