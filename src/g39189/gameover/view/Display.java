@@ -21,16 +21,16 @@ public class Display
      * Touches utilisées pour choisir une arme
      */
     final static String WPN_KEYS = "1234";
-    
+
     /**
      * Touche permettant de quitter le jeu
      */
     final static String QUIT_KEY = "Q";
 
     private static Console console = System.console();
-    
+
     private static String dungeonLine;
-    
+
     static
     {
         dungeonLine = dungeonLine();
