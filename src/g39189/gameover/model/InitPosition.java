@@ -23,7 +23,7 @@ public enum InitPosition
      * 
      * @return column colonne dans le tableau
      */
-    public int getColumn()
+    int getColumn()
     {
         return column;
     }
@@ -33,7 +33,7 @@ public enum InitPosition
      * 
      * @return row ligne dans le tableau
      */
-    public int getRow()
+    int getRow()
     {
         return row;
     }

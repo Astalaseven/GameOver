@@ -3,7 +3,6 @@ package g39189.gameover.view;
 import g39189.gameover.model.*;
 
 import java.io.Console;
-import java.util.Arrays;
 
 /**
  * Gère les affichages et demandes à l’utilisateur.

@@ -363,7 +363,7 @@ public class Game
     /**
      * Supprime tous les joueurs et remet à zéro le compteur.
      */
-    protected void deletePlayers()
+    void deletePlayers()
     {
         Player.resetN();
         players.clear();
@@ -375,7 +375,7 @@ public class Game
      * @param dungeon
      *            un donjon personnalisé
      */
-    protected void setDungeon(Dungeon dungeon)
+    void setDungeon(Dungeon dungeon)
     {
         this.dungeon = dungeon;
     }
