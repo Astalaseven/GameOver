@@ -158,7 +158,7 @@ public class DungeonPosition
      */
     DungeonPosition down() throws GameOverException
     {
-        DungeonPosition pos = new DungeonPosition(0, 0);
+        DungeonPosition pos = new DungeonPosition();
 
         if (((row + 1) >= Dungeon.N) || (column < 0) || (column >= Dungeon.N))
         {
@@ -180,7 +180,7 @@ public class DungeonPosition
      */
     DungeonPosition left() throws GameOverException
     {
-        DungeonPosition pos = new DungeonPosition(0, 0);
+        DungeonPosition pos = new DungeonPosition();
 
         if (((column - 1) < 0) || (row < 0) || (row >= Dungeon.N))
         {
@@ -202,7 +202,7 @@ public class DungeonPosition
      */
     DungeonPosition right() throws GameOverException
     {
-        DungeonPosition pos = new DungeonPosition(0, 0);
+        DungeonPosition pos = new DungeonPosition();
 
         if (((column + 1) >= Dungeon.N) || (row < 0) || (row >= Dungeon.N))
         {
@@ -224,7 +224,7 @@ public class DungeonPosition
      */
     DungeonPosition up() throws GameOverException
     {
-        DungeonPosition pos = new DungeonPosition(0, 0);
+        DungeonPosition pos = new DungeonPosition();
 
         if (((row - 1) < 0) || (column < 0) || (column >= Dungeon.N))
         {
