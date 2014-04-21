@@ -337,11 +337,12 @@ public class Display
     {
         printLine();
 
-        String template = String.format("| %10s : %10s \t %10s : %10s %n"
-                                      + "| %10s : %10s",
+        String template = String.format("| %10s : %10s \t %10s : %6s %n"
+                                      + "| %10s : %10s \t %10s : %5s",
                  bold("Nom du joueur"), player.getName(),
                  bold("Couleur"), player.getColor(),
-                 bold("Position init"), InitPosition.values()[player.getId()]);
+                 bold("Position init"), player.getInitPosition(),
+                 bold("Débutant"), player.isBeginner() ? "oui" : "non");
 
         System.out.println(template);
         printLine();

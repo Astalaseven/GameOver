@@ -29,14 +29,24 @@ public class DungeonPosition
 
     private int column;
     private int row;
-    private static int dungeonCpt;
 
     static
     {
         P_BARBARIAN_1 = new DungeonPosition();
+        P_BARBARIAN_1.row = -1;
+        P_BARBARIAN_1.column = 0;
+
         P_BARBARIAN_2 = new DungeonPosition();
+        P_BARBARIAN_2.row = Dungeon.N;
+        P_BARBARIAN_2.column = (Dungeon.N - 1);
+
         P_BARBARIAN_3 = new DungeonPosition();
+        P_BARBARIAN_3.row = 0;
+        P_BARBARIAN_3.column = Dungeon.N;
+
         P_BARBARIAN_4 = new DungeonPosition();
+        P_BARBARIAN_4.row = (Dungeon.N - 1);
+        P_BARBARIAN_4.column = -1;
     }
 
     /**
@@ -66,14 +76,11 @@ public class DungeonPosition
     }
 
     /**
-     * Initialise la position initiale du joueur.
+     * Sert à définir les constantes publiques P_BARBARIAN_*.
      */
     private DungeonPosition()
     {
-        InitPosition init = InitPosition.values()[dungeonCpt];
-        column = init.getColumn();
-        row = init.getRow();
-        ++dungeonCpt;
+
     }
 
     /**
