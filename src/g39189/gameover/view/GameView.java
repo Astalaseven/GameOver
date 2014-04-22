@@ -23,48 +23,45 @@ public class GameView
     {
         try
         {
-            Display.printGameOver();
-
-            String[] names;
-
-            // Parse le fichier s’il est passé en paramètre
-            if (args.length >= 1)
-            {
-                names = parseFile(args[0]);
-            }
-            // sinon propose de rentrer les noms manuellement
-            else
-            {
-                names = Display.createPlayers();
-            }
-
-            Game game = new Game(names);
-       
-            console.readLine("\nTapez sur « %s » à n’importe quel moment "
-                    + "pour quitter.\n(Tapez sur Enter pour commencer "
-                    + "la partie)", Display.QUIT_KEY);
-
-            while (!game.isOver())
-            {
-                try
-                {
-                    Display.printGameOver();
-                    play(game);
-                }
-                catch (GameOverException e)
-                {
-                    continue;
-                }
-            }
-            
-            Display.printGameOver();
-            Display.printDungeon(game.getDungeon(), game.getCurrentState());
-            Display.printEndOfGame(game.getCurrentPlayer());
+            String[] names = loadPlayers(args);
+            GameView game = new GameView(names);
         }
         catch (GameOverException e)
         {
-            e.getMessage();
+            System.out.println(e.getMessage());
+            System.console().readLine();
         }
+    }
+    
+    private GameView(String[] names) throws GameOverException
+    {
+        Display.printGameOver();
+
+        Game game = new Game(names);
+   
+        console.readLine("\nTapez sur « %s » à n’importe quel moment "
+                + "pour quitter.\n(Tapez sur Enter pour commencer "
+                + "la partie)", Display.QUIT_KEY);
+
+        while (!game.isOver())
+        {
+            try
+            {
+                Display.printGameOver();
+                play(game);
+            }
+            catch (GameOverException e)
+            {
+                System.out.print(e.getMessage());
+                System.out.print("  −  Tapez sur Enter pour continuer");
+                System.console().readLine();
+                continue;
+            }
+        }
+        
+        Display.printGameOver();
+        Display.printDungeon(game.getDungeon(), game.getCurrentState());
+        Display.printEndOfGame(game.getCurrentPlayer());
     }
     
     /**
@@ -101,6 +98,24 @@ public class GameView
         }
 
         return lines;
+    }
+    
+    private static String[] loadPlayers(String[] args)
+    {
+        String[] names;
+
+        // Parse le fichier s’il est passé en paramètre
+        if (args.length >= 1)
+        {
+            names = parseFile(args[0]);
+        }
+        // sinon propose de rentrer les noms manuellement
+        else
+        {
+            names = Display.createPlayers();
+        }
+        
+        return names;
     }
     
     private static void play(Game game) throws GameOverException

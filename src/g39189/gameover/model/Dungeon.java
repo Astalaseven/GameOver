@@ -14,9 +14,7 @@ public class Dungeon
      * Taille du donjon
      */
     public final static int N = 5;
-
     private static Dungeon instance;
-    private LinkedList<Room> donjon = new LinkedList<>();
     private Room[][] roomss = new Room[N][N];
 
     /**
@@ -24,14 +22,14 @@ public class Dungeon
      */
     private Dungeon()
     {
-        populateDungeon();
-        Collections.shuffle(donjon);
+        LinkedList<Room> rooms = populateDungeon();
+        Collections.shuffle(rooms);
 
         for (int row = 0; row < N; row++)
         {
             for (int column = 0; column < N; column++)
             {
-                roomss[row][column] = donjon.pop();
+                roomss[row][column] = rooms.pop();
             }
         }
         
@@ -170,30 +168,37 @@ public class Dungeon
      * @param armed
      *            indique si la carte a une arme
      */
-    private void addRoom(RoomType type, int nb, boolean colored, boolean armed)
+    private LinkedList<Room> addRoom(RoomType type, int nb, boolean colored, boolean armed)
     {
         int j = 0;
+        LinkedList<Room> rooms = new LinkedList<>();
 
         for (int i = 0; i < nb; i++)
         {
             WeaponType weapon = armed ? WeaponType.values()[j] : null;
             BarbarianColor color = colored ? BarbarianColor.values()[j] : null;
 
-            donjon.add(new Room(type, true, weapon, color));
+            rooms.add(new Room(type, true, weapon, color));
 
             j = (j + 1) % 4;
         }
+        
+        return rooms;
     }
 
     /**
      * Crée et ajoute les cartes dans la liste donjon.
      */
-    private void populateDungeon()
+    private LinkedList<Room> populateDungeon()
     {
-        addRoom(RoomType.BLORK, 16, false, true);
-        addRoom(RoomType.PRINCESS, 4, true, false);
-        addRoom(RoomType.KEY, 2, false, false);
-        addRoom(RoomType.BLORK, 2, false, false);
-        addRoom(RoomType.GATE, 1, false, false);
+        LinkedList<Room> rooms = new LinkedList<>();
+
+        rooms.addAll(addRoom(RoomType.BLORK, 16, false, true));
+        rooms.addAll(addRoom(RoomType.PRINCESS, 4, true, false));
+        rooms.addAll(addRoom(RoomType.KEY, 2, false, false));
+        rooms.addAll(addRoom(RoomType.BLORK, 2, false, false));
+        rooms.addAll(addRoom(RoomType.GATE, 1, false, false));
+        
+        return rooms;
     }
 }

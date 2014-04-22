@@ -50,16 +50,6 @@ public class Player
     }
 
     /**
-     * Retourne le numéro du joueur.
-     * 
-     * @return le numéro du joueur
-     */
-    public int getId()
-    {
-        return n;
-    }
-
-    /**
      * Retourne la valeur de initPosition.
      * 
      * @return la position initiale du joueur
@@ -98,6 +88,8 @@ public class Player
     
     /**
      * Remet le compteur de joueurs à zéro.
+     * Nécessaire quand plusieurs instances de Game sont lancées
+     * dans les tests.
      */
     static void resetN()
     {

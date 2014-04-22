@@ -152,23 +152,32 @@ public class Display
                     name.replace(" débutant", ""));
             ++nbPlayers;
 
-            if ((nbPlayers >= Game.MIN_PLAYER)
-                    && (nbPlayers < Game.MAX_PLAYER))
-            {
-                String str = " ";
-
-                while (!str.matches("[ON]"))
-                {
-                    str = console.readLine("Créer un autre joueur ? (O/n) ");
-                    str = str.toUpperCase();
-                    str = (str.length() > 0) ? str : "O";
-                }
-
-                newPlayer = (str.startsWith("O"));
-            }
+            newPlayer = askCreateOtherUser(nbPlayers);
         }
 
         return names;
+    }
+    
+    static boolean askCreateOtherUser(int nbPlayers)
+    {
+        boolean newPlayer = true;
+
+        if ((nbPlayers >= Game.MIN_PLAYER)
+                && (nbPlayers < Game.MAX_PLAYER))
+        {
+            String str = " ";
+
+            while (!str.matches("[ON]"))
+            {
+                str = console.readLine("Créer un autre joueur ? (O/n) ");
+                str = str.toUpperCase();
+                str = (str.length() > 0) ? str : "O";
+            }
+
+            newPlayer = (str.startsWith("O"));
+        }
+
+        return newPlayer;
     }
     
     /**
