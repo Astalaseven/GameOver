@@ -18,8 +18,7 @@ public class Dungeon
     private Room[][] roomss = new Room[N][N];
 
     /**
-     * Remplit la liste donjon avec les cartes et les place
-     * sur le plateau.
+     * Crée les cartes, les mélange et les place sur le plateau.
      */
     private Dungeon()
     {
@@ -149,7 +148,7 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute un nombre de cartes passé en paramètre
+     * Retourne une liste avec  Crée et ajoute un nombre de cartes passé en paramètre
      * à la liste donjon.
      * 
      * @param type
