@@ -11,7 +11,7 @@ import java.io.IOException;
  * Cette classe est destinée à l’interface utilisateur.
  * Cette classe instancie le jeu. Tant que le jeu n’est pas fini,
  * c’est-à-dire qu’aucun joueur n’a trouvé la princesse de sa couleur
- * et une clé, elle demande au joueur d’introduire un mouvement 
+ * et une clé, elle demande au joueur d’introduire un mouvement
  * et une arme.
  *
  * @author Bovyn Gatien - 39189
@@ -26,6 +26,12 @@ public class GameView
     
     private static Console console = System.console();
     
+    /**
+     * Lance une partie et interagit avec l’utilisateur.
+     * 
+     * @param args un fichier contenant les noms des joueurs
+     * et leur statut (débutant ou non)
+     */
     public static void main(String[] args)
     {
         try

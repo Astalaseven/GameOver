@@ -3,8 +3,8 @@ package g39189.gameover.model;
 import java.util.ArrayList;
 
 /**
- * Cette classe représente une partie. Une partie se finit lorsqu’un joueur
- * trouve la princesse de sa couleur et une clé.
+ * Cette classe représente une partie. Une partie se finit
+ * lorsqu’un joueur trouve la princesse de sa couleur et une clé.
  * 
  * @author Bovyn Gatien - 39189
  */
@@ -62,7 +62,7 @@ public class Game
                 {
                     name += " ";
                 }
-                
+
                 if (infos[i].equals("débutant"))
                 {
                     beginner = true;
@@ -192,7 +192,7 @@ public class Game
         {
             throw new GameOverException("La partie est finie");
         }
-        
+
         if ((stateCurrent != BarbarianState.CONTINUE)
                 && (stateCurrent != BarbarianState.READY_TO_GO))
         {
@@ -201,7 +201,7 @@ public class Game
 
         // Si la partie n’est pas finie, fait le mouvement
         DungeonPosition newPos = lastPosition.move(dir);
-        
+
         Room room = dungeon.getRoom(newPos);
 
         if (!room.isHidden())
