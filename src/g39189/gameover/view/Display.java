@@ -232,9 +232,9 @@ public class Display
         {
             template.append(dungeonLine());
             
-            // Indique la position du troisième joueur
+            // Indique la position du quatrième joueur
             template.append((row == 4) ?
-                    String.format("%18s", Color.blue("*")) : "\t");
+                    String.format("%18s", Color.yellow("*")) : "\t");
 
             // Ajoute le type des cartes sur la ligne
             for (int column = 0; column < Dungeon.N; column++)
@@ -255,9 +255,9 @@ public class Display
 
             template.append(" |");
             
-            // Indique la position du quatrième joueur
+            // Indique la position du troisième joueur
             template.append((row == 0)
-                    ? String.format("%12s", Color.yellow("*")) : "");
+                    ? String.format("%12s", Color.blue("*")) : "");
 
             template.append("\n\t");
 
