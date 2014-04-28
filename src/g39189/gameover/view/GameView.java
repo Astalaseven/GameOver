@@ -23,8 +23,7 @@ public class GameView
     {
         try
         {
-            String[] names = loadPlayers(args);
-            GameView game = new GameView(names);
+            new GameView(args);
         }
         catch (GameOverException e)
         {
@@ -33,10 +32,10 @@ public class GameView
         }
     }
     
-    private GameView(String[] names) throws GameOverException
+    private GameView(String[] args) throws GameOverException
     {
         Display.printGameOver();
-
+        String[] names = loadPlayers(args);
         Game game = new Game(names);
    
         console.readLine("\nTapez sur « %s » à n’importe quel moment "
