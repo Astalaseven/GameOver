@@ -23,11 +23,13 @@ public class Player
         };
 
     /**
-     * Crée un joueur avec un nom, un numéro, une couleur
+     * Crée un joueur avec un nom, un statut, un numéro, une couleur
      * et une position initiale.
      * 
      * @param name
      *            nom du joueur
+     * @param beginner
+     *            statut du joueur, débutant ou non
      * @throws GameOverException
      */
     public Player(String name, boolean beginner)
