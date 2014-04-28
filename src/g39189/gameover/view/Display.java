@@ -29,13 +29,6 @@ public class Display
 
     private static Console console = System.console();
 
-    private static String dungeonLine;
-
-    static
-    {
-        dungeonLine = dungeonLine();
-    }
-
     /**
      * Demande à l’utilisateur quel mouvement il souhaite faire.
      * 
@@ -237,7 +230,7 @@ public class Display
 
         for (int row = 0; row < Dungeon.N; row++)
         {
-            template.append(dungeonLine);
+            template.append(dungeonLine());
             
             // Indique la position du troisième joueur
             template.append((row == 4) ?
@@ -281,7 +274,7 @@ public class Display
             template.append(" |\n");
         }
         
-        template.append(dungeonLine);
+        template.append(dungeonLine());
         
         // Indique la position du deuxième joueur
         template.append(String.format("%79s", Color.green("*")));
@@ -429,8 +422,6 @@ public class Display
         --entier;
         int row = entier / 5;
         int column = entier % 5;
-        
-        System.out.println("DEBUG " + row + ", " + column);
 
         return new DungeonPosition(row, column);
     }

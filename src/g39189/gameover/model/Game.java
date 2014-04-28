@@ -36,7 +36,8 @@ public class Game
      * @param names
      *            noms des joueurs
      * @throws GameOverException
-     *             si le nb de joueurs n’est pas compris entre 2 et 4 inclus.
+     *             si le nb de joueurs n’est pas compris
+     *             entre 2 et 4 inclus.
      */
     public Game(String... names) throws GameOverException
     {
@@ -92,9 +93,9 @@ public class Game
     }
 
     /**
-     * Retourne l’id du joueur courant.
+     * Retourne le joueur courant.
      * 
-     * @return l’id du joueur actuel
+     * @return le joueur actuel
      */
     public Player getCurrentPlayer()
     {
@@ -195,7 +196,6 @@ public class Game
         if ((stateCurrent != BarbarianState.CONTINUE)
                 && (stateCurrent != BarbarianState.READY_TO_GO))
         {
-            System.out.println("DEBUG : " + stateCurrent);
             throw new GameOverException("Le joueur ne peut pas jouer");
         }
 
@@ -212,8 +212,6 @@ public class Game
         lastPosition = newPos;
 
         stateCurrent = play(lastPosition, weapon);
-
-        System.out.println("DEBUG stateCurrent " + stateCurrent + " " + jokerUsed);
 
         // Si le joueur a trouvé une clé et sa princesse, il a gagné et
         // la partie est finie
@@ -244,26 +242,7 @@ public class Game
         {
             case BLORK:
 
-                // Si le joueur tombe sur un blork invincible
-                if (room.getWeapon() == null)
-                {
-                    stateCurrent = BarbarianState.MOVE_BLORK;
-                }
-                // Si le joueur n’a pas la bonne arme, il perd son tour
-                else if (room.getWeapon() != weapon)
-                {
-                    // sauf s’il a un joker
-                    if (players.get(idCurrent).isBeginner() && !jokerUsed)
-                    {
-                        stateCurrent = BarbarianState.JOKER;   
-                    }
-                    else
-                    {
-                        stateCurrent = BarbarianState.GAMEOVER;
-                    }
-                }
-
-                System.out.println("DEBUG BLORK stateCurrent " + stateCurrent);
+                stateCurrent = playBlork(room, weapon);
                 break;
 
             case GATE:
@@ -297,11 +276,32 @@ public class Game
         return stateCurrent;
     }
     
+    private BarbarianState playBlork(Room room, WeaponType weapon)
+    {
+        if (room.getWeapon() == null)
+        {
+            stateCurrent = BarbarianState.MOVE_BLORK;
+        }
+        // Si le joueur n’a pas la bonne arme, il perd son tour
+        else if (room.getWeapon() != weapon)
+        {
+            // sauf s’il a un joker
+            if (players.get(idCurrent).isBeginner() && !jokerUsed)
+            {
+                stateCurrent = BarbarianState.JOKER;   
+            }
+            else
+            {
+                stateCurrent = BarbarianState.GAMEOVER;
+            }
+        }
+
+        return stateCurrent;
+    }
+    
     public BarbarianState playJoker(WeaponType weapon) throws GameOverException
     {
         jokerUsed = true;
-        
-        System.out.println("DEBUG stateCurrent playJoker " + stateCurrent);
         
         return play(lastPosition, weapon);
     }

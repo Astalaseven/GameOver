@@ -18,7 +18,8 @@ public class Dungeon
     private Room[][] roomss = new Room[N][N];
 
     /**
-     * Remplit la liste donjon avec les cartes et les place sur le plateau.
+     * Remplit la liste donjon avec les cartes et les place
+     * sur le plateau.
      */
     private Dungeon()
     {
@@ -32,20 +33,6 @@ public class Dungeon
                 roomss[row][column] = rooms.pop();
             }
         }
-        
-        // Debug
-        roomss[0][0] = new Room(RoomType.GATE, true, null, null);
-        roomss[0][1] = new Room(RoomType.KEY, true, null, null);
-        roomss[1][1] = new Room(RoomType.KEY, true, null, null);
-        roomss[2][1] = new Room(RoomType.KEY, true, null, null);
-        roomss[2][0] = new Room(RoomType.KEY, true, null, null);
-        roomss[1][0] = new Room(RoomType.GATE, true, null, null);
-        roomss[4][4] = new Room(RoomType.BLORK, true, null, null);
-        roomss[0][4] = new Room(RoomType.BLORK, true, WeaponType.BLUDGEON, null);
-        roomss[3][0] = new Room(RoomType.KEY, true, null, null);
-        roomss[4][0] = new Room(RoomType.PRINCESS, true, null, BarbarianColor.RED);
-        roomss[4][1] = new Room(RoomType.KEY, true, null, null);
-        roomss[3][1] = new Room(RoomType.KEY, true, null, null);
     }
 
     /**
@@ -135,20 +122,25 @@ public class Dungeon
         boolean posLeft = false;
         boolean posRight = false;
 
-        // Si la position est dans le tableau, vérifie si elle est entourée de cartes cachées
-        if (((pos.getRow() - 1) >= 0) && (pos.getColumn() >= 0) && (pos.getColumn() < N))
+        // Si la position est dans le tableau, vérifie si elle est entourée
+        // de cartes cachées
+        if (((pos.getRow() - 1) >= 0) && (pos.getColumn() >= 0)
+                && (pos.getColumn() < N))
         {
             posUp = getRoom(pos.up()).isHidden();
         }
-        if (((pos.getRow() + 1) < N) && (pos.getColumn() >= 0) && (pos.getColumn() < N))
+        if (((pos.getRow() + 1) < N) && (pos.getColumn() >= 0)
+                && (pos.getColumn() < N))
         {
             posDown = getRoom(pos.down()).isHidden();
         }
-        if (((pos.getColumn() - 1) >= 0) && (pos.getRow() >= 0) && (pos.getRow() < N))
+        if (((pos.getColumn() - 1) >= 0) && (pos.getRow() >= 0)
+                && (pos.getRow() < N))
         {
             posLeft = getRoom(pos.left()).isHidden();
         }
-        if (((pos.getColumn() + 1) < N) && (pos.getRow() >= 0) && (pos.getRow() < N))
+        if (((pos.getColumn() + 1) < N) && (pos.getRow() >= 0)
+                && (pos.getRow() < N))
         {
             posRight = getRoom(pos.right()).isHidden();
         }
@@ -157,7 +149,8 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute un nombre de cartes passé en paramètre à la liste donjon.
+     * Crée et ajoute un nombre de cartes passé en paramètre
+     * à la liste donjon.
      * 
      * @param type
      *            le type de carte à créer
@@ -168,7 +161,8 @@ public class Dungeon
      * @param armed
      *            indique si la carte a une arme
      */
-    private LinkedList<Room> addRoom(RoomType type, int nb, boolean colored, boolean armed)
+    private LinkedList<Room> addRoom(RoomType type, int nb, boolean colored,
+            boolean armed)
     {
         int j = 0;
         LinkedList<Room> rooms = new LinkedList<>();

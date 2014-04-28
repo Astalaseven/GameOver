@@ -11,12 +11,19 @@ import java.io.IOException;
  * Cette classe est destinée à l’interface utilisateur.
  * Cette classe instancie le jeu. Tant que le jeu n’est pas fini,
  * c’est-à-dire qu’aucun joueur n’a trouvé la princesse de sa couleur
- * et une clé, elle demande au joueur d’introduire un mouvement et une arme.
+ * et une clé, elle demande au joueur d’introduire un mouvement 
+ * et une arme.
  *
  * @author Bovyn Gatien - 39189
  */
 public class GameView
 {
+    private Game game = null;
+    private Player player = null;
+    private DungeonPosition pos = null;
+    private Direction direction = null;
+    private WeaponType weapon = null;
+    
     private static Console console = System.console();
     
     public static void main(String[] args)
@@ -36,7 +43,7 @@ public class GameView
     {
         Display.printGameOver();
         String[] names = loadPlayers(args);
-        Game game = new Game(names);
+        game = new Game(names);
    
         console.readLine("\nTapez sur « %s » à n’importe quel moment "
                 + "pour quitter.\n(Tapez sur Enter pour commencer "
@@ -71,7 +78,7 @@ public class GameView
      * @return un tableau contenant les noms des joueurs
      * et leur statut (débutant ou non)
      */
-    private static String[] parseFile(String file)
+    private String[] parseFile(String file)
     {
         String[] lines = new String[Game.MAX_PLAYER];
         int cpt = 0;
@@ -99,7 +106,7 @@ public class GameView
         return lines;
     }
     
-    private static String[] loadPlayers(String[] args)
+    private String[] loadPlayers(String[] args)
     {
         String[] names;
 
@@ -117,79 +124,112 @@ public class GameView
         return names;
     }
     
-    private static void play(Game game) throws GameOverException
+    private void play(Game game) throws GameOverException
     {
-        Player player = game.getCurrentPlayer();
-        DungeonPosition pos = null;
-        Direction direction = null;
-        WeaponType weapon = null;
+        player = game.getCurrentPlayer();
 
         switch (game.getCurrentState())
         {
             case CONTINUE:
 
-                Display.printPlayer(player);
-                Display.printDungeon(game.getDungeon(), game.getCurrentState());
-
-                // Si le joueur ne sait plus bouger, il perd son tour
-                if (game.getDungeon().isSurrounded(game.getLastPosition()))
-                {
-                    game.nextPlayer();
-                    throw new GameOverException("Vous êtes bloqué"
-                            + " et perdez votre tour !");
-                }
-
-                direction = Display.askMov();
-                weapon = Display.askWeapon();
-                game.play(direction, weapon);
+                playContinue();
                 break;
 
             case GAMEOVER:
 
-                Display.printDungeon(Dungeon.getInstance(), game.getCurrentState());
-
-                game.nextPlayer();
-                throw new GameOverException("Vous avez été tué !");
+                playGameOver();
 
             case MOVE_BLORK:
 
-                Display.printDungeon(game.getDungeon(), game.getCurrentState());
-
-                pos = Display.askNewPosition();
-                game.playBlorkInvincible(pos);
+                playMoveBlork();
                 break;
 
             case BEAM_ME_UP:
 
-                Display.printDungeon(game.getDungeon(), game.getCurrentState());
-
-                pos = Display.askNewPosition();
-                weapon = Display.askWeapon();
-                game.playGate(pos, weapon);
+                playBeamMeUp();
                 break;
 
             case JOKER:
 
-                Display.printDungeon(game.getDungeon(), game.getCurrentState());
-                console.printf("Joker activé ! ");
-
-                weapon = Display.askWeapon();
-                game.playJoker(weapon);
+                playJoker();
                 break;
 
             case READY_TO_GO:
 
-                console.printf("%s, à vous de jouer !\n\n", player.getName());
-                Display.printPlayer(player);
-                Display.printDungeon(game.getDungeon(), game.getCurrentState());
-
-                direction = Display.askMov();
-                weapon = Display.askWeapon();
-                game.play(direction, weapon);
+                playReadyToGo();
                 break;
 
             default:
                 throw new GameOverException("Statut inconnu");
         }
+    }
+    
+    private void playReadyToGo() throws GameOverException
+    {
+        console.printf("%s, à vous de jouer !\n\n", player.getName());
+        Display.printPlayer(player);
+        Display.printDungeon(game.getDungeon(),
+                game.getCurrentState());
+
+        direction = Display.askMov();
+        weapon = Display.askWeapon();
+        game.play(direction, weapon);
+    }
+
+    private void playJoker() throws GameOverException
+    {
+        Display.printDungeon(game.getDungeon(),
+                game.getCurrentState());
+        console.printf("Joker activé ! ");
+
+        weapon = Display.askWeapon();
+        game.playJoker(weapon);        
+    }
+
+    private void playBeamMeUp() throws GameOverException
+    {
+        Display.printDungeon(game.getDungeon(),
+                game.getCurrentState());
+
+        pos = Display.askNewPosition();
+        weapon = Display.askWeapon();
+        game.playGate(pos, weapon);
+    }
+
+    private void playMoveBlork() throws GameOverException
+    {
+        Display.printDungeon(game.getDungeon(),
+                game.getCurrentState());
+
+        pos = Display.askNewPosition();
+        game.playBlorkInvincible(pos);
+    }
+
+    private void playGameOver() throws GameOverException
+    {
+        Display.printDungeon(Dungeon.getInstance(),
+                game.getCurrentState());
+
+        game.nextPlayer();
+        throw new GameOverException("Vous avez été tué !");
+    }
+
+    private void playContinue() throws GameOverException
+    {
+        Display.printPlayer(player);
+        Display.printDungeon(game.getDungeon(),
+                game.getCurrentState());
+
+        // Si le joueur ne sait plus bouger, il perd son tour
+        if (game.getDungeon().isSurrounded(game.getLastPosition()))
+        {
+            game.nextPlayer();
+            throw new GameOverException("Vous êtes bloqué"
+                    + " et perdez votre tour !");
+        }
+
+        direction = Display.askMov();
+        weapon = Display.askWeapon();
+        game.play(direction, weapon);
     }
 }
