@@ -119,7 +119,7 @@ public class Display
         
         console.printf("Un joueur a droit a un joker par tour s’il est"
                 + " débutant. Il suffit de rajouter « débutant » après"
-                + " son nom.\nExemple : « JohnDoe débutant »\n\n");
+                + " son nom.\nExemple : « John Doe débutant »\n\n");
 
         while (newPlayer && (nbPlayers < Game.MAX_PLAYER))
         {
@@ -184,27 +184,6 @@ public class Display
         System.out.println("| Fin de la partie :");
         System.out.println("| Le joueur " + player.getName() + " a gagné !");
         printLine();
-    }
-    
-    static void main(String[] args)
-    {
-        try
-        {
-//            printDungeon(Dungeon.getInstance(), BarbarianState.MOVE_BLORK);
-//            printDungeon(Dungeon.getInstance(), null);
-            
-            for (int i = 1; i <= 25; i++) {
-                System.out.print(i + " ");
-                convertToPosition(i);
-                System.out.println();
-            }
-
-        }
-        catch (GameOverException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -417,7 +396,8 @@ public class Display
         return String.format("%11s", details);
     }
     
-    private static DungeonPosition convertToPosition(int entier) throws GameOverException
+    private static DungeonPosition convertToPosition(int entier)
+            throws GameOverException
     {
         --entier;
         int row = entier / 5;
@@ -427,10 +407,11 @@ public class Display
     }
 
     /**
-     * Demande à l’utilisateur à quelle position il souhaite se déplacer
-     * ou déplacer une carte
+     * Demande à l’utilisateur à quelle position il souhaite se
+     * déplacer ou déplacer une carte
      * @return la nouvelle position
-     * @throws GameOverException si la conversion en position sort du tableau
+     * @throws GameOverException si la conversion de la position sort
+     * du tableau
      */
     static DungeonPosition askNewPosition() throws GameOverException
     {

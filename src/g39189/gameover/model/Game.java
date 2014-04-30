@@ -50,28 +50,8 @@ public class Game
                 break;
             }
 
-            String[] infos = info.split(" ");
-            String name = "";
-            boolean beginner = false;
-            int i = 0;
-
-            for (i = 0; i < infos.length; i++)
-            {
-                // Remet l’espace perdu lors du split
-                if ((i > 0) && (i < (infos.length - 1)))
-                {
-                    name += " ";
-                }
-
-                if (infos[i].equals("débutant"))
-                {
-                    beginner = true;
-                }
-                else
-                {
-                    name += infos[i];
-                }
-            }
+            boolean beginner = info.endsWith(" débutant");
+            String name = info.replace(" débutant", "");
 
             Player player = new Player(name, beginner);
             players.add(player);
@@ -167,7 +147,7 @@ public class Game
         dungeon.hideAll();
         jokerUsed = false;
         keyFound = false;
-        lastPosition = players.get(idCurrent).getInitPosition();
+        lastPosition = getCurrentPlayer().getInitPosition();
         princessFound = false;
         stateCurrent = BarbarianState.READY_TO_GO;
     }
@@ -228,7 +208,7 @@ public class Game
             throws GameOverException
     {
         lastPosition = pos;
-        Player player = players.get(idCurrent);
+        Player player = getCurrentPlayer();
         Room room = dungeon.getRoom(lastPosition);
 
         if (!room.isHidden())
@@ -286,7 +266,7 @@ public class Game
         else if (room.getWeapon() != weapon)
         {
             // sauf s’il a un joker
-            if (players.get(idCurrent).isBeginner() && !jokerUsed)
+            if (getCurrentPlayer().isBeginner() && !jokerUsed)
             {
                 stateCurrent = BarbarianState.JOKER;   
             }
@@ -299,6 +279,14 @@ public class Game
         return stateCurrent;
     }
     
+    /** Traite le cas où le joker est activé et que le joueur peut
+     * retenter sa chance avec une autre arme.
+     * 
+     * @param weapon l’arme du joueur
+     * @return le nouvel état du jeu
+     * @throws GameOverException si une erreur survient durant
+     * le coup
+     */
     public BarbarianState playJoker(WeaponType weapon) throws GameOverException
     {
         jokerUsed = true;
@@ -306,6 +294,16 @@ public class Game
         return play(lastPosition, weapon);
     }
     
+    /** Traite le cas où un joueur tombe sur une porte et peut se
+     * déplacer.
+     * 
+     * @param pos la nouvelle position du joueur
+     * @param weapon l’arme du joueur
+     * @return le nouveau statut de la partie
+     * @throws GameOverException si le statut actuel de la partie
+     * n’est pas BEAM_ME_UP ou que la partie est finie ou qu’une 
+     * erreur survient durant le coup
+     */
     public BarbarianState playGate(DungeonPosition pos, WeaponType weapon)
             throws GameOverException
     {
@@ -323,6 +321,16 @@ public class Game
         return play(pos, weapon);
     }
     
+    /** Traite le cas où un joueur rencontre un blork invincible
+     * et peut le changer de place.
+     * 
+     * @param pos la position où déplacer le blork invincible
+     * @return BarbarianState.CONTINUE si le joueur est débutant
+     * et qu’il n’avait pas encore utilisé son joker, sinon
+     * BarbarianState.GAMEOVER.
+     * @throws GameOverException si le statut actuel de la partie
+     * n’est pas MOVE_BLORK ou que la partie est finie
+     */
     public BarbarianState playBlorkInvincible(DungeonPosition pos)
             throws GameOverException
     {
@@ -345,7 +353,6 @@ public class Game
         
         dungeon.swap(lastPosition, pos);
         dungeon.show(lastPosition);
-        dungeon.show(pos);
         
         if (getCurrentPlayer().isBeginner() && !jokerUsed)
         {

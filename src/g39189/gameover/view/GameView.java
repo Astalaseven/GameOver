@@ -29,8 +29,8 @@ public class GameView
     /**
      * Lance une partie et interagit avec l’utilisateur.
      * 
-     * @param args un fichier contenant les noms des joueurs
-     * et leur statut (débutant ou non)
+     * @param args éventuellement un fichier contenant les noms des
+     * joueurs et leur statut (débutant ou non)
      */
     public static void main(String[] args)
     {

@@ -148,8 +148,8 @@ public class Dungeon
     }
 
     /**
-     * Retourne une liste avec  Crée et ajoute un nombre de cartes passé en paramètre
-     * à la liste donjon.
+     * Retourne une liste contenant les cartes créées
+     * selon les paramètres.
      * 
      * @param type
      *            le type de carte à créer
@@ -180,7 +180,7 @@ public class Dungeon
     }
 
     /**
-     * Crée et ajoute les cartes dans la liste donjon.
+     * Retourne toutes les cartes à mettre dans le donjon.
      */
     private LinkedList<Room> populateDungeon()
     {
